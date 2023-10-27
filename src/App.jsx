@@ -1,12 +1,17 @@
 import { useState } from "react";
 import "./App.css";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
-    <div className="flex justify-center items-center flex-col mt-[10rem]">
-      <h1 className="text-[82px] font-bold font-cairoBold text-dark-500">
-        مرحبا بك
-      </h1>
+    <div className="lg:flex lg:flex-row">
+      <div className="lg:flex lg:flex-col lg:flex-[0.9] flex-1">
+        <Navbar />
+      </div>
+      <div className="lg:flex-[0.1]">
+        <Sidebar />
+      </div>
     </div>
   );
 }

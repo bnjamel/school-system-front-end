@@ -25,14 +25,14 @@ function Navbar() {
   };
   return (
     <>
-      <div className="relative bg-slate-50 dark:bg-black dark:text-white shadow ">
+      <div className="relative bg-slate-50 dark:bg-black dark:text-white shadow">
         {/* Desktop */}
-        <section className="hidden lg:flex mx-28 p-4  justify-between items-center">
+        <section className="hidden lg:flex mx-28 p-4  justify-between items-center ">
           <div className="items-center gap-4 flex">
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="My Profile">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <div className="shadow bg-gray-200 rounded-full flex items-center gap-">
+                  <div className="shadow bg-gray-200 rounded-full flex items-center ">
                     <KeyboardArrowDownIcon />
                     <Avatar
                       alt="Remy Sharp"
