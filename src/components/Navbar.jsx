@@ -1,137 +1,49 @@
 import React from "react";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import Avatar from "@mui/material/Avatar";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from "@mui/icons-material/Menu";
-import Badge from "@mui/material/Badge";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const settings = ["Profile", "Dashboard", "Settings", "Logout"];
+import {
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  Button,
+} from "@material-tailwind/react";
+
+import { BiDownArrow } from 'react-icons/bi';
+import { BsBell } from 'react-icons/bs';
+
+
+
 
 function Navbar() {
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
   return (
-    <>
-      <div className="relative bg-slate-50 dark:bg-black dark:text-white shadow">
-        {/* Desktop */}
-        <section className="hidden lg:flex mx-28 p-4  justify-between items-center ">
-          <div className="items-center gap-4 flex">
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="My Profile">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <div className="shadow bg-gray-200 rounded-full flex items-center ">
-                    <KeyboardArrowDownIcon />
-                    <Avatar
-                      alt="Remy Sharp"
-                      className=""
-                      src=""
-                      sx={{ bgcolor: "#5B91D0" }}
-                    />
-                  </div>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={2} color="error">
-                <NotificationsNoneOutlinedIcon />
-              </Badge>
-            </IconButton>
-          </div>
-          <nav className="hidden md:block space-x-6 text-lg font-semibold text-[#2d2e32] text-end">
-            <h1 className="font-cairoBold text-2xl text-[#5B91D0]">مرحبا بك</h1>
-            <h3 className="font-cairoRegular">كل شيء تجده هنا</h3>
-          </nav>
-        </section>
-        {/* Mobile */}
-        <section className="flex lg:hidden mx-4 p-4   items-center justify-between">
-          <div>
-            <h1 className="text-xl font-cairoBold cursor-pointer">شعار</h1>
-          </div>
-          <div className="flex items-center ">
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="My Profile">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <div className="flex items-center ">
-                    <Avatar
-                      alt="me"
-                      className=""
-                      src=""
-                      sx={{ bgcolor: "#5B91D0" }}
-                    />
-                  </div>
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <div>
-              <IconButton edge="end" color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-            </div>
-          </div>
-        </section>
+    <div>
+      <div dir="rtl" className="absolute left-0 top-0 py-2 pl-[4rem] pr-1 sm:pr-2 md:pr-3 lg:pr-4 border-b w-full hidden md:flex flex-row justify-between items-center">
+      <div className=" my-2 ">
+            <h1 className="lg:text-[1.6rem] text-white font-cairoBold">مدرسة</h1>
+            <p className="text-[.8rem] lg:text-[1rem] xl:text-[1.2rem] font-cairoSemiBold text-light-300">اسم المدرسة كامل</p>
       </div>
-    </>
+      <div className="flex">
+      <button className="mx-8"><BsBell className="w-[24px] h-[24px]" /></button>
+
+          <Menu className="">
+          <MenuHandler>
+            <Button className="py-2 px-4 bg-white border rounded-full flex items-center justify-center">
+              <div className="w-[40px] mx-1 h-[40px] bg-blue-500 rounded-full"></div>
+              <h1 className="text-black mx-1"><BiDownArrow className="w-[18px] h-[18px]" /></h1>
+            </Button>
+          </MenuHandler>
+          <MenuList dir="rtl">
+            <MenuItem><a href="#">الملف الشخصي</a></MenuItem>
+            <MenuItem><a href="#">الاعدادات</a></MenuItem>
+            <MenuItem className="text-red-400">تسجيل خروج</MenuItem>
+          </MenuList>
+        </Menu>
+      </div>
+
+
+      </div>
+    </div>
   );
 }
 

@@ -1,72 +1,37 @@
 import * as React from "react";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-
-const drawerWidth = 220;
+import { Link } from "react-router-dom";
+import SidebarLink from "./SidebarLink";
 
 export default function Sidebar() {
   return (
-    <section className="hidden lg:flex">
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="permanent"
-        anchor="right"
-      >
-        <div className="bg-[#5B91D0] h-[100vh]">
-          <section
-            dir="rtl"
-            className="hidden lg:flex p-4  justify-center items-center "
-          >
-            <div className="items-center flex">
-              <nav className="hidden md:block text-lg font-semibold text-[#2d2e32] ">
-                <h1 className="font-cairoBold text-2xl text-[#fff]">مدرسة</h1>
-                <h3 className="font-cairoRegular text-white">جرير النموذجية</h3>
-              </nav>
-            </div>
-          </section>
-
-          <div dir="rtl" className="text-white justify-center flex ">
-            <List className="">
-              {[
-                "الصفحة الرئيسية",
-                "الأساتذة",
-                "الطلاب",
-                "الصفوف",
-                "الجدول الأسبوعي",
-                "الخطة السنوية",
-                "التبليغات",
-                "الاعدادات",
-                "الملف الشخصي",
-              ].map((text) => (
-                // disablePadding
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemText
-                      dir="rtl"
-                      className="text-start"
-                      primary={text}
-                    />
-                  </ListItemButton>
-                </ListItem>
-              ))}
-              <button className="border p-2 font-cairoRegular">
-                تسجيل خروج
-              </button>
-            </List>
+    <div className="min-w-full min-h-full pl-4 pr-1 sm:pr-2 md:pr-3 lg:pr-4 overflow-hidden">
+        <div dir="rtl" className="w-full">
+          <div className="px-4 py-2 my-2 ">
+            <h1 className="lg:text-[1.6rem] font-cairoBold text-transparent">مدرسة</h1>
+            <p className="lg:text-[1.1rem] font-cairoSemiBold text-transparent text-">السم المدرسة كامل</p>
           </div>
         </div>
-      </Drawer>
-    </section>
+
+        <div dir="rtl" className="w-full flex h-full">
+          <div className="flex justify-between flex-col flex-1 pb-[8rem]">
+            <ul className="flex flex-col justify-start py-4">
+              <SidebarLink link="/" text="الصفحة الرئيسية" />
+              <SidebarLink link="/teacher" text="الاساتذة" />
+              <SidebarLink link="/student" text="الطلاب" />
+              <SidebarLink link="/class" text="الصفوف" />
+              <SidebarLink link="/weekly_schedule" text="الجدول الاسبوعي" />
+              <SidebarLink link="/annual_plan" text="الخطة السنوية" />
+              <SidebarLink link="/announcements" text="التبليغات" />
+              <SidebarLink link="/settings" text="الاعدادات" />
+              <SidebarLink link="/profile" text="الملف الشخصي" />
+
+
+            </ul>
+            <div className="flex justify-center items-center">
+              <button className="py-2 px-6 border rounded-md hover:bg-white text-white hover:text-black transition ease-linear">تسجيل خروج</button>
+            </div>
+          </div>
+        </div>
+    </div>
   );
 }

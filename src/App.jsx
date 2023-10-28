@@ -2,14 +2,16 @@ import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
+import RouterContent from "./components/RouterContent";
 
 function App() {
   return (
-    <div className="lg:flex lg:flex-row">
-      <div className="lg:flex lg:flex-col lg:flex-[0.9] flex-1">
+    <div className="flex h-[100vh] overflow-hidden">
+      <div className="red  flex-[1] md:flex-[.85]">
         <Navbar />
+        <RouterContent />
       </div>
-      <div className="lg:flex-[0.1]">
+      <div className="red bg-blue-500 hidden md:flex md:flex-[.15]">
         <Sidebar />
       </div>
     </div>
