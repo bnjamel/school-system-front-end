@@ -11,7 +11,7 @@ function App() {
       <div className="w-full ">
         <Navbar />
         {/* Divider */}
-        <div className="p-[0.5px] bg-black"></div>
+        <div className="mt-1 p-[0.5px] bg-black"></div>
         {/* sub Navbar */}
         <div className=" hidden lg:flex justify-center">
           <Sidebar />

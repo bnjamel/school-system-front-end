@@ -6,7 +6,7 @@ export default function SidebarLink({ link, text }) {
     <li className="w-full py-1 lg:block">
       <Link
         to={link}
-        className="block py-2 xl:text-[1.1rem] lg:pr-2 font-cairoRegular text-black transition ease-in-out hover:bg-black hover:text-white rounded-md "
+        className="block py-2 lg:pr-2 font-cairoRegular text-black transition ease-in-out hover:bg-black hover:text-white rounded-md "
       >
         {text}
       </Link>
