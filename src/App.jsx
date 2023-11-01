@@ -6,14 +6,21 @@ import RouterContent from "./components/RouterContent";
 
 function App() {
   return (
-    <div className="flex h-[100vh] overflow-hidden">
-      <div className="w-full">
+    <div className="flex h-[100vh] overflow-hidden ">
+      {/* Navbar */}
+      <div className="w-full ">
         <Navbar />
-        {/* <RouterContent /> */}
+        {/* Divider */}
+        <div className="p-[0.5px] bg-black"></div>
+        {/* sub Navbar */}
+        <div className=" hidden lg:flex justify-center">
+          <Sidebar />
+        </div>
+        {/* Content */}
+        <div className="flex justify-center">
+          <RouterContent />
+        </div>
       </div>
-      {/* <div className="red bg-blue-500 hidden lg:flex md:flex-[.15]"> */}
-      {/* <Sidebar /> */}
-      {/* </div> */}
     </div>
   );
 }

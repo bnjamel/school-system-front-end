@@ -13,7 +13,7 @@ import Announcements from "../pages/announcements/Announcements";
 export default function RouterContent() {
   return (
     <div className="w-full h-full">
-      <div dir="rtl" className="w-full h-full pt-[8rem]">
+      <div dir="rtl" className="w-full h-full">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/teacher" element={<Teacher />} />

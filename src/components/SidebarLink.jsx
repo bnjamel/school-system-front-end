@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 export default function SidebarLink({ link, text }) {
   return (
     <li className="w-full py-1 lg:block">
-      {/* <Link
+      <Link
         to={link}
-        className="block py-2 lg:text-sm xl:text-[1.1rem] lg:pr-2 rounded-md min-w-full hover:bg-white text-white hover:text-black transition ease-in-out"
+        className="block py-2 xl:text-[1.1rem] lg:pr-2 font-cairoRegular text-black transition ease-in-out hover:bg-black hover:text-white rounded-md "
       >
         {text}
-      </Link> */}
+      </Link>
     </li>
   );
 }

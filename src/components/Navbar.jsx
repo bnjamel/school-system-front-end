@@ -10,10 +10,11 @@ import {
 
 import { BiDownArrow } from "react-icons/bi";
 import { BsBell } from "react-icons/bs";
+import { Divider } from "@mui/material";
 
 function Navbar() {
   return (
-    <div className="flex justify-between items-center bg-gray-300 p-2 ">
+    <div className="flex justify-between items-center  p-2 ">
       {/* profile */}
       <div className="items-center flex ml-10">
         <Menu className="">
