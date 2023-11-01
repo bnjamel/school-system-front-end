@@ -7,13 +7,13 @@ import RouterContent from "./components/RouterContent";
 function App() {
   return (
     <div className="flex h-[100vh] overflow-hidden">
-      <div className="flex-[1] md:flex-[.85]">
+      <div className="w-full">
         <Navbar />
-        <RouterContent />
+        {/* <RouterContent /> */}
       </div>
-      <div className="red bg-blue-500 hidden lg:flex md:flex-[.15]">
-        <Sidebar />
-      </div>
+      {/* <div className="red bg-blue-500 hidden lg:flex md:flex-[.15]"> */}
+      {/* <Sidebar /> */}
+      {/* </div> */}
     </div>
   );
 }
