@@ -9,11 +9,12 @@ import Profile from "../pages/profile/Profile";
 import Settings from "../pages/settings/Settings";
 import WeeklySchedule from "../pages/weekly_schedule/WeeklySchedule";
 import Announcements from "../pages/announcements/Announcements";
+import Login from "../pages/login/Login";
 
 export default function RouterContent() {
   return (
     <div className="w-full h-full">
-      <div dir="rtl" className="w-full h-full">
+      <div className="w-full h-full ">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/teacher" element={<Teacher />} />
@@ -24,6 +25,7 @@ export default function RouterContent() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/weekly_schedule" element={<WeeklySchedule />} />
           <Route path="/announcements" element={<Announcements />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </div>

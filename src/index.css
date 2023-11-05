@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  background-color: rgb(255, 255, 255);
+  background-color: #f7f7fc;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,4 +25,8 @@
 @font-face {
   font-family: "cairo-bold";
   src: url("./assets/fonts/Cairo-Bold.ttf");
+}
+
+table {
+  font-family: "cairo-regular";
 }
