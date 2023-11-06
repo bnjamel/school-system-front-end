@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import StudentProfile from '../../components/StudentProfile';
+import TeacherProfile from '../../components/TeacherProfile';
 
 export default function Profile() {
-  return (
-    <div>Profile</div>
-  )
+  const [role, setRole] = useState("teacher");
+
+  switch (role) {
+    case "student":
+      return <StudentProfile />
+      case "teacher":
+      return <TeacherProfile />
+  }
 }

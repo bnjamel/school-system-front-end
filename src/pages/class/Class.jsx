@@ -1,6 +1,31 @@
 import React from "react";
 
-const data = [1, 2, 2, 2, 2, 2, 2, 8];
+const data = [
+  {
+    id: 1,
+    class_name: "الاول"
+  },
+  {
+    id: 2,
+    class_name: "الثاني"
+  },
+  {
+    id: 3,
+    class_name: "الثالث"
+  },
+  {
+    id: 4,
+    class_name: "الرابع"
+  },
+  {
+    id: 5,
+    class_name: "الخامس"
+  },
+  {
+    id: 6,
+    class_name: "السادس"
+  },
+]
 
 export default function Class() {
   return (
@@ -15,12 +40,12 @@ export default function Class() {
         </button>
       </div>
       {/* CLASSES */}
-      <div className="flex flex-col lg:flex-row container lg:flex-wrap mx-auto items-center lg:gap-8 justify-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 mx-auto container">
         {data.map((item) => (
-          <div className="">
-            <div className="mt-4 lg:mt-0 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md ">
+          <div className="flex px-[2rem] justify-center items-center">
+            <div className="mt-4 border-black/25 hover:border-blue-500 transition ease-in-out border lg:mt-0 w-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md ">
               <div className="text-xl font-cairoSemiBold mx-6 mt-4 border-b border-black pb-2 ">
-                صف الأول
+                صف {item.class_name}
               </div>
               <div className="my-6 mx-6 items-center  ">
                 <div className="cursor-pointer my-2 hover:text-gray-600 underline">
