@@ -5,7 +5,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 
 function Footer() {
   return (
-    <div className=" border-t border-[#5B91D0] lg:mx-[5rem] my-6">
+    <div className="border-t border-dark-500/20 lg:mx-[5rem] my-6">
       <div className="flex flex-col lg:flex-row  items-center justify-between mx-[1rem] lg:mx-[10rem] my-[1.5rem]">
         <div className="">
           <h3 className="text-[#AAAAAA]">كل الحقوق محفوظة © 2023</h3>

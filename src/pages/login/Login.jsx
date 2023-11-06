@@ -1,7 +1,5 @@
 import React from "react";
 import login from "../login/login.svg";
-
-// login form
 import {
   Card,
   Input,
@@ -9,15 +7,23 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import {useNavigate} from "react-router-dom";
 
 function Login() {
+  let navigator = useNavigate();
+
+  const onSubmit = () => {
+    navigator("/");
+  }
+
   return (
-    <div className="flex flex-col lg:flex-row justify-center  my-[4rem] md:my-[2rem] lg:mt-[8rem] lg:mb-0 items-center container mx-auto">
+    <div className="flex h-[65vh] flex-col lg:flex-row justify-center my-[4rem] md:my-[2rem] lg:mt-[8rem] lg:mb-0 items-center container mx-auto">
       {/* PICTURE */}
-      <div className="w-full h-full ">
+      <div className="w-full h-full flex-[.5] flex items-center">
         <img width={700} height={700} src={login} alt="login" />
       </div>
       {/* LOGIN FORM */}
+      <div className="flex-[.5] items-center justify-center flex">
       <div className="bg-[#5B91D0] p-4 lg:p-6 lg:px-14 rounded-lg border-2 border-gray-500">
         <Card color="transparent" shadow={false}>
           <h1 dir="rtl" className="font-cairoBold text-2xl text-white">
@@ -85,7 +91,7 @@ function Login() {
                 containerProps={{ className: "-ml-2.5" }}
               />
             </div>
-            <Button className="mt-6 font-cairoBold text-md" fullWidth>
+            <Button onClick={onSubmit} className="mt-6 font-cairoBold text-md" fullWidth>
               تسجيل الدخول
             </Button>
             <Typography
@@ -100,6 +106,8 @@ function Login() {
             </Typography>
           </form>
         </Card>
+      </div>
+
       </div>
     </div>
   );

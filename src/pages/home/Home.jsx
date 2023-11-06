@@ -1,11 +1,42 @@
 import React from "react";
 import home from "../home/home.svg";
+import {Link} from "react-router-dom"
+import {PiChalkboardTeacherFill} from "react-icons/pi"
+import {PiStudentFill} from "react-icons/pi"
+import {SiGoogleclassroom} from "react-icons/si"
+import {BsArrowLeft} from "react-icons/bs"
+
 
 import { CardBody, Typography } from "@material-tailwind/react";
 
 export default function Home() {
   const data = [1, 2, 3, 4, 5, 6, 7, 8];
   const activity = [1, 2, 3, 4];
+  const stats = [
+    {
+      id: 1,
+      number: 160,
+      label: "عدد الطلاب الحالي",
+      link: "student",
+      Icon: PiStudentFill
+    },
+    {
+      id: 2,
+      number: 42,
+      label: "عدد الاساتذة الحالي",
+      link: "teacher",
+      Icon: PiChalkboardTeacherFill
+
+    },
+    {
+      id: 1,
+      number: 16,
+      label: "عدد الصفوف الحالي",
+      link: "class",
+      Icon: SiGoogleclassroom
+    },
+  ]
+
   return (
     <div>
       {/* HERO SECTION */}
@@ -27,31 +58,22 @@ export default function Home() {
         </div>
       </div>
       {/* STATISTIC CARDS */}
-      <div className="container mx-auto my-[2rem] flex flex-col justify-center items-center lg:flex-row gap-[4rem]">
+      <div className="container mx-auto my-[2rem] flex flex-col justify-center items-center lg:flex-row-reverse gap-[4rem]">
         {/* 1 */}
-        <div className="w-[16rem] h-[6rem] rounded-lg  border border-black flex justify-between ">
-          <div className="font-cairoRegular self-center text-right m-auto">
-            <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">16</h1>
-            <h3 className="text-[#666666] ">عدد الصفوف الحالي</h3>
-          </div>
-          <div className="w-[6rem] h-[6rem] rounded-r-lg bg-[#091420]"></div>
-        </div>
-        {/* 2 */}
-        <div className="w-[16rem] h-[6rem] rounded-lg  border border-black flex justify-between ">
-          <div className="font-cairoRegular self-center text-right m-auto">
-            <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">42</h1>
-            <h3 className="text-[#666666] ">عدد الأساتذة الحالي</h3>
-          </div>
-          <div className="w-[6rem] h-[6rem] rounded-r-lg bg-[#091420]"></div>
-        </div>
-        {/* 3 */}
-        <div className="w-[16rem] h-[6rem] rounded-lg  border border-black flex justify-between ">
-          <div className="font-cairoRegular self-center text-right m-auto">
-            <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">160</h1>
-            <h3 className="text-[#666666] ">عدد الطلاب الحالي</h3>
-          </div>
-          <div className="w-[6rem] h-[6rem] rounded-r-lg bg-[#091420]"></div>
-        </div>
+        {
+          stats.map(item => (
+            <Link to={item.link} key={item.id} className="w-[16rem] h-[6rem] flex rounded-lg overflow-hidden border border-black transition ease-in-out hover:scale-[1.02] cursor-pointer active:scale-[.99]">
+              <div className="font-cairoRegular self-center text-right m-auto flex-[.6] px-4">
+                <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">{item.number}</h1>
+                <h3 className="text-[#666666] ">{item.label}</h3>
+              </div>
+              <div className="w-[6rem] h-[6rem] bg-[#091420] flex-[.4]">
+                <item.Icon className="text-white p-4 w-full h-full"/>
+              </div>
+            </Link>
+          ))
+        }
+        
       </div>
       {/* REPORTS */}
       <div
@@ -60,8 +82,8 @@ export default function Home() {
       >
         <div className="flex justify-center lg:justify-between lg:mx-[10rem]">
           <h1 className="font-cairoBold text-2xl ">أحدث التبليغات</h1>
-          <h3 className="hidden lg:flex font-cairoRegular underline text-md cursor-pointer">
-            تصفح كل التبليغات&larr;
+          <h3 className="hover:underline items-center hidden lg:flex font-cairoRegular text-md cursor-pointer">
+            تصفح كل التبليغات <BsArrowLeft className="mx-4" />
           </h3>
         </div>
         {/* CARDS */}
@@ -85,7 +107,7 @@ export default function Home() {
                   </Typography>
                 </CardBody>
                 <div className="pt-0 mr-6 mb-6 ">
-                  <button className="font-cairoRegular  bg-black text-white p-2 rounded-lg text-md">
+                  <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9] bg-black text-white p-2 rounded-lg text-md">
                     قراءة المزيد
                   </button>
                 </div>
@@ -94,8 +116,11 @@ export default function Home() {
           ))}
         </div>
         {/* ACTIVITY */}
-        <div className="flex justify-center lg:justify-between lg:mx-[10rem] mt-[5rem]">
+        <div className="flex justify-center lg:justify-between lg:mx-[10rem] mt-[6rem]">
           <h1 className="font-cairoBold text-2xl ">أحدث الأنشطة</h1>
+          <h3 className="hover:underline items-center hidden lg:flex font-cairoRegular text-md cursor-pointer">
+            تصفح كل الانشطة <BsArrowLeft className="mx-4" />
+          </h3>
         </div>
         {/* ACTIVITY CARDS */}
         {/* CARDS */}
@@ -120,7 +145,7 @@ export default function Home() {
                   </Typography>
                 </CardBody>
                 <div className="pt-0 mr-6 mb-6 ">
-                  <button className="font-cairoRegular  bg-black text-white p-2 rounded-lg text-md">
+                  <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9]  bg-black text-white p-2 rounded-lg text-md">
                     قراءة المزيد
                   </button>
                 </div>

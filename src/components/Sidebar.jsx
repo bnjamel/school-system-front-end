@@ -2,10 +2,12 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
 
-export default function Sidebar() {
+export default function Sidebar({location}) {
+  console.log(location)
   return (
     <div dir="rtl" className="">
-      <ul className="flex-wrap flex flex-row gap-6">
+      {location.pathname !== "/login" &&
+      <ul className="flex-wrap flex flex-row gap-x-6">
         <SidebarLink link="/" text="الصفحة الرئيسية" />
         <SidebarLink link="/teacher" text="الاساتذة" />
         <SidebarLink link="/student" text="الطلاب" />
@@ -16,6 +18,8 @@ export default function Sidebar() {
         <SidebarLink link="/settings" text="الاعدادات" />
         <SidebarLink link="/profile" text="الملف الشخصي" />
       </ul>
+      
+      }
     </div>
   );
 }

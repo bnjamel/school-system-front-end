@@ -1,9 +1,25 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
 
-const TABLE_HEAD = ["الأسم", "المادة", "رقم الهاتف"];
+const TABLE_HEAD = ["#", "الأسم", "المادة", "رقم الهاتف"];
 
 const TABLE_ROWS = [
+  {
+    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
+    name: "أ. محمد علي",
+    email: "mohammed@teacher.com",
+    subject: "كيمياء",
+    org: "صف الأول متوسط",
+    date: "00000000000",
+  },
+  {
+    img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
+    name: "أ. محمد علي",
+    email: "mohammed@teacher.com",
+    subject: "كيمياء",
+    org: "صف الأول متوسط",
+    date: "00000000000",
+  },
   {
     img: "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg",
     name: "أ. محمد علي",
@@ -62,24 +78,24 @@ export default function Teacher() {
             placeholder="ابحث عن أستاذ..."
             className="w-[16rem] font-cairoRegular pr-4 mt-1 rounded-md border-gray-200 py-2.5 shadow-sm sm:text-sm"
           />
-          <div className="mr-1 px-[15px] py-[10px] mt-1 cursor-pointer rounded-md  bg-[#5B91D0]">
+          <div className="mr-1 transition ease-in-out hover:scale-[1.06] active:scale-[.9] px-[15px] py-[10px] mt-1 cursor-pointer rounded-md  bg-[#5B91D0]">
             <BsSearch className="text-white" />
           </div>
         </div>
         {/* BUTTON */}
-        <button className="hidden md:flex px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
+        <button className="hidden transition ease-in-out hover:scale-[1.06] active:scale-[.9] md:flex px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
           إضافة أستاذ +
         </button>
       </div>
       {/* TABLE */}
-      <table dir="rtl" className="mt-2 w-full min-w-max table-auto text-right">
+      <table dir="rtl" className="mt-[2rem] w-full min-w-max table-auto rounded-lg overflow-hidden text-right">
         <thead className="">
           <tr>
             {TABLE_HEAD.map((head) => (
               <th
                 dir="rtl"
                 key={head}
-                className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 "
+                className="border-b border-blue-gray-100 bg-blue-gray-50/50 p-4 "
               >
                 <h2 className="">{head}</h2>
               </th>
@@ -94,7 +110,12 @@ export default function Teacher() {
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
               return (
-                <tr className="hover:bg-gray-200 cursor-pointer " key={name}>
+                <tr className={`hover:bg-gray-200 hover:scale-[1.01] transition ease-in-out ${index % 2 === 0 ? "bg-light-100" : "bg-blue-100/25"} cursor-pointer`} key={name}>
+                  <td>
+                  <div className="flex pr-4  flex-col">
+                      {index+1}
+                  </div>
+                  </td>
                   <td className={classes}>
                     <div className="flex items-center gap-3">
                       <div className="avatar">

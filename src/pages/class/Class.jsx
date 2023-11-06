@@ -10,7 +10,7 @@ export default function Class() {
       <div className="flex flex-col lg:flex-row lg:justify-between items-center mx-[8rem] xl:mx-0 justify-center mb-6">
         <h1 className="font-cairoRegular text-2xl text-[#999999]">الصفوف</h1>
         {/* BUTTON */}
-        <button className="my-2 lg:my-0 px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
+        <button className="my-2 transition ease-in-out hover:scale-[1.06] active:scale-[.9] lg:my-0 px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
           إضافة صف +
         </button>
       </div>
