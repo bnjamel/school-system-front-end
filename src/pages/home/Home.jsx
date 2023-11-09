@@ -1,11 +1,10 @@
 import React from "react";
 import home from "../home/home.svg";
-import {Link} from "react-router-dom"
-import {PiChalkboardTeacherFill} from "react-icons/pi"
-import {PiStudentFill} from "react-icons/pi"
-import {SiGoogleclassroom} from "react-icons/si"
-import {BsArrowLeft} from "react-icons/bs"
-
+import { Link } from "react-router-dom";
+import { PiChalkboardTeacherFill } from "react-icons/pi";
+import { PiStudentFill } from "react-icons/pi";
+import { SiGoogleclassroom } from "react-icons/si";
+import { BsArrowLeft } from "react-icons/bs";
 
 import { CardBody, Typography } from "@material-tailwind/react";
 
@@ -18,24 +17,23 @@ export default function Home() {
       number: 160,
       label: "عدد الطلاب الحالي",
       link: "student",
-      Icon: PiStudentFill
+      Icon: PiStudentFill,
     },
     {
       id: 2,
       number: 42,
       label: "عدد الاساتذة الحالي",
       link: "teacher",
-      Icon: PiChalkboardTeacherFill
-
+      Icon: PiChalkboardTeacherFill,
     },
     {
       id: 1,
       number: 16,
       label: "عدد الصفوف الحالي",
       link: "class",
-      Icon: SiGoogleclassroom
+      Icon: SiGoogleclassroom,
     },
-  ]
+  ];
 
   return (
     <div>
@@ -60,38 +58,43 @@ export default function Home() {
       {/* STATISTIC CARDS */}
       <div className="container mx-auto my-[2rem] flex flex-col justify-center items-center lg:flex-row-reverse gap-[4rem]">
         {/* 1 */}
-        {
-          stats.map(item => (
-            <Link to={item.link} key={item.id} className="w-[16rem] h-[6rem] flex rounded-lg overflow-hidden border border-black transition ease-in-out hover:scale-[1.02] cursor-pointer active:scale-[.99]">
-              <div className="font-cairoRegular self-center text-right m-auto flex-[.6] px-4">
-                <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">{item.number}</h1>
-                <h3 className="text-[#666666] ">{item.label}</h3>
-              </div>
-              <div className="w-[6rem] h-[6rem] bg-[#091420] flex-[.4]">
-                <item.Icon className="text-white p-4 w-full h-full"/>
-              </div>
-            </Link>
-          ))
-        }
-        
+        {stats.map((item) => (
+          <Link
+            to={item.link}
+            key={item.id}
+            className="w-[16rem] h-[6rem] flex rounded-lg overflow-hidden border border-black transition ease-in-out hover:scale-[1.02] cursor-pointer active:scale-[.99]"
+          >
+            <div className="font-cairoRegular self-center text-right m-auto flex-[.6] px-4">
+              <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">
+                {item.number}
+              </h1>
+              <h3 className="text-[#666666] ">{item.label}</h3>
+            </div>
+            <div className="w-[6rem] h-[6rem] bg-[#091420] flex-[.4]">
+              <item.Icon className="text-white p-4 w-full h-full" />
+            </div>
+          </Link>
+        ))}
       </div>
       {/* REPORTS */}
       <div
         dir="rtl"
-        className="container mx-auto items-center self-center my-[5rem] "
+        className="container mx-auto items-center self-center mt-[5rem] max-w-[1000px]"
       >
-        <div className="flex justify-center lg:justify-between lg:mx-[10rem]">
+        <div className="flex justify-center lg:justify-between lg:mx-[2rem]">
           <h1 className="font-cairoBold text-2xl ">أحدث التبليغات</h1>
-          <h3 className="hover:underline items-center hidden lg:flex font-cairoRegular text-md cursor-pointer">
-            تصفح كل التبليغات <BsArrowLeft className="mx-4" />
-          </h3>
+          <Link to="/announcements">
+            <h3 className="hover:underline items-center hidden lg:flex font-cairoRegular text-md cursor-pointer">
+              تصفح كل التبليغات <BsArrowLeft className="mx-4" />
+            </h3>
+          </Link>
         </div>
         {/* CARDS */}
-        <div className="flex flex-row container flex-wrap mx-auto items-center lg:gap-8 justify-center">
+        <div className="flex flex-row container flex-wrap mx-auto items-center gap-2 md:gap-4  justify-center ">
           {data.map((item) => (
             <div className=" ">
-              <div className="mt-6 bg-white w-[18rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md">
-                <div className="h-56 mx-2 mt-2 rounded-lg bg-[#47D0C8]"></div>
+              <div className="mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md">
+                <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]"></div>
                 <CardBody>
                   <Typography
                     variant="h5"
@@ -103,20 +106,22 @@ export default function Home() {
                     08/12/2023
                   </Typography>
                   <Typography className="font-cairoRegular text-sm">
-                    هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذا
+                    هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة.
                   </Typography>
                 </CardBody>
-                <div className="pt-0 mr-6 mb-6 ">
-                  <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9] bg-black text-white p-2 rounded-lg text-md">
-                    قراءة المزيد
-                  </button>
-                </div>
+                <Link to="/announcements/announce">
+                  <div className="pt-0 mr-6 mb-6 ">
+                    <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9] bg-black text-white p-2 rounded-lg text-md">
+                      قراءة المزيد
+                    </button>
+                  </div>
+                </Link>
               </div>
             </div>
           ))}
         </div>
         {/* ACTIVITY */}
-        <div className="flex justify-center lg:justify-between lg:mx-[10rem] mt-[6rem]">
+        <div className="flex justify-center lg:justify-between lg:mx-[3rem] mt-[6rem] max-w-[1000px]">
           <h1 className="font-cairoBold text-2xl ">أحدث الأنشطة</h1>
           <h3 className="hover:underline items-center hidden lg:flex font-cairoRegular text-md cursor-pointer">
             تصفح كل الانشطة <BsArrowLeft className="mx-4" />
@@ -124,11 +129,11 @@ export default function Home() {
         </div>
         {/* ACTIVITY CARDS */}
         {/* CARDS */}
-        <div className="flex flex-row container flex-wrap mx-auto items-center lg:gap-8 justify-center">
+        <div className="flex flex-row container flex-wrap mx-auto items-center gap-2 md:gap-4 justify-center">
           {activity.map((item) => (
             <div className=" ">
-              <div className="mt-6 bg-white w-[18rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md">
-                <div className="h-56 mx-2 mt-2 rounded-lg bg-[#47D0C8]"></div>
+              <div className="mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md">
+                <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]"></div>
                 <CardBody>
                   <Typography
                     variant="h5"
@@ -141,7 +146,7 @@ export default function Home() {
                   </Typography>
 
                   <Typography className="font-cairoRegular text-sm">
-                    هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذه
+                    هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة.
                   </Typography>
                 </CardBody>
                 <div className="pt-0 mr-6 mb-6 ">

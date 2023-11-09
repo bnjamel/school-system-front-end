@@ -11,9 +11,9 @@ function Footer() {
           <h3 className="text-[#AAAAAA]">كل الحقوق محفوظة © 2023</h3>
         </div>
         <div className="flex gap-8 items-center">
-          <ImFacebook className="w-[20px] h-[20px]" />
-          <AiFillInstagram className="w-[24px] h-[24px]" />
-          <IoLogoWhatsapp className="w-[22px] h-[22px]" />
+          <ImFacebook className="w-[20px] h-[20px] text-[#5787BE]" />
+          <AiFillInstagram className="w-[24px] h-[24px] text-[#B530D7]" />
+          <IoLogoWhatsapp className="w-[22px] h-[22px] text-[#27D817]" />
         </div>
       </div>
     </div>

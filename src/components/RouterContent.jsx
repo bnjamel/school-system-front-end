@@ -10,6 +10,8 @@ import Settings from "../pages/settings/Settings";
 import WeeklySchedule from "../pages/weekly_schedule/WeeklySchedule";
 import Announcements from "../pages/announcements/Announcements";
 import Login from "../pages/login/Login";
+import Announce from "../pages/announcements/Announce";
+import NewAnnounce from "../pages/announcements/NewAnnounce";
 
 export default function RouterContent() {
   return (
@@ -25,6 +27,8 @@ export default function RouterContent() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/weekly_schedule" element={<WeeklySchedule />} />
           <Route path="/announcements" element={<Announcements />} />
+          <Route path="/announcements/announce" element={<Announce />} />
+          <Route path="/announcements/newannounce" element={<NewAnnounce />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </div>
