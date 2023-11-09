@@ -39,7 +39,7 @@ function NewAnnounce() {
         {/* TEXTAREA */}
         <div className="my-6 font-cairoBold">
           <textarea
-            className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4 "
+            className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4 max-h-[400px] min-h-[200px]"
             rows="8"
             placeholder="اكتب محتوى التبليغ..."
           ></textarea>

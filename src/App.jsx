@@ -13,7 +13,7 @@ function App() {
     <div className="flex h-[100vh] ">
       <div className="w-full ">
         {/* Navbar */}
-        <div className="w-full fixed bg-white">
+        <div className="w-full fixed bg-white z-[100]">
           <Navbar location={location}/>
           {/* sub Navbar */}
           <div className=" hidden lg:flex justify-center ">

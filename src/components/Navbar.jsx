@@ -20,7 +20,7 @@ function Navbar({ location }) {
 
   return (
     <div
-      className={`flex ${
+      className={`flex z-[100] ${
         location.pathname !== "/login" ? "justify-between" : "justify-center"
       } items-center p-2 border-b border-black/50`}
     >

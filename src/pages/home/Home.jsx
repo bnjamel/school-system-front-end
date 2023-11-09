@@ -62,7 +62,7 @@ export default function Home() {
           <Link
             to={item.link}
             key={item.id}
-            className="w-[16rem] h-[6rem] flex rounded-lg overflow-hidden border border-black transition ease-in-out hover:scale-[1.02] cursor-pointer active:scale-[.99]"
+            className="w-[16rem] bg-white h-[6rem] flex rounded-lg overflow-hidden border border-black transition ease-in-out hover:scale-[1.02] z-[1] cursor-pointer active:scale-[.99]"
           >
             <div className="font-cairoRegular self-center text-right m-auto flex-[.6] px-4">
               <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">
