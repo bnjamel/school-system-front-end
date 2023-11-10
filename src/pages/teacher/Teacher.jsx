@@ -1,5 +1,6 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const TABLE_HEAD = ["#", "الأسم", "المادة", "رقم الهاتف"];
 
@@ -83,12 +84,18 @@ export default function Teacher() {
           </div>
         </div>
         {/* BUTTON */}
-        <button className="hidden transition ease-in-out hover:scale-[1.06] active:scale-[.9] md:flex px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
+        <Link
+          to="/teacher/newteacher"
+          className="hidden transition ease-in-out hover:scale-[1.06] active:scale-[.9] md:flex px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]"
+        >
           إضافة أستاذ +
-        </button>
+        </Link>
       </div>
       {/* TABLE */}
-      <table dir="rtl" className="mt-[2rem] w-full min-w-max table-auto rounded-lg overflow-hidden text-right">
+      <table
+        dir="rtl"
+        className="mt-[2rem] w-full min-w-max table-auto rounded-lg overflow-hidden text-right"
+      >
         <thead className="">
           <tr>
             {TABLE_HEAD.map((head) => (
@@ -110,11 +117,14 @@ export default function Teacher() {
                 ? "p-4"
                 : "p-4 border-b border-blue-gray-50";
               return (
-                <tr className={`hover:bg-gray-200 hover:scale-[1.01] transition ease-in-out ${index % 2 === 0 ? "bg-light-100" : "bg-blue-100/25"} cursor-pointer`} key={name}>
+                <tr
+                  className={`hover:bg-gray-200 hover:scale-[1.01] transition ease-in-out ${
+                    index % 2 === 0 ? "bg-light-100" : "bg-blue-100/25"
+                  } cursor-pointer`}
+                  key={name}
+                >
                   <td>
-                  <div className="flex pr-4  flex-col">
-                      {index+1}
-                  </div>
+                    <div className="flex pr-4  flex-col">{index + 1}</div>
                   </td>
                   <td className={classes}>
                     <div className="flex items-center gap-3">
