@@ -45,7 +45,7 @@ export default function WeeklySchedule() {
               <div className="text-xl font-cairoSemiBold mx-6 mt-4 border-b border-black pb-2 ">
                 صف {item.class_name}
               </div>
-              <div className="my-6 mx-6 items-center">
+              <div className="my-6 mx-6 items-center font-cairoRegular">
                 {/* Schedule A // you can add B & C later */}
                 <Link to="/weekly_schedule/schedule">
                   <div className="cursor-pointer my-2 hover:text-gray-600 underline">
