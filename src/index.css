@@ -30,3 +30,13 @@
 table {
   font-family: "cairo-regular";
 }
+
+.bg-gradient {
+  background-image: linear-gradient(to right, #FAC394, #E95F9B);
+}
+
+.item-shadow {
+  transition: .2s ease-in-out all;
+  box-shadow: 5px 8px 0px 0px #ffcae1,
+              5px 8px 0px 0px #ffcae1;
+}
