@@ -12,7 +12,7 @@ function Schedule() {
         <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-lg">
           <thead className="ltr:text-left rtl:text-right bg-blue-50 ">
             <tr>
-              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+              <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 ">
                 اليوم
               </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -38,7 +38,7 @@ function Schedule() {
 
           <tbody className="divide-y divide-gray-200">
             <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900">
+              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الأحد
               </td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
@@ -62,7 +62,7 @@ function Schedule() {
             </tr>
 
             <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900">
+              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الإثنين
               </td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
@@ -86,7 +86,7 @@ function Schedule() {
             </tr>
 
             <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900">
+              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الثلاثاء
               </td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
@@ -110,7 +110,7 @@ function Schedule() {
             </tr>
 
             <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900">
+              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الأربعاء
               </td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
@@ -134,7 +134,7 @@ function Schedule() {
             </tr>
 
             <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900">
+              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الخميس
               </td>
               <td className="whitespace-nowrap px-4 py-2 text-gray-700">
