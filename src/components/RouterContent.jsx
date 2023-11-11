@@ -12,6 +12,10 @@ import Announcements from "../pages/announcements/Announcements";
 import Login from "../pages/login/Login";
 import Announce from "../pages/announcements/Announce";
 import NewAnnounce from "../pages/announcements/NewAnnounce";
+import NewTeacher from "../pages/teacher/NewTeacher";
+import NewStudent from "../pages/student/NewStudent";
+import NewClass from "../pages/class/NewClass";
+import Schedule from "../pages/weekly_schedule/Schedule";
 
 export default function RouterContent() {
   return (
@@ -20,12 +24,16 @@ export default function RouterContent() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/teacher" element={<Teacher />} />
+          <Route path="/teacher/newteacher" element={<NewTeacher />} />
           <Route path="/student" element={<Student />} />
+          <Route path="/student/newstudent" element={<NewStudent />} />
           <Route path="/annual_plan" element={<AnnualPlan />} />
           <Route path="/class" element={<Class />} />
+          <Route path="/class/newclass" element={<NewClass />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/weekly_schedule" element={<WeeklySchedule />} />
+          <Route path="/weekly_schedule/schedule" element={<Schedule />} />
           <Route path="/announcements" element={<Announcements />} />
           <Route path="/announcements/announce" element={<Announce />} />
           <Route path="/announcements/newannounce" element={<NewAnnounce />} />

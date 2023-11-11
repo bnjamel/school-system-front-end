@@ -1,6 +1,5 @@
 import React from "react";
 import { BiImageAdd } from "react-icons/bi";
-import { Select, Option, Textarea, Input } from "@material-tailwind/react";
 
 function NewAnnounce() {
   return (
@@ -12,13 +11,13 @@ function NewAnnounce() {
       >
         <label
           htmlFor="file"
-          className="cursor-pointer bg-blue-500  items-end px-10 py-4 flex h-full transition ease-in-out "
+          className="cursor-pointer bg-blue-500  items-end px-10 py-4 flex h-full transition ease-in-out hover:opacity-90"
         >
           <div className="items-center flex">
             <div className="bg-[#091420] rounded-full p-2 items-center ml-4">
               <BiImageAdd className="text-2xl text-white " />
             </div>
-            <h2 className="font-cairoBold text-2xl text-white">
+            <h2 className="font-cairoBold text-2xl text-white ">
               اضف غلاف للتبليغ
             </h2>
           </div>
@@ -28,10 +27,9 @@ function NewAnnounce() {
       {/* ALL OF IT / JUSTIFIED CENTERED / FOR THE MOBILE */}
       <div className="flex flex-col justify-center self-center items-center lg:self-auto lg:block">
         {/* TEXT */}
-
         <div className="mt-6 font-cairoBold">
           <input
-            className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4 "
+            className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4  focus:border-dark-100 outline-none focus:border-transparent transition ease-in-out"
             type="text"
             placeholder="عنوان التبليغ"
           ></input>
@@ -39,7 +37,7 @@ function NewAnnounce() {
         {/* TEXTAREA */}
         <div className="my-6 font-cairoBold">
           <textarea
-            className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4 max-h-[400px] min-h-[200px]"
+            className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4 max-h-[400px] min-h-[200px] focus:border-dark-100 outline-none focus:border-transparent transition ease-in-out"
             rows="8"
             placeholder="اكتب محتوى التبليغ..."
           ></textarea>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const data = [
   {
@@ -35,9 +36,12 @@ export default function Class() {
       <div className="flex flex-col lg:flex-row lg:justify-between items-center mx-[3rem] xl:mx-[2rem] justify-center mb-6 ">
         <h1 className="font-cairoRegular text-2xl text-[#999999]">الصفوف</h1>
         {/* BUTTON */}
-        <button className=" my-2 transition ease-in-out hover:scale-[1.06] active:scale-[.9] lg:my-0 px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
+        <Link
+          to="/class/newclass"
+          className=" my-2 transition ease-in-out hover:scale-[1.06] active:scale-[.9] lg:my-0 px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]"
+        >
           إضافة صف +
-        </button>
+        </Link>
       </div>
       {/* CLASSES */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 max-w-[20rem] md:max-w-full mx-auto container">

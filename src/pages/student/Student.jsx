@@ -1,6 +1,6 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
-
+import { Link } from "react-router-dom";
 const TABLE_HEAD = ["#", "الأسم", "الصف", "رقم الهاتف"];
 
 const TABLE_ROWS = [
@@ -82,9 +82,12 @@ export default function Student() {
           </div>
         </div>
         {/* BUTTON */}
-        <button className="hidden transition ease-in-out hover:scale-[1.06] active:scale-[.9] md:flex px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
+        <Link
+          to="/student/newstudent"
+          className="hidden transition ease-in-out hover:scale-[1.06] active:scale-[.9] md:flex px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]"
+        >
           إضافة طالب +
-        </button>
+        </Link>
       </div>
       {/* TABLE */}
       <table
