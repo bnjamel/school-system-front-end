@@ -13,6 +13,20 @@ module.exports = withMT({
         400: "#71A0D6",
         500: "#5B91D0",
       },
+      pink: {
+        100: "#F3A5C7",
+        200: "#F093BC",
+        300: "#EE81B0",
+        400: "#EB6FA5",
+        500: "#E95F9B",
+      },
+      orange: {
+        100: "#FEF4EC",
+        200: "#FDE9D8",
+        300: "#FCDFC5",
+        400: "#FBD4B1",
+        500: "#FAC394",
+      },
       light: {
         100: "#EFF5FA",
         200: "#E0ECF5",

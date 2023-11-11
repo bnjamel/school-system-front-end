@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <div>
       {/* HERO SECTION */}
-      <div className="h-[21rem] bg-[#5D9EEB] mt-[8rem]">
+      <div className="h-[25rem] mt-[8rem] bg-gradient">
         <div className="flex justify-center items-center gap-[10rem]">
           {/* PICTURE */}
           <div>
@@ -60,19 +60,22 @@ export default function Home() {
         {/* 1 */}
         {stats.map((item) => (
           <Link
-            to={item.link}
+          to={item.link}
             key={item.id}
-            className="w-[16rem] bg-white h-[6rem] flex rounded-lg overflow-hidden border border-black transition ease-in-out hover:scale-[1.02] z-[1] cursor-pointer active:scale-[.99]"
+          className="p-1 bg-gradient rounded-lg overflow-hidden transition ease-in-out hover:scale-[1.02] z-[1] cursor-pointer active:scale-[.99]">
+          <div
+            className="w-[16rem]  h-[6rem] flex rounded-lg overflow-hidden"
           >
-            <div className="font-cairoRegular self-center text-right m-auto flex-[.6] px-4">
+            <div className="font-cairoRegular bg-white h-full justify-center  flex flex-col text-right m-auto flex-[.6] px-4">
               <h1 className="font-cairoBold text-2xl text-[#5D9EEB]">
                 {item.number}
               </h1>
-              <h3 className="text-[#666666] ">{item.label}</h3>
+              <h3 className="text-[#666666 ">{item.label}</h3>
             </div>
-            <div className="w-[6rem] h-[6rem] bg-[#091420] flex-[.4]">
+            <div className="w-[6rem] h-[6rem]  flex-[.4]">
               <item.Icon className="text-white p-4 w-full h-full" />
             </div>
+          </div>
           </Link>
         ))}
       </div>
@@ -92,8 +95,8 @@ export default function Home() {
         {/* CARDS */}
         <div className="flex flex-row container flex-wrap mx-auto items-center gap-2 md:gap-4  justify-center ">
           {data.map((item) => (
-            <div className=" ">
-              <div className="mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md">
+            <div className="">
+              <div className="item-shadow mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md border border-gray-300/50 hover:border-gray-500">
                 <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]"></div>
                 <CardBody>
                   <Typography
@@ -111,7 +114,7 @@ export default function Home() {
                 </CardBody>
                 <Link to="/announcements/announce">
                   <div className="pt-0 mr-6 mb-6 ">
-                    <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9] bg-black text-white p-2 rounded-lg text-md">
+                    <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9] bg-dark-500 text-white p-2 rounded-lg text-md">
                       قراءة المزيد
                     </button>
                   </div>
@@ -132,7 +135,7 @@ export default function Home() {
         <div className="flex flex-row container flex-wrap mx-auto items-center gap-2 md:gap-4 justify-center">
           {activity.map((item) => (
             <div className=" ">
-              <div className="mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md">
+              <div className="item-shadow mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md border border-gray-300/50 hover:border-gray-500">
                 <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]"></div>
                 <CardBody>
                   <Typography
@@ -150,7 +153,7 @@ export default function Home() {
                   </Typography>
                 </CardBody>
                 <div className="pt-0 mr-6 mb-6 ">
-                  <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9]  bg-black text-white p-2 rounded-lg text-md">
+                  <button className="font-cairoRegular transition ease-in-out hover:scale-[1.06] active:scale-[.9]  bg-dark-500 text-white p-2 rounded-lg text-md">
                     قراءة المزيد
                   </button>
                 </div>
