@@ -1,27 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 function NewAnnounce() {
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("No file selected");
+
+  const types = ['image/png', 'image/jpeg'];
+
+  const handleImageUpload = (e) => {
+    const selected = e.target.files[0]
+    if(selected) {
+      setFileName(selected.name)
+      setFile(URL.createObjectURL(e.target.files[0]))
+    }
+  }
+
+  const removeImage = () => {
+    setFileName("No file selected")
+    setFile(null)
+  }
+
   return (
     <div dir="rtl" className="mx-auto max-w-[1000px] flex flex-col pt-[12rem]">
       {/* COVER */}
       <div
         dir="rtl"
-        className="w-full h-[12rem]  rounded-md self-center overflow-hidden"
+        className="w-full h-[14rem] rounded-md self-center"
       >
         <label
           htmlFor="file"
-          className="cursor-pointer bg-blue-500  items-end px-10 py-4 flex h-full transition ease-in-out hover:opacity-90"
+          className={`cursor-pointer ${!file && "bg-blue-500"} rounded-md items-end flex h-full transition ease-in-out border border-transparent hover:border-light-400/50 hover:opacity-90`}
         >
-          <div className="items-center flex">
-            <div className="bg-[#091420] rounded-full p-2 items-center ml-4">
-              <BiImageAdd className="text-2xl text-white " />
-            </div>
-            <h2 className="font-cairoBold text-2xl text-white ">
-              اضف غلاف للتبليغ
-            </h2>
-          </div>
-          <input id="file" name="file" type="file" className="hidden" />
+            { !file && 
+              <>
+                <div className="items-center flex px-6 py-4">
+                  <div className="bg-[#091420] rounded-full p-2 items-center ml-4">
+                    <BiImageAdd className="text-2xl text-white " />
+                  </div>
+
+                  <h2 className="font-cairoBold text-2xl text-white ">
+                    اضف غلاف للتبليغ
+                  </h2>
+
+                </div>
+              </>
+              }
+          <input id="file" name="file" type="file" className="hidden" accept={types} onChange={handleImageUpload} />
+              {
+                file && (
+                  <>
+                    <img src={file} className='img w-full h-full object-contain'/>
+                    {/* <p className="text-[18px] font-cairoSemiBold">{fileName}</p> */}
+                  </>
+                )
+              }
         </label>
       </div>
       {/* ALL OF IT / JUSTIFIED CENTERED / FOR THE MOBILE */}

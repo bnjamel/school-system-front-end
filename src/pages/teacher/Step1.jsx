@@ -1,8 +1,29 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "@material-tailwind/react";
 import { HiOutlineUpload } from "react-icons/hi";
+import { FaRegTrashAlt } from "react-icons/fa";
+
 
 function Step1({ handleNext, handlePrev }) {
+
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("No file selected");
+
+  const types = ['image/png', 'image/jpeg'];
+
+  const handleImageUpload = (e) => {
+    const selected = e.target.files[0]
+    if(selected) {
+      setFileName(selected.name)
+      setFile(URL.createObjectURL(e.target.files[0]))
+    }
+  }
+
+  const removeImage = () => {
+    setFileName("No file selected")
+    setFile(null)
+  }
+
   return (
     <div>
       {/* FORM */}
@@ -69,9 +90,22 @@ function Step1({ handleNext, handlePrev }) {
                   <HiOutlineUpload className="text-2xl text-white " />
                 </div>
               </div>
-              <input id="file" name="file" type="file" className="hidden" />
+              <input id="file" name="file" type="file" className="hidden" accept={types} onChange={handleImageUpload} />
+              {
+                file && (
+                  <>
+                    <img src={file} className='img w-[50px] h-[50px] object-contain'/>
+                    <p className="text-[18px] font-cairoSemiBold">{fileName}</p>
+                  </>
+                )
+              }
             </label>
           </div>
+            {file && (
+              <button className="my-2 bg-red-400 p-2 rounded hover:opacity-80 transition ease-in-out" onClick={removeImage}>
+                <FaRegTrashAlt className="text-[24px] text-light-100" />
+              </button> 
+            )}
         </form>
       </section>
       {/* BUTTONS */}
