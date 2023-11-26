@@ -32,11 +32,10 @@ table {
 }
 
 .bg-gradient {
-  background-image: linear-gradient(to right, #FAC394, #E95F9B);
+  background-image: linear-gradient(to right, #fac394, #e95f9b);
 }
 
 .item-shadow {
-  transition: .2s ease-in-out all;
-  box-shadow: 5px 8px 0px 0px #ffcae1,
-              5px 8px 0px 0px #ffcae1;
+  transition: 0.2s ease-in-out all;
+  box-shadow: 5px 8px 0px 0px #ffcae1, 5px 8px 0px 0px #ffcae1;
 }

@@ -15,6 +15,7 @@ import NewAnnounce from "../pages/announcements/NewAnnounce";
 import NewTeacher from "../pages/teacher/NewTeacher";
 import NewStudent from "../pages/student/NewStudent";
 import NewClass from "../pages/class/NewClass";
+import Display from "../pages/class/Display";
 import Schedule from "../pages/weekly_schedule/Schedule";
 
 export default function RouterContent() {
@@ -30,6 +31,8 @@ export default function RouterContent() {
           <Route path="/annual_plan" element={<AnnualPlan />} />
           <Route path="/class" element={<Class />} />
           <Route path="/class/newclass" element={<NewClass />} />
+          <Route path="/class/display" element={<Display />} />
+
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/weekly_schedule" element={<WeeklySchedule />} />
