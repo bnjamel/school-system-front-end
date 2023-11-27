@@ -21,8 +21,8 @@ function Navbar({ location }) {
   return (
     <div
       className={`flex z-[100] ${
-        location.pathname !== "/login" ? "justify-between" : "justify-center"
-      } items-center p-2 border-b border-black/50`}
+        location.pathname !== "/login" ? "justify-between border-b border-black/50" : "justify-center"
+      } items-center p-2`}
     >
       {/* profile */}
       {location.pathname !== "/login" && (
@@ -59,13 +59,17 @@ function Navbar({ location }) {
 
       {/* name */}
       <div className="mr-2 lg:mr-10 flex items-center">
-        <h1 className="lg:text-[1.6rem] text-[#5D9EEB] font-cairoBold">
+        <h1 className="lg:text-[1.6rem] text-[#7150CF] font-cairoBold">
           المدرسة
         </h1>
 
-        <div className="block lg:hidden mx-2 px-2 cursor-pointer rotate-90">
-          |||
-        </div>
+        {
+          location.pathname === "login" && (
+            <div className="block lg:hidden mx-2 px-2 cursor-pointer rotate-90">
+              |||
+            </div>
+          )
+        }
       </div>
     </div>
   );

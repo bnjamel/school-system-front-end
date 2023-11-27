@@ -1,5 +1,5 @@
 import React from "react";
-import login from "../login/login.svg";
+// import login from "../login/login.svg";
 import {
   Card,
   Input,
@@ -8,6 +8,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import {useNavigate} from "react-router-dom";
+import login from "../../assets/images/login_1.png"
 
 function Login() {
   let navigator = useNavigate();
@@ -19,18 +20,21 @@ function Login() {
   return (
     <div className="flex h-[65vh] flex-col lg:flex-row justify-center my-[4rem] md:my-[2rem] lg:mt-[8rem] lg:mb-0 items-center container mx-auto">
       {/* PICTURE */}
-      <div className="w-full h-full flex-[.5] flex items-center">
+      <div className="w-full h-full flex-[.5] items-center hidden lg:flex">
         <img width={700} height={700} src={login} alt="login" />
       </div>
       {/* LOGIN FORM */}
       <div className="flex-[.5] items-center justify-center flex">
-      <div className="bg-[#5B91D0] p-4 lg:p-6 lg:px-14 rounded-lg border-2 border-gray-500">
+      <div className="px-4 py-6 lg:py-[4rem] lg:px-14 bg-gradient rounded-tr-md rounded-tl-[10rem]
+      rounded-bl-md rounded-br-[10rem] m-2
+      login-card-shadow border border-black
+      ">
         <Card color="transparent" shadow={false}>
           <h1 dir="rtl" className="font-cairoBold text-2xl text-white">
             مرحبًا بك في المدرسة
           </h1>
 
-          <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+          <form dir="rtl" className="p-4 mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
             <div className="mb-1 flex flex-col gap-6">
               <Typography
                 dir="rtl"
@@ -43,7 +47,7 @@ function Login() {
               <Input
                 dir="rtl"
                 size="lg"
-                placeholder="name@mail.com"
+                placeholder="name.student@school.com"
                 className="text-black bg-white !border-t-blue-gray-200 focus:!border-t-gray-900"
                 labelProps={{
                   className: "before:content-none after:content-none",
@@ -91,7 +95,7 @@ function Login() {
                 containerProps={{ className: "-ml-2.5" }}
               />
             </div>
-            <Button onClick={onSubmit} className="mt-6 font-cairoBold text-md" fullWidth>
+            <Button onClick={onSubmit} className="mt-6 font-cairoBold text-md" >
               تسجيل الدخول
             </Button>
             <Typography
