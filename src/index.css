@@ -35,7 +35,44 @@ table {
   background-image: linear-gradient(to right, #fac394, #e95f9b);
 }
 
+.login-card-shadow {
+  transition: .2s ease-in-out all;
+  box-shadow: 5px 8px 0px 0px #000000,
+              5px 8px 0px 0px #000000;
+}
+
 .item-shadow {
+
+  transition: .2s ease-in-out all;
+  box-shadow: 5px 8px 0px 0px #ffcae1,
+              5px 8px 0px 0px #ffcae1;
+}
+
+.linkStyle {
+  display: block;
+  border-radius: 8px; 
+  padding: .5rem;
+  text-align: center;
+  color: black;
+  transition: .2s ease-in-out all;
+}
+
+.linkStyle:hover {
+  background: black;
+  color: white;
+}
+
+.active {
+  background: black;
+  color: white;
+}
+
+.pending {
+  color: black;
+  background: transparent;
+}
+
   transition: 0.2s ease-in-out all;
   box-shadow: 5px 8px 0px 0px #ffcae1, 5px 8px 0px 0px #ffcae1;
 }
+

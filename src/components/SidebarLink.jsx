@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function SidebarLink({ link, text }) {
   return (
     <li className=" py-2 lg:block  ">
-      <Link
+      <NavLink
         to={link}
-        className="block py-2 text-center font-cairoRegular text-black transition ease-in-out hover:bg-black hover:text-white rounded-md px-2"
+        className={`${({ isActive, isPending }) =>
+        isPending ? "pending" : isActive ? "active" : ""
+      } linkStyle font-cairoRegular`}
       >
         {text}
-      </Link>
+      </NavLink>
     </li>
   );
 }
