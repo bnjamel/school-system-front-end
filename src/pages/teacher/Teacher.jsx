@@ -1,8 +1,9 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { FiEdit } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
 
-const TABLE_HEAD = ["#", "الأسم", "المادة", "رقم الهاتف"];
+const TABLE_HEAD = ["#", "الأسم", "المادة", "رقم الهاتف", ""];
 
 const TABLE_ROWS = [
   {
@@ -64,6 +65,14 @@ const TABLE_ROWS = [
 ];
 
 export default function Teacher() {
+  const navigate = useNavigate();
+  const handleTeacherPress = () => {
+    navigate("/profile/1");
+  };
+  const navigateEdit = useNavigate();
+  const handleTeacherEdit = () => {
+    navigateEdit("/profile/teacheredit");
+  };
   return (
     <div dir="rtl" className="mx-auto max-w-[1000px] flex flex-col pt-[12rem]">
       {/* TEACHER */}
@@ -126,7 +135,7 @@ export default function Teacher() {
                   <td>
                     <div className="flex pr-4  flex-col">{index + 1}</div>
                   </td>
-                  <td className={classes}>
+                  <td onClick={handleTeacherPress} className={classes}>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="w-10 ">
@@ -139,15 +148,23 @@ export default function Teacher() {
                       </div>
                     </div>
                   </td>
-                  <td className={classes}>
+                  <td onClick={handleTeacherPress} className={classes}>
                     <div className="flex flex-col">
                       <p>{subject}</p>
                       <p className="text-[#58585a]">{org}</p>
                     </div>
                   </td>
 
-                  <td className={classes}>
+                  <td onClick={handleTeacherPress} className={classes}>
                     <p>{date}</p>
+                  </td>
+
+                  <td>
+                    <FiEdit
+                      size={20}
+                      className="cursor-pointer hover:scale-125 transition"
+                      onClick={handleTeacherEdit}
+                    />
                   </td>
                 </tr>
               );

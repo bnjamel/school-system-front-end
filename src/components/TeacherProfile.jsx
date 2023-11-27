@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Announce from "../pages/profile/teacherProfile/Announce";
 import Thanks from "../pages/profile/teacherProfile/Thanks";
+import { useNavigate } from "react-router-dom";
 
 export default function TeacherProfile() {
   const [activeTab, setActiveTab] = useState("announce");
@@ -16,6 +17,10 @@ export default function TeacherProfile() {
         return;
     }
   };
+  const navigate = useNavigate();
+  const handleTeacherEdit = () => {
+    navigate("/profile/teacheredit");
+  };
 
   return (
     <div dir="rtl" className="mx-auto max-w-[1000px] flex pt-[12rem]  ">
@@ -30,8 +35,13 @@ export default function TeacherProfile() {
               src=""
               alt=""
             />
-            <h1 className="self-center text-2xl font-cairoBold my-4">
+            <h1 className="self-center text-2xl font-cairoBold my-4 flex items-center">
               أ. علي حسن
+              <FiEdit
+                size={20}
+                className="mr-4 cursor-pointer"
+                onClick={handleTeacherEdit}
+              />
             </h1>
           </div>
           <div className="border-l border border-black" />

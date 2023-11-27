@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Cv from "../pages/profile/studentProfile/Cv";
 import Document from "../pages/profile/studentProfile/Document";
 import Grades from "../pages/profile/studentProfile/Grades";
+import { FiEdit } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentProfile() {
   const [activeTab, setActiveTab] = useState("cv");
@@ -20,6 +22,11 @@ export default function StudentProfile() {
         return;
     }
   };
+
+  const navigate = useNavigate();
+  const handleStudentEdit = () => {
+    navigate("/profile/studentedit");
+  };
   return (
     <div dir="rtl" className="mx-auto max-w-[1000px] flex pt-[12rem] ">
       <div className="flex w-full flex-col md:flex-row justify-center md:justify-normal md:mx-0">
@@ -33,8 +40,13 @@ export default function StudentProfile() {
               src=""
               alt=""
             />
-            <h1 className="self-center text-2xl font-cairoBold my-4">
+            <h1 className="self-center text-2xl font-cairoBold my-4 flex items-center">
               محمد حسن
+              <FiEdit
+                size={20}
+                className="mr-4 cursor-pointer"
+                onClick={handleStudentEdit}
+              />
             </h1>
           </div>
           <div className="border-l border border-black" />

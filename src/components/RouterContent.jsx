@@ -17,6 +17,8 @@ import NewStudent from "../pages/student/NewStudent";
 import NewClass from "../pages/class/NewClass";
 import Display from "../pages/class/Display";
 import Schedule from "../pages/weekly_schedule/Schedule";
+import StudentEdit from "../pages/profile/editProfile/StudentEdit";
+import TeacherEdit from "../pages/profile/editProfile/TeacherEdit";
 
 export default function RouterContent() {
   return (
@@ -33,7 +35,10 @@ export default function RouterContent() {
           <Route path="/class/newclass" element={<NewClass />} />
           <Route path="/class/display" element={<Display />} />
 
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/studentedit" element={<StudentEdit />} />
+          <Route path="/profile/teacheredit" element={<TeacherEdit />} />
+
           <Route path="/settings" element={<Settings />} />
           <Route path="/weekly_schedule" element={<WeeklySchedule />} />
           <Route path="/weekly_schedule/schedule" element={<Schedule />} />
