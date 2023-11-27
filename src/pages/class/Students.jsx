@@ -1,8 +1,7 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
-import { Link, useNavigate } from "react-router-dom";
-const TABLE_HEAD = ["#", "الأسم", "الصف", "رقم الهاتف", ""];
-import { FiEdit } from "react-icons/fi";
+import { Link } from "react-router-dom";
+const TABLE_HEAD = ["#", "الأسم", "الصف", "رقم الهاتف"];
 
 const TABLE_ROWS = [
   {
@@ -62,46 +61,14 @@ const TABLE_ROWS = [
     date: "0123456789",
   },
 ];
-export default function Student() {
-  const navigate = useNavigate();
-  const handleTeacherPress = () => {
-    navigate("/profile/1");
-  };
-  const navigateEdit = useNavigate();
-  const handleStudentEdit = () => {
-    navigateEdit("/profile/studentedit");
-  };
-  return (
-    <div dir="rtl" className="mx-auto max-w-[1000px] flex flex-col pt-[12rem]">
-      {/* TEACHER */}
-      <h1 className="font-cairoRegular text-2xl text-[#999999]">الطلاب</h1>
-      {/* SEARCH + BUTTON */}
-      <div className="flex justify-between items-center">
-        <div className="flex items-center ">
-          <label htmlFor="Search" className="sr-only"></label>
 
-          <input
-            type="text"
-            id="Search"
-            placeholder="ابحث عن طالب..."
-            className="w-[16rem] font-cairoRegular pr-4 mt-1 rounded-md border-gray-200 py-2.5 shadow-sm sm:text-sm"
-          />
-          <div className="mr-1 transition ease-in-out hover:scale-[1.06] active:scale-[.9] px-[15px] py-[10px] mt-1 cursor-pointer rounded-md  bg-[#5B91D0]">
-            <BsSearch className="text-white" />
-          </div>
-        </div>
-        {/* BUTTON */}
-        <Link
-          to="/student/newstudent"
-          className="hidden transition ease-in-out hover:scale-[1.06] active:scale-[.9] md:flex px-3 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]"
-        >
-          إضافة طالب +
-        </Link>
-      </div>
+function Students() {
+  return (
+    <div>
       {/* TABLE */}
       <table
         dir="rtl"
-        className="mt-[2rem] w-full min-w-max table-auto text-right rounded-lg overflow-hidden"
+        className="w-full min-w-max table-auto text-right rounded-lg overflow-hidden"
       >
         <thead className="">
           <tr>
@@ -122,15 +89,15 @@ export default function Student() {
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
             return (
               <tr
-                className={`hover:bg-gray-200 hover:scale-[1.01] transition ease-in-out  ${
+                className={`hover:bg-gray-200 hover:scale-[1.01] transition ease-in-out ${
                   index % 2 === 0 ? "bg-light-100" : "bg-blue-100/25"
-                } cursor-pointer `}
+                } cursor-pointer`}
                 key={name}
               >
                 <td>
                   <div className="flex pr-4 flex-col">{index + 1}</div>
                 </td>
-                <td onClick={handleTeacherPress} className={classes}>
+                <td className={classes}>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="w-10 ">
@@ -143,23 +110,15 @@ export default function Student() {
                     </div>
                   </div>
                 </td>
-                <td onClick={handleTeacherPress} className={classes}>
+                <td className={classes}>
                   <div className="flex flex-col">
                     <p>{subject}</p>
                     <p className="text-[#58585a]">{org}</p>
                   </div>
                 </td>
 
-                <td onClick={handleTeacherPress} className={classes}>
+                <td className={classes}>
                   <p>{date}</p>
-                </td>
-
-                <td>
-                  <FiEdit
-                    size={20}
-                    className="cursor-pointer hover:scale-125 transition"
-                    onClick={handleStudentEdit}
-                  />
                 </td>
               </tr>
             );
@@ -169,3 +128,5 @@ export default function Student() {
     </div>
   );
 }
+
+export default Students;

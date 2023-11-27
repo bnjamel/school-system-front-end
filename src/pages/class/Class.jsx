@@ -52,9 +52,11 @@ export default function Class() {
                 صف {item.class_name}
               </div>
               <div className="my-6 mx-6 items-center font-cairoRegular">
-                <div className="cursor-pointer my-2 hover:text-gray-600 underline">
-                  شعبة أ
-                </div>
+                <Link to="/class/display">
+                  <div className="cursor-pointer my-2 hover:text-gray-600 underline">
+                    شعبة أ
+                  </div>
+                </Link>
                 <div className="cursor-pointer my-2 hover:text-gray-600 underline">
                   شعبة ب
                 </div>
