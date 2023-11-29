@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { Button } from "@material-tailwind/react";
 
-function TeacherEdit() {
+function EditAdminProfile() {
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("No file selected");
 
@@ -15,13 +15,13 @@ function TeacherEdit() {
       setFile(URL.createObjectURL(e.target.files[0]));
     }
   };
-
   const removeImage = () => {
     setFileName("No file selected");
     setFile(null);
   };
+
   return (
-    <div dir="rtl" className="mx-auto max-w-[600px] flex flex-col pt-[12rem]">
+    <div dir="rtl" className="mx-auto max-w-[600px] flex flex-col py-10">
       {/* FORM */}
       <section class="max-w-4xl  p-6 bg-white rounded-md shadow-md dark:bg-gray-800 mb-6 font-cairoRegular">
         {/* Profile Picture */}
@@ -149,4 +149,4 @@ function TeacherEdit() {
   );
 }
 
-export default TeacherEdit;
+export default EditAdminProfile;

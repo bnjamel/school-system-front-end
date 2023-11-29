@@ -62,14 +62,14 @@ function EditProfile() {
         </div>
 
         {/* Details */}
-        <div className="my-8 flex justify-between mx-auto max-w-[500px]">
+        <div className="my-8 flex flex-col md:flex-row justify-between items-center md:items-start mx-auto max-w-[500px]">
           <div>
             <div className="">
               <input
                 className="w-fit lg:w-ful rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out "
                 type="text"
                 placeholder="اسم الطالب الكامل"
-              ></input>
+              />
             </div>
 
             <div className="my-2">
@@ -77,7 +77,7 @@ function EditProfile() {
                 className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
                 type="text"
                 placeholder="12345"
-              ></input>
+              />
             </div>
 
             <div className="">
@@ -85,13 +85,13 @@ function EditProfile() {
                 className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
                 type="text"
                 placeholder="البصرة - الجزيرة"
-              ></input>
+              />
             </div>
 
             <div className="my-2">
               {/* SELECT */}
               <div className="flex flex-col items-start font-cairoRegular ">
-                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out px-4 py-2 cursor-pointer">
+                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out w-full px-4 py-2 cursor-pointer">
                   <option value="">صف السادس</option>
                   <option value="">صف الخامس</option>
                   <option value="">صف الرابع</option>
@@ -102,10 +102,10 @@ function EditProfile() {
               </div>
             </div>
 
-            <div className="mt-2">
+            <div className="my-2">
               {/* SELECT */}
               <div className="flex flex-col items-start font-cairoRegular ">
-                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out px-4 py-2 cursor-pointer">
+                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out w-full px-4 py-2 cursor-pointer">
                   <option value="">ممتاز</option>
                   <option value="">جيد</option>
                   <option value="">مقبول</option>
@@ -120,15 +120,15 @@ function EditProfile() {
                 className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
                 type="text"
                 placeholder="name.student@school.com"
-              ></input>
+              />
             </div>
 
             <div className="my-2">
               <input
-                className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
+                className="w-full lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
                 type="date"
                 placeholder="2004-10-04"
-              ></input>
+              />
             </div>
 
             <div>
@@ -136,13 +136,13 @@ function EditProfile() {
                 className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out "
                 type="text"
                 placeholder="عن الطالب"
-              ></input>
+              />
             </div>
 
             <div className="my-2">
               {/* SELECT */}
               <div className="flex flex-col items-start font-cairoRegular ">
-                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out px-4 py-2  cursor-pointer">
+                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out w-full px-4 py-2  cursor-pointer">
                   <option value="">شعبة أ</option>
                   <option value="">شعبة ب</option>
                   <option value="">شعبة ج</option>
