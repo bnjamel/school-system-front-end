@@ -2,7 +2,7 @@ import React from "react";
 
 function Grades() {
   return (
-    <div className="flex flex-col mx-10 overflow-y-scroll h-[100vh]">
+    <div className="flex flex-col mx-10 hide-scrollbar h-[100vh]">
       <div className="mb-6">
         <h1 className="font-cairoBold text-xl ">درجات الطالب</h1>
       </div>

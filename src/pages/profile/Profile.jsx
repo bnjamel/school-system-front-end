@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StudentProfile from "../../components/StudentProfile";
 import TeacherProfile from "../../components/TeacherProfile";
 import { useParams } from "react-router-dom";
+import { useStateValue } from "../../context/StateProvider";
+import axios from "axios";
 
 export default function Profile() {
-  const [role, setRole] = useState("student");
+  const [{ user }, dispatch] = useStateValue();
   const { id } = useParams();
-  console.log(id);
-  switch (role) {
+
+  switch (user.role) {
     case "student":
-      return <StudentProfile />;
+      return <StudentProfile id={id} />;
     case "teacher":
-      return <TeacherProfile />;
+      return <TeacherProfile id={id} />;
+    case "admin":
+      return <h1>admin</h1>;
+    default:
+      return;
   }
 }

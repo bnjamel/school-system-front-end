@@ -1,13 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import RouterContent from "./components/RouterContent";
 import Footer from "./components/Footer";
-import {useLocation} from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
+import useFetch from "./customHooks/useFetch";
+import axios from "axios"
+import { useStateValue } from "./context/StateProvider";
+
+const URL = "http://localhost:3001/"
 
 function App() {
+  const [{}, dispatch] = useStateValue();
   const location = useLocation();
+  const navigator = useNavigate();
+
+  // const {data, isPending, error} = useFetch(URL + "student/", "GET")
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+
+      axios.get("http://localhost:3001/user/authToken", {
+          headers: { accessToken: localStorage.getItem("accessToken") },
+        }).then((response) => {
+          if (response.data.error) {
+            dispatch({
+              type: "SET_LOGIN",
+              isLogged: false,
+            });
+          } else {
+            dispatch({
+              type: "SET_LOGIN",
+              isLogged: true,
+            });
+
+            dispatch({
+              type: "SET_USER",
+              user: {
+                email: response.data.email,
+                name: response.data.name,
+                role: response.data.role,
+                id: response.data.id,
+              },
+            });
+          }
+        });
+    } else {
+      navigator("/login")
+    }
+  }, []);
 
   return (
     <div className="flex h-[100vh] ">

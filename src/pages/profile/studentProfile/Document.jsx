@@ -2,7 +2,7 @@ import React from "react";
 
 function Document() {
   return (
-    <div className="flex flex-col mx-10 overflow-y-scroll h-[100vh]">
+    <div className="flex hide-scrollbar flex-col mx-10 h-[100vh]">
       <div className="mb-10">
         <h1 className="font-cairoBold text-xl mb-6">وثيقة الطالب</h1>
         <label className="border border-black font-cairoRegular px-10 py-1 cursor-pointer">

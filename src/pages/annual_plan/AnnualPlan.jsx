@@ -1,6 +1,9 @@
 import React from "react";
+import { useStateValue } from "../../context/StateProvider";
 
 export default function AnnualPlan() {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     <div dir="rtl" className="mx-auto max-w-[1000px] flex flex-col pt-[12rem]">
       <div className="flex flex-col lg:flex-row justify-center text-center lg:text-justify lg:justify-between items-center mb-6">
@@ -12,9 +15,11 @@ export default function AnnualPlan() {
             مواعيد الامتحانات الشهرية والنهائية
           </h3>
         </div>
-        <button className=" my-2 transition ease-in-out hover:scale-[1.06] active:scale-[.9] lg:my-0 px-6 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
-          تعديل
-        </button>
+        {user.role === "admin" && (
+          <button className=" my-2 transition ease-in-out hover:scale-[1.06] active:scale-[.9] lg:my-0 px-6 py-1.5 rounded-md text-white font-cairoRegular bg-[#5B91D0]">
+            تعديل
+          </button>
+        )}
       </div>
       {/* Table */}
       <div className="overflow-x-auto rounded-lg border border-gray-200 mx-10 lg:mx-0">

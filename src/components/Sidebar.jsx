@@ -1,8 +1,10 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
+import { useStateValue } from "../context/StateProvider";
 
 export default function Sidebar({ location }) {
+  const [{ user }, dispatch] = useStateValue();
   return (
     <div dir="rtl" className="">
       {location.pathname !== "/login" && (
@@ -14,8 +16,12 @@ export default function Sidebar({ location }) {
           <SidebarLink link="/weekly_schedule" text="الجدول الاسبوعي" />
           <SidebarLink link="/annual_plan" text="الخطة السنوية" />
           <SidebarLink link="/announcements" text="التبليغات" />
-          <SidebarLink link="/settings" text="الاعدادات" />
-          <SidebarLink link="/profile/1" text="الملف الشخصي" />
+          {user.role === "admin" && (
+            <SidebarLink link="/settings" text="الاعدادات" />
+          )}
+          {user.role !== "admin" && (
+            <SidebarLink link={`/profile/${user.id}`} text="الملف الشخصي" />
+          )}
         </ul>
       )}
     </div>

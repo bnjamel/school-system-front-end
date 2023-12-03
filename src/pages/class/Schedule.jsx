@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useFetch from "../../customHooks/useFetch";
+import axios from "axios";
 
-function Schedule() {
+function Schedule({ schedules, DivisionId }) {
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    if (schedules) {
+      axios
+        .get(`http://localhost:3001/schedule/byDivId/${DivisionId}`)
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
+
   return (
     <div>
       {/* Table */}
@@ -33,125 +50,32 @@ function Schedule() {
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
-                الأحد
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                انكليزي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                عربي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                كيمياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                فيزياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                رياضيات
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                أحياء
-              </td>
-            </tr>
-
-            <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
-                الإثنين
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                انكليزي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                عربي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                كيمياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                فيزياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                رياضيات
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                أحياء
-              </td>
-            </tr>
-
-            <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
-                الثلاثاء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                انكليزي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                عربي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                كيمياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                فيزياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                رياضيات
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                أحياء
-              </td>
-            </tr>
-
-            <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
-                الأربعاء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                انكليزي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                عربي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                كيمياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                فيزياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                رياضيات
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                أحياء
-              </td>
-            </tr>
-
-            <tr>
-              <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
-                الخميس
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                انكليزي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                عربي
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                كيمياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                فيزياء
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                رياضيات
-              </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                أحياء
-              </td>
-            </tr>
+            {data &&
+              data.map((item) => (
+                <tr key={item.id}>
+                  <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
+                    {item?.Day?.name}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item?.first_lesson}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item?.second_lesson}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item?.third_lesson}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item?.fourth_lesson}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item?.fifth_lesson}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                    {item?.sixth_lesson}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
