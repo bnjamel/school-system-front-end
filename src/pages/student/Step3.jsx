@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@material-tailwind/react";
 
-function Step3({ handleNext, handlePrev }) {
+function Step3({ handleNext, handlePrev, isLastStep, setIsLastStep }) {
   return (
     <div>
       {/* FORM */}

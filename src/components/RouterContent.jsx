@@ -19,6 +19,8 @@ import Display from "../pages/class/Display";
 import Schedule from "../pages/weekly_schedule/Schedule";
 import StudentEdit from "../pages/profile/editProfile/StudentEdit";
 import TeacherEdit from "../pages/profile/editProfile/TeacherEdit";
+import ViewTeacherProfile from "../pages/profile/ViewTeacherProfile";
+import ViewStudentProfile from "../pages/profile/ViewStudentProfile";
 
 export default function RouterContent() {
   return (
@@ -33,18 +35,25 @@ export default function RouterContent() {
           <Route path="/annual_plan" element={<AnnualPlan />} />
           <Route path="/class" element={<Class />} />
           <Route path="/class/newclass" element={<NewClass />} />
-          <Route path="/class/display" element={<Display />} />
+          <Route path="/class/display/:id" element={<Display />} />
 
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/profile/studentedit" element={<StudentEdit />} />
           <Route path="/profile/teacheredit" element={<TeacherEdit />} />
+          <Route path="/student/:id" element={<ViewStudentProfile />} />
+          <Route path="/student/:name" element={<ViewStudentProfile />} />
+
+          <Route path="/teacher/:id" element={<ViewTeacherProfile />} />
+          <Route path="/teacher/:name" element={<ViewTeacherProfile />} />
 
           <Route path="/settings" element={<Settings />} />
           <Route path="/weekly_schedule" element={<WeeklySchedule />} />
-          <Route path="/weekly_schedule/schedule" element={<Schedule />} />
+          <Route path="/weekly_schedule/schedule/:id" element={<Schedule />} />
           <Route path="/announcements" element={<Announcements />} />
-          <Route path="/announcements/announce" element={<Announce />} />
+          {/* <Route path="/announcements/announce" element={<Announce />} /> */}
+          <Route path="/announcements/:id" element={<Announce />} />
           <Route path="/announcements/newannounce" element={<NewAnnounce />} />
+
           <Route path="/login" element={<Login />} />
         </Routes>
       </div>

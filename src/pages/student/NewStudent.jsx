@@ -14,11 +14,32 @@ function NewStudent() {
   const activeDiv = (activeTab) => {
     switch (activeTab) {
       case 0:
-        return <Step1 handleNext={handleNext} handlePrev={handlePrev} />;
+        return (
+          <Step1
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            isLastStep={isLastStep}
+            setIsLastStep={setIsLastStep}
+          />
+        );
       case 1:
-        return <Step2 handleNext={handleNext} handlePrev={handlePrev} />;
+        return (
+          <Step2
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            isLastStep={isLastStep}
+            setIsLastStep={setIsLastStep}
+          />
+        );
       case 2:
-        return <Step3 handleNext={handleNext} handlePrev={handlePrev} />;
+        return (
+          <Step3
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            isLastStep={isLastStep}
+            setIsLastStep={setIsLastStep}
+          />
+        );
       default:
         break;
     }

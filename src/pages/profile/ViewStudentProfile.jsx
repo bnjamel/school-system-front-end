@@ -1,28 +1,46 @@
 import React, { useEffect, useState } from "react";
-import Cv from "../pages/profile/studentProfile/Cv";
-import Document from "../pages/profile/studentProfile/Document";
-import Grades from "../pages/profile/studentProfile/Grades";
+import Cv from "../../pages/profile/studentProfile/Cv";
+import Document from "../../pages/profile/studentProfile/Document";
+import Grades from "../../pages/profile/studentProfile/Grades";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { useStateValue } from "../../context/StateProvider";
+import { useParams } from "react-router-dom";
+
 import axios from "axios";
 
-export default function StudentProfile({ id }) {
-  const [activeTab, setActiveTab] = useState("cv");
-  const navigate = useNavigate();
+export default function ViewStudentProfile() {
+  const { id, name } = useParams();
   const [data, setData] = useState();
+  const [{ user }, dispatch] = useStateValue();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3001/student/byId/${id}`)
-      .then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (name) {
+      console.log(name);
+      axios
+        .get(`http://localhost:3001/student/${name}`)
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    if (id) {
+      axios
+        .get(`http://localhost:3001/student/byId/${id}`)
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }, []);
 
+  const [activeTab, setActiveTab] = useState("cv");
   const activeDiv = () => {
     switch (activeTab) {
       case "cv":
@@ -57,13 +75,18 @@ export default function StudentProfile({ id }) {
               alt=""
             />
             <h1 className="self-center text-2xl font-cairoBold my-4 flex items-center">
-              {data && data?.name}
-
-              <FiEdit
-                size={20}
-                className="mr-4 cursor-pointer"
-                onClick={handleStudentEdit}
-              />
+              {data?.name.length > 20 ? (
+                <>{data?.name.slice(0, 20)}</>
+              ) : (
+                <>{data?.name}</>
+              )}
+              {user?.id === data?.id && (
+                <FiEdit
+                  size={20}
+                  className="mr-4 cursor-pointer"
+                  onClick={handleStudentEdit}
+                />
+              )}
             </h1>
           </div>
           <div className="border-l border border-black" />

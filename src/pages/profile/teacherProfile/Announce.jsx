@@ -10,10 +10,10 @@ function Announce() {
       {/* CARDS */}
       <div
         dir="ltr"
-        className=" flex flex-col container gap-2 md:gap-4 mb-6 overflow-y-scroll h-[100vh]"
+        className="pt-4 flex flex-col overflow-hidden overflow-y-scroll container gap-2 md:gap-4 mb-6 hide-scrollbar h-[100vh]"
       >
         {data.map((item) => (
-          <div dir="rtl" className="">
+          <div key={item} dir="rtl" className="">
             <div className="bg-white  rounded-lg overflow-hidden mx-6 shadow-sm hover:shadow-md border border-gray-300/50 hover:border-gray-500 flex ">
               <div className="w-[10rem] h-[6rem] md:h-[10rem] md:w-[10rem] mx-2 rounded-lg self-center bg-[#47D0C8]"></div>
               <div className="flex flex-col">

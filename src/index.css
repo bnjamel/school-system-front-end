@@ -72,4 +72,7 @@ table {
   background: transparent;
 }
 
-
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  overflow-y: scroll;
+}

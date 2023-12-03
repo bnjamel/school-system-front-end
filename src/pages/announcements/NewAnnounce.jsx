@@ -1,60 +1,95 @@
 import React, { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { FaRegTrashAlt } from "react-icons/fa";
+import axios from "axios";
 
 function NewAnnounce() {
   const [file, setFile] = useState();
   const [fileName, setFileName] = useState("No file selected");
 
-  const types = ['image/png', 'image/jpeg'];
+  const [image, setImage] = useState();
+  const [imagePreview, setImagePreview] = useState();
+
+  const types = ["image/png", "image/jpeg"];
 
   const handleImageUpload = (e) => {
-    const selected = e.target.files[0]
-    if(selected) {
-      setFileName(selected.name)
-      setFile(URL.createObjectURL(e.target.files[0]))
+    const selected = e.target.files[0];
+    if (selected) {
+      setFileName(selected.name);
+      setImagePreview(URL.createObjectURL(e.target.files[0]));
+      setImage(e.target.files[0]);
     }
-  }
+  };
 
   const removeImage = () => {
-    setFileName("No file selected")
-    setFile(null)
-  }
+    setFileName("No file selected");
+    setImagePreview(null);
+  };
+
+  const handleSubmit = () => {
+    const formData = new FormData();
+
+    if (!image) {
+      console.log("error");
+    } else {
+      formData.append("image", image);
+      formData.append("title", "title");
+      formData.append("body", "body");
+      formData.append("date", Date.now().toString());
+      formData.append("type", "نشاط");
+      formData.append("UserId", "2");
+
+      // axios
+      //   .post("http://localhost:3001/announcement/", formData)
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+    }
+  };
 
   return (
     <div dir="rtl" className="mx-auto max-w-[1000px] flex flex-col pt-[12rem]">
       {/* COVER */}
-      <div
-        dir="rtl"
-        className="w-full h-[14rem] rounded-md self-center"
-      >
+      <div dir="rtl" className="w-full h-[14rem] rounded-md self-center">
         <label
-          htmlFor="file"
-          className={`cursor-pointer ${!file && "bg-blue-500"} rounded-md items-end flex h-full transition ease-in-out border border-transparent hover:border-light-400/50 hover:opacity-90`}
+          htmlFor="image"
+          className={`cursor-pointer ${
+            !imagePreview && "bg-blue-500"
+          } rounded-md items-end flex h-full transition ease-in-out border border-transparent hover:border-light-400/50 hover:opacity-90`}
         >
-            { !file && 
-              <>
-                <div className="items-center flex px-6 py-4">
-                  <div className="bg-[#091420] rounded-full p-2 items-center ml-4">
-                    <BiImageAdd className="text-2xl text-white " />
-                  </div>
-
-                  <h2 className="font-cairoBold text-2xl text-white ">
-                    اضف غلاف للتبليغ
-                  </h2>
-
+          {!imagePreview && (
+            <>
+              <div className="items-center flex px-6 py-4">
+                <div className="bg-[#091420] rounded-full p-2 items-center ml-4">
+                  <BiImageAdd className="text-2xl text-white " />
                 </div>
-              </>
-              }
-          <input id="file" name="file" type="file" className="hidden" accept={types} onChange={handleImageUpload} />
-              {
-                file && (
-                  <>
-                    <img src={file} className='img w-full h-full object-contain'/>
-                    {/* <p className="text-[18px] font-cairoSemiBold">{fileName}</p> */}
-                  </>
-                )
-              }
+
+                <h2 className="font-cairoBold text-2xl text-white ">
+                  اضف غلاف للتبليغ
+                </h2>
+              </div>
+            </>
+          )}
+          <input
+            id="image"
+            name="image"
+            type="file"
+            className="hidden"
+            accept={types}
+            onChange={handleImageUpload}
+          />
+          {imagePreview && (
+            <>
+              <img
+                src={imagePreview}
+                className="img w-full h-full object-contain"
+              />
+              {/* <p className="text-[18px] font-cairoSemiBold">{fileName}</p> */}
+            </>
+          )}
         </label>
       </div>
       {/* ALL OF IT / JUSTIFIED CENTERED / FOR THE MOBILE */}
@@ -88,7 +123,10 @@ function NewAnnounce() {
         </div>
         {/* BUTTON */}
         <div>
-          <button className="transition ease-in-out hover:scale-[1.04] active:scale-[.99] md:flex px-6 text-lg font-cairoSemiBold py-2 rounded-md text-white bg-[#5B91D0] ml-4 ">
+          <button
+            onClick={handleSubmit}
+            className="transition ease-in-out hover:scale-[1.04] active:scale-[.99] md:flex px-6 text-lg font-cairoSemiBold py-2 rounded-md text-white bg-[#5B91D0] ml-4 "
+          >
             نشر التبليغ
           </button>
         </div>
