@@ -118,7 +118,8 @@ function Step3({
                 className="w-full px-4 text-right py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-gray-300"
               >
                 <option value="">الشعبة</option>
-                {divisionList.length > 0 &&
+                {divisionList &&
+                  divisionList.length > 0 &&
                   divisionList.map((option) => (
                     <option key={option.id} value={option.id}>
                       {option.name}

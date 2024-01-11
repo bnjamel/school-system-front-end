@@ -10,6 +10,7 @@ import { BiDownArrow } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useStateValue } from "../../context/StateProvider";
+import { TfiAnnouncement } from "react-icons/tfi";
 
 export default function Announcements() {
   const [{ user }, dispatch] = useStateValue();
@@ -31,7 +32,6 @@ export default function Announcements() {
         .get(`http://localhost:3001/announcement/byType/${type}`)
         .then((response) => {
           setAnnouncements(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -98,8 +98,20 @@ export default function Announcements() {
                   className="cursor-pointer"
                   onClick={() => handleAnnounceClick(item.id)}
                 >
-                  <div className="mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md">
-                    <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8] "></div>
+                  <div className="mt-6 bg-white w-[14rem] px-2 rounded-lg overflow-hidden shadow-sm hover:shadow-md">
+                    {!item.cover ? (
+                      <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-gradient flex justify-center items-center">
+                        <TfiAnnouncement className="text-white p-6 w-full h-full" />
+                      </div>
+                    ) : (
+                      <div className="h-full mt-4 w-full rounded-lg overflow-hidden ">
+                        <img
+                          src={"http://localhost:3001/images/" + item?.cover}
+                          className="w-full h-full object-cover"
+                          alt=""
+                        />
+                      </div>
+                    )}
                     <CardBody>
                       <Typography
                         variant="h5"

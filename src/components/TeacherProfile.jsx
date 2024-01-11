@@ -4,6 +4,7 @@ import Thanks from "../pages/profile/teacherProfile/Thanks";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FiEdit } from "react-icons/fi";
+import imagePlaceholder from "../assets/images/profile.png";
 
 export default function TeacherProfile({ id }) {
   const [activeTab, setActiveTab] = useState("announce");
@@ -25,18 +26,18 @@ export default function TeacherProfile({ id }) {
   const activeDiv = () => {
     switch (activeTab) {
       case "announce":
-        return <Announce />;
+        return <Announce id={id} />;
 
       case "thanks":
-        return <Thanks />;
+        return <Thanks thanks={data?.Appreciation_Books} />;
 
       default:
         return;
     }
   };
 
-  const handleTeacherEdit = () => {
-    navigate("/profile/teacheredit");
+  const handleTeacherEdit = (id) => {
+    navigate(`/profile/teacheredit/${id}`);
   };
 
   return (
@@ -45,20 +46,33 @@ export default function TeacherProfile({ id }) {
         {/* Profile side */}
         <div className="bg-white rounded-md p-8 flex-[.3] flex-col mx-4 md:mx-auto">
           <div className="flex flex-col items-center justify-center">
-            <img
-              className="rounded-full bg-purple-500 bg-gradient"
-              width={150}
-              height={150}
-              src=""
-              alt=""
-            />
+            {data?.image ? (
+              <div className="avatar">
+                <div className="">
+                  <img
+                    width={150}
+                    height={150}
+                    src={"http://localhost:3001/images/" + data?.image}
+                    className=" rounded-full"
+                  />
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="avatar">
+                  <div className="">
+                    <img
+                      width={150}
+                      height={150}
+                      src={imagePlaceholder}
+                      className=" rounded-full"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
             <h1 className="self-center text-2xl font-cairoBold my-4 flex items-center">
               أ. {data && data?.name}
-              <FiEdit
-                size={20}
-                className="mr-4 cursor-pointer"
-                onClick={handleTeacherEdit}
-              />
             </h1>
           </div>
           <div className="border-l border border-black" />

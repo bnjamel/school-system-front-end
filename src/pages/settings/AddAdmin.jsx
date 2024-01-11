@@ -1,146 +1,255 @@
 import React, { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { Button } from "@material-tailwind/react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import CustomInput from "../../components/CustomInput";
+import { FiEdit } from "react-icons/fi";
+import imagePlaceholder from "../../assets/images/profile.png";
+import { useNavigate } from "react-router-dom";
 
 function AddAdmin() {
-  const [file, setFile] = useState();
-  const [fileName, setFileName] = useState("No file selected");
+  const [image, setImage] = useState();
+  const [imagePreview, setImagePreview] = useState();
+  const navigate = useNavigate();
 
   const types = ["image/png", "image/jpeg"];
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    reset,
+  } = useForm();
 
   const handleImageUpload = (e) => {
     const selected = e.target.files[0];
     if (selected) {
-      setFileName(selected.name);
-      setFile(URL.createObjectURL(e.target.files[0]));
+      setImage(e.target.files[0]);
+      setImagePreview(URL.createObjectURL(e.target.files[0]));
     }
   };
   const removeImage = () => {
-    setFileName("No file selected");
-    setFile(null);
+    setImagePreview(null);
+    setImage(null);
+  };
+
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("name", data?.name);
+    formData.append("email", data?.email);
+    formData.append("password", data?.password);
+    formData.append("phone_number", data?.phone_number);
+    formData.append("degree", data?.degree);
+    formData.append("experience", data?.experience);
+    formData.append("location", data?.location);
+    formData.append("birthdate", data?.birthdate);
+    formData.append("image", image);
+
+    axios
+      .post("http://localhost:3001/admin/", formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    navigate("/settings");
   };
 
   return (
     <div dir="rtl" className="mx-auto max-w-[600px] flex flex-col py-10">
       {/* FORM */}
-      <section class="max-w-4xl  p-6 bg-white rounded-md shadow-md dark:bg-gray-800 mb-6 font-cairoRegular">
+      <section class="max-w-4xl  p-6  dark:bg-gray-800 mb-6 font-cairoRegular">
         {/* Profile Picture */}
         <div
           dir="rtl"
           className="flex flex-col justify-center mt-4 items-center"
         >
           <label
-            htmlFor="file"
-            className={`cursor-pointer ${
-              !file && "bg-blue-500"
-            } rounded-full self-center flex w-[8rem] h-[8rem] transition ease-in-out border border-transparent hover:border-light-400/50 hover:opacity-90`}
+            htmlFor="image"
+            className={`cursor-pointer rounded-full self-center flex w-[8rem] h-[8rem] transition ease-in-out border border-transparent hover:opacity-90`}
           >
-            {!file && (
+            {imagePreview ? (
               <>
-                <div className="items-center flex px-6 py-4">
-                  <div className="bg-[#091420] rounded-full p-2 items-center mt-20  mr-4">
-                    <BiImageAdd className="text-2xl text-white " />
+                <div className="relative">
+                  <div className="avatar h-[150px] w-[150px] overflow-hidden">
+                    <div className="w-full h-full bg-black rounded-full overflow-hidden">
+                      <img
+                        src={imagePreview}
+                        className="img w-full h-full object-cover"
+                      />
+                    </div>
                   </div>
+                  <div className="items-center flex  absolute bottom-[-10px]">
+                    <div className="bg-[#091420] cursor-pointer p-4 rounded-full">
+                      <FiEdit className="text-white" />
+                    </div>
+                  </div>
+                  {/* <div className="items-center flex px-6 py-4">
+                    <div className="bg-[#091420] rounded-full p-2 items-center mt-20  mr-4">
+                      <BiImageAdd className="text-2xl text-white " />
+                    </div>
+                  </div> */}
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="relative">
+                  <div className="avatar h-[150px] w-[150px] overflow-hidden">
+                    <div className="w-full h-full bg-black rounded-full overflow-hidden">
+                      <img
+                        src={imagePlaceholder}
+                        className="img w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="items-center flex  absolute bottom-[-10px]">
+                    <div className="bg-[#091420] cursor-pointer p-4 rounded-full">
+                      <FiEdit className="text-white" />
+                    </div>
+                  </div>
+                  {/* <div className="items-center flex px-6 py-4">
+                    <div className="bg-[#091420] rounded-full p-2 items-center mt-20  mr-4">
+                      <BiImageAdd className="text-2xl text-white " />
+                    </div>
+                  </div> */}
                 </div>
               </>
             )}
             <input
-              id="file"
-              name="file"
+              id="image"
+              name="image"
               type="file"
               className="hidden"
               accept={types}
               onChange={handleImageUpload}
             />
-            {file && (
+            {/* {imagePreview && (
               <>
-                <img src={file} className="img w-full h-full object-contain" />
+                <img
+                  src={imagePreview}
+                  className="img w-full h-full object-contain"
+                />
               </>
-            )}
+            )} */}
           </label>
         </div>
 
         {/* Details */}
         <div className="my-8 flex flex-col md:flex-row justify-between items-center md:items-start mx-auto max-w-[500px] ">
-          <div className="">
-            <div>
-              <input
-                className="w-fit lg:w-ful rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out "
-                type="text"
-                placeholder="اسم الأستاذ الكامل"
-              />
-            </div>
-
-            <div className="my-2">
-              <input
-                className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="12345"
-              />
-            </div>
-
-            <div className="my-[10px]">
-              {/* SELECT */}
-              <div className="flex flex-col items-start font-cairoRegular ">
-                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out w-full px-6 py-2 cursor-pointer">
-                  <option value="">رياضيات</option>
-                  <option value="">انكليزي</option>
-                  <option value="">عربي</option>
-                  <option value="">اسلامية</option>
-                  <option value="">جغرافية</option>
-                  <option value="">تاريخ</option>
-                </select>
+          <div className="w-full">
+            <>
+              <div className="my-2">
+                <CustomInput
+                  label={"الاسم"}
+                  name={"name"}
+                  type={"text"}
+                  placeholder={"الاسم الثلاثي"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال الاسم الثلاثي",
+                  }}
+                />
               </div>
-            </div>
 
-            <div className="my-2">
-              {/* SELECT */}
-              <input
-                className="w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="6 سنوات"
-              />
-            </div>
-          </div>
+              <div className="my-2">
+                <CustomInput
+                  label={"البريد الالكتروني"}
+                  name={"email"}
+                  type={"email"}
+                  placeholder={"البريد الالكتروني"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال البريد الالكتروني",
+                  }}
+                />
+              </div>
 
-          <div>
-            <div>
-              <input
-                className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="name.teacher@school.com"
-              />
-            </div>
+              <div className="my-2">
+                <CustomInput
+                  label={"كلمة المرور"}
+                  name={"password"}
+                  type={"password"}
+                  placeholder={"كلمة المرور"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال كلمة المرور",
+                  }}
+                />
+              </div>
 
-            <div className="my-2">
-              <input
-                className="w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="date"
-                placeholder="1988-2-10"
-              />
-            </div>
+              <div className="my-2">
+                <CustomInput
+                  label={"رقم الهاتف"}
+                  name={"phone_number"}
+                  type={"text"}
+                  placeholder={"رقم الهاتف"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال رقم الهاتف",
+                  }}
+                />
+              </div>
 
-            <div>
-              <input
-                className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out "
-                type="text"
-                placeholder="عن الأستاذ"
-              />
-            </div>
+              <div className="my-2">
+                <CustomInput
+                  label={"الشهادة"}
+                  name={"degree"}
+                  type={"text"}
+                  placeholder={"الشهادة"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال الشهادة",
+                  }}
+                />
+              </div>
+              <div className="my-2">
+                <CustomInput
+                  label={"سنوات الخبرة"}
+                  name={"experience"}
+                  type={"number"}
+                  placeholder={"سنوات الخبرة"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال سنوات الخبرة",
+                  }}
+                />
+              </div>
+              <div className="my-2">
+                <CustomInput
+                  label={"تاريخ الميلاد"}
+                  name={"birthdate"}
+                  type={"date"}
+                  placeholder={"تاريخ الميلاد"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال تاريخ الميلاد",
+                  }}
+                />
+              </div>
 
-            <div className="mt-2">
-              <input
-                className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="البصرة - الجزيرة"
-              />
-            </div>
+              <div className="my-2">
+                <CustomInput
+                  label={"العنوان"}
+                  name={"location"}
+                  type={"text"}
+                  placeholder={"العنوان"}
+                  control={control}
+                  rules={{
+                    required: "الرجاء ادخال العنوان",
+                  }}
+                />
+              </div>
+            </>
           </div>
         </div>
         {/* BUTTONS */}
         <div className="flex justify-between max-w-[600px] mx-auto">
-          <Button className="font-cairoBold text-sm bg-blue-500">
-            حفظ التغييرات
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            className="font-cairoBold text-sm bg-blue-500"
+          >
+            إضافة
           </Button>
           <Button className="font-cairoBold text-sm">إلغاء</Button>
         </div>

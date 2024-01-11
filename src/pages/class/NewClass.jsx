@@ -4,33 +4,85 @@ import { useState } from "react";
 import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useForm, Controller } from "react-hook-form";
+import CustomInput from "../../components/CustomInput";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+// const classOptions = [
+//   {
+//     id: 1,
+//     label: "اول",
+//     value: "اول",
+//   },
+//   {
+//     id: 2,
+//     label: "ثاني",
+//     value: "ثاني",
+//   },
+//   {
+//     id: 3,
+//     label: "ثالث",
+//     value: "ثالث",
+//   },
+//   {
+//     id: 4,
+//     label: "رابع",
+//     value: "رابع",
+//   },
+//   {
+//     id: 5,
+//     label: "خامس",
+//     value: "خامس",
+//   },
+//   {
+//     id: 6,
+//     label: "سادس",
+//     value: "سادس",
+//   },
+// ];
 
 function NewClass() {
-  const [numberOfDivisions, setNumberOfDivisions] = useState([]);
+  const [classList, setClassList] = useState([]);
+  const navigate = useNavigate();
 
-  const [fields, setFields] = useState([{ id: 1, value: "" }]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/class")
+      .then((res) => {
+        setClassList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-  const handleAddField = () => {
-    setFields([...fields, { id: fields.length + 1, value: "" }]);
+  // Form Controllers
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    const selectedClass = classList.find((clas) => clas.name === data.class);
+
+    const info = {
+      classId: selectedClass.id,
+      name: data?.division,
+    };
+
+    axios
+      .post("http://localhost:3001/division/", info)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    navigate("/class");
   };
-
-  const handleRemoveField = (e, id) => {
-    e.preventDefault();
-    setFields(fields.filter((field) => field.id !== id));
-  };
-
-  const handleChange = (id, value) => {
-    setFields(
-      fields.map((field) => (field.id === id ? { ...field, value } : field))
-    );
-  };
-
-  const onAdd = (newItem) => {
-    numberOfDivisions.push(newItem);
-    console.log(numberOfDivisions.length);
-  };
-
-  useEffect(() => {}, [numberOfDivisions]);
 
   return (
     <div
@@ -44,58 +96,35 @@ function NewClass() {
         {/* FORM */}
         <form>
           <div className="grid grid-cols-1 gap-6  ">
-            <div>
-              <input
-                type="text"
-                placeholder="الصف"
-                className="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
-
-            <div>
-              <input
-                id="group"
-                type="text"
-                placeholder="الشعبة"
-                className=" block w-full px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-              {fields.map((field) => (
-                <div className="flex my-4">
-                  <input
-                    id="group"
-                    type="text"
-                    placeholder="الشعبة"
-                    value={field.value}
-                    onChange={() => handleChange(field.id, field.value)}
-                    className=" block w-full px-4 py-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                  />
-                  <button
-                    className="px-4  justify-center items-center"
-                    onClick={(e) => handleRemoveField(e, field.id)}
-                  >
-                    <FaRegTrashAlt className="text-red-400 w-[20px]  h-[20px]" />
-                  </button>
-                </div>
-              ))}
-            </div>
+            <CustomInput
+              control={control}
+              name={"class"}
+              placeholder={"الصف"}
+              type={"select"}
+              options={classList}
+              rules={{
+                required: "الرجاء ادخال الصف",
+              }}
+            />
+            <CustomInput
+              control={control}
+              name={"division"}
+              type={"text"}
+              placeholder={"اسم الشعبة"}
+              rules={{
+                required: "الرجاء ادخال اسم الشعبة",
+              }}
+            />
           </div>
-          {/* Profile Picture */}
         </form>
-        <button
-          onClick={handleAddField}
-          className="cursor-pointer transition ease-in-out hover:opacity-80 w-fit "
-        >
-          <div className="items-center flex mt-6  ">
-            <div className="bg-blue-500 rounded-full p-1.5 items-center ml-4">
-              <FiPlus className="text-2xl text-white " />
-            </div>
-            <h2 className="font-cairoBold text-[#938D8D]">إضافة شعبة اخرى</h2>
-          </div>
-        </button>
       </section>
       {/* BUTTONS */}
       <div className="flex justify-between w-full md:w-[60%] self-center">
-        <Button type="submit" className="font-cairoBold text-sm bg-blue-500">
+        <Button
+          type="submit"
+          onClick={handleSubmit(onSubmit)}
+          className="font-cairoBold text-sm bg-blue-500"
+        >
           إضافة
         </Button>
         <Link to="/class">

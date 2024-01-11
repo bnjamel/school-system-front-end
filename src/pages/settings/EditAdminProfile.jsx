@@ -1,145 +1,286 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import { Button } from "@material-tailwind/react";
+import { useStateValue } from "../../context/StateProvider";
+import useFetch from "../../customHooks/useFetch";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import CustomInput from "../../components/CustomInput";
+import imagePlaceholder from "../../assets/images/profile.png";
+import { FiEdit } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 function EditAdminProfile() {
-  const [file, setFile] = useState();
-  const [fileName, setFileName] = useState("No file selected");
+  const [{ user }, dispatch] = useStateValue();
+  const [formData, setFormData] = useState();
+  const [image, setImage] = useState();
+  const [imagePreview, setImagePreview] = useState();
+  const navigate = useNavigate();
 
   const types = ["image/png", "image/jpeg"];
+
+  // Form Controllers
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({
+    defaultValues: {
+      name: formData ? formData.name : "",
+      phone_number: formData ? formData.phone_number : "",
+      image: formData ? formData.image : "",
+      birthdate: formData ? formData.birthdate : "",
+      degree: formData ? formData.degree : "",
+      experience: formData ? formData.experience : "",
+      location: formData ? formData.location : "",
+      password: formData ? formData.password : "",
+      email: formData ? formData.email : "",
+    },
+  });
+
+  // const { data, isPending, error } = useFetch(
+  //   `http://localhost:3001/admin/byId/${user.id}`,
+  //   "GET",
+  //   null
+  // );
+
+  const getData = async () => {
+    await axios
+      .get(`http://localhost:3001/admin/byId/${user.id}`)
+      .then((response) => {
+        setFormData(response.data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    getData();
+  }, [user]);
 
   const handleImageUpload = (e) => {
     const selected = e.target.files[0];
     if (selected) {
-      setFileName(selected.name);
-      setFile(URL.createObjectURL(e.target.files[0]));
+      setImagePreview(URL.createObjectURL(e.target.files[0]));
+      setImage(e.target.files[0]);
     }
   };
   const removeImage = () => {
-    setFileName("No file selected");
-    setFile(null);
+    setImagePreview(null);
+    setImage(null);
+  };
+
+  const onSubmit = (data) => {
+    if (formData) {
+      const form_data = new FormData();
+      const info = {
+        name: data.name ? data.name : formData.name,
+        email: data.email ? data.email : formData.email,
+        password: data.password ? data.password : formData.password,
+        phone_number: data.phone_number
+          ? data.phone_number
+          : formData.phone_number,
+        location: data.location ? data.location : formData.location,
+        degree: data.degree ? data.degree : formData.degree,
+        experience: data.experience ? data.experience : formData.experience,
+        birthdate: data.birthdate ? data.birthdate : formData.birthdate,
+      };
+
+      form_data.append("name", info.name);
+      form_data.append("birthdate", info.birthdate);
+      form_data.append("degree", info.degree);
+      form_data.append("experience", info.experience);
+      form_data.append("email", info.email);
+      form_data.append("password", info.password);
+      form_data.append("location", info.location);
+      form_data.append("phone_number", info.phone_number);
+      form_data.append("image", image);
+      // console.log(info);
+
+      axios
+        .put(`http://localhost:3001/admin/${user.id}`, form_data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      window.location.reload();
+    }
   };
 
   return (
     <div dir="rtl" className="mx-auto max-w-[600px] flex flex-col py-10">
       {/* FORM */}
-      <section class="max-w-4xl  p-6 bg-white rounded-md shadow-md dark:bg-gray-800 mb-6 font-cairoRegular">
+      <section class="max-w-4xl  p-6  dark:bg-gray-800 mb-6 font-cairoRegular">
         {/* Profile Picture */}
         <div
           dir="rtl"
           className="flex flex-col justify-center mt-4 items-center"
         >
           <label
-            htmlFor="file"
-            className={`cursor-pointer ${
-              !file && "bg-blue-500"
-            } rounded-full self-center flex w-[8rem] h-[8rem] transition ease-in-out border border-transparent hover:border-light-400/50 hover:opacity-90`}
+            htmlFor="image"
+            className={`cursor-pointer rounded-full self-center flex w-[8rem] h-[8rem] transition ease-in-out border border-transparent hover:opacity-90`}
           >
-            {!file && (
+            {!formData?.image ? (
               <>
-                <div className="items-center flex px-6 py-4">
-                  <div className="bg-[#091420] rounded-full p-2 items-center mt-20  mr-4">
-                    <BiImageAdd className="text-2xl text-white " />
-                  </div>
+                <div className="relative">
+                  {imagePreview ? (
+                    <div className="avatar h-[150px] w-[150px] overflow-hidden">
+                      <div className="w-full h-full bg-black rounded-full overflow-hidden">
+                        <img
+                          src={imagePreview}
+                          className="img w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="avatar h-[150px] w-[150px] overflow-hidden">
+                        <div className="w-full h-full">
+                          <img
+                            src={imagePlaceholder}
+                            className="object-cover w-full"
+                          />
+                        </div>
+                      </div>
+                      <div className="items-center flex  absolute bottom-[-10px]">
+                        <div className="bg-[#091420] cursor-pointer p-4 rounded-full">
+                          <FiEdit className="text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </>
+            ) : (
+              <div className="relative">
+                <div className="avatar">
+                  <div className="">
+                    <img
+                      width={150}
+                      height={150}
+                      src={"http://localhost:3001/images/" + formData?.image}
+                      className=" rounded-full object-cover h-full w-full"
+                    />
+                  </div>
+                </div>
+                <div className="items-center flex  absolute bottom-[-10px]">
+                  <div className="bg-[#091420] cursor-pointer p-4 rounded-full">
+                    <FiEdit className="text-white" />
+                  </div>
+                </div>
+              </div>
             )}
             <input
-              id="file"
-              name="file"
+              id="image"
+              name="image"
               type="file"
               className="hidden"
               accept={types}
               onChange={handleImageUpload}
             />
-            {file && (
-              <>
-                <img src={file} className="img w-full h-full object-contain" />
-              </>
-            )}
           </label>
         </div>
 
         {/* Details */}
         <div className="my-8 flex flex-col md:flex-row justify-between items-center md:items-start mx-auto max-w-[500px] ">
-          <div className="">
-            <div>
-              <input
-                className="w-fit lg:w-ful rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out "
-                type="text"
-                placeholder="اسم الأستاذ الكامل"
-              />
-            </div>
+          <div className="w-full">
+            {formData && (
+              <>
+                <div className="my-2">
+                  <CustomInput
+                    label={"الاسم"}
+                    name={"name"}
+                    type={"text"}
+                    placeholder={formData.name}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
 
-            <div className="my-2">
-              <input
-                className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="12345"
-              />
-            </div>
+                <div className="my-2">
+                  <CustomInput
+                    label={"البريد الالكتروني"}
+                    name={"email"}
+                    type={"email"}
+                    placeholder={formData.email}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
 
-            <div className="my-[10px]">
-              {/* SELECT */}
-              <div className="flex flex-col items-start font-cairoRegular ">
-                <select className=" rounded-md text-black/50 border border-gray-500/50 focus:border-black/50 transition ease-in-out w-full px-6 py-2 cursor-pointer">
-                  <option value="">رياضيات</option>
-                  <option value="">انكليزي</option>
-                  <option value="">عربي</option>
-                  <option value="">اسلامية</option>
-                  <option value="">جغرافية</option>
-                  <option value="">تاريخ</option>
-                </select>
-              </div>
-            </div>
+                <div className="my-2">
+                  <CustomInput
+                    label={"كلمة المرور"}
+                    name={"password"}
+                    type={"password"}
+                    placeholder={formData.password}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
 
-            <div className="my-2">
-              {/* SELECT */}
-              <input
-                className="w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="6 سنوات"
-              />
-            </div>
-          </div>
-
-          <div>
-            <div>
-              <input
-                className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="name.teacher@school.com"
-              />
-            </div>
-
-            <div className="my-2">
-              <input
-                className="w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="date"
-                placeholder="1988-2-10"
-              />
-            </div>
-
-            <div>
-              <input
-                className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out "
-                type="text"
-                placeholder="عن الأستاذ"
-              />
-            </div>
-
-            <div className="mt-2">
-              <input
-                className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-3  focus:border-dark-100 outline-none  transition ease-in-out"
-                type="text"
-                placeholder="البصرة - الجزيرة"
-              />
-            </div>
+                <div className="my-2">
+                  <CustomInput
+                    label={"الشهادة"}
+                    name={"degree"}
+                    type={"text"}
+                    placeholder={formData.degree}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
+                <div className="my-2">
+                  <CustomInput
+                    label={"سنوات الخبرة"}
+                    name={"experience"}
+                    type={"number"}
+                    placeholder={formData.experience}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
+                <div className="my-2">
+                  <CustomInput
+                    label={"تاريخ الميلاد"}
+                    name={"birthdate"}
+                    type={"date"}
+                    placeholder={formData.birthdate}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
+                <div className="my-2">
+                  <CustomInput
+                    label={"العنوان"}
+                    name={"location"}
+                    type={"text"}
+                    placeholder={formData.location}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
+                <div className="my-2">
+                  <CustomInput
+                    label={"رقم الهاتف"}
+                    name={"phone_number"}
+                    type={"text"}
+                    placeholder={formData.phone_number}
+                    control={control}
+                    rules={{}}
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
         {/* BUTTONS */}
         <div className="flex justify-between max-w-[600px] mx-auto">
-          <Button className="font-cairoBold text-sm bg-blue-500">
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            className="font-cairoBold text-sm bg-blue-500"
+          >
             حفظ التغييرات
           </Button>
           <Button className="font-cairoBold text-sm">إلغاء</Button>

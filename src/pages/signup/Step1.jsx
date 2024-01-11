@@ -4,26 +4,25 @@ import { HiOutlineUpload } from "react-icons/hi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import CustomInput from "../../components/CustomInput";
 
-const evaluationOptions = [
-  {
-    id: 1,
-    name: "ممتاز",
-  },
-  {
-    id: 2,
-    name: "جيد",
-  },
-  {
-    id: 3,
-    name: "مقبول",
-  },
-  {
-    id: 4,
-    name: "سيء",
-  },
-];
-
 function Step1({ handleNext, handlePrev, isLastStep, setIsLastStep, control }) {
+  const [file, setFile] = useState();
+  const [fileName, setFileName] = useState("No file selected");
+
+  const types = ["image/png", "image/jpeg"];
+
+  const handleImageUpload = (e) => {
+    const selected = e.target.files[0];
+    if (selected) {
+      setFileName(selected.name);
+      setFile(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
+  const removeImage = () => {
+    setFileName("No file selected");
+    setFile(null);
+  };
+
   return (
     <div>
       {/* FORM */}
@@ -60,20 +59,9 @@ function Step1({ handleNext, handlePrev, isLastStep, setIsLastStep, control }) {
                 required: "الرجاء إدخال البريد الالكتروني",
               }}
             />
-
             <CustomInput
               control={control}
-              name={"password"}
-              placeholder={"كلمة المرور"}
-              type={"password"}
-              rules={{
-                required: "الرجاء إدخال كلمة المرور",
-              }}
-            />
-
-            <CustomInput
-              control={control}
-              name={"birthdate"}
+              name={"date"}
               placeholder={"تاريخ الميلاد"}
               type={"date"}
               max={new Date().toISOString().split("T")[0]}
@@ -129,28 +117,58 @@ function Step1({ handleNext, handlePrev, isLastStep, setIsLastStep, control }) {
                 required: "الرجاء إدخال رقم هاتف ولي امر الطالب",
               }}
             />
+            {/* <div>
+              <input
+                id="username"
+                type="text"
+                placeholder="اسم الطالب الثلاثي"
+                className="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+              />
+            </div>
 
-            <CustomInput
-              control={control}
-              name={"evaluation"}
-              placeholder={"تقييم الطالب"}
-              type={"select"}
-              options={evaluationOptions}
-              rules={{
-                required: "الرجاء ادخال تقييم للطالب",
-              }}
-            />
+            <div>
+              <input
+                id="emailAddress"
+                type="email"
+                placeholder="البريد الالكتروني"
+                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+              />
+            </div>
 
-            <CustomInput
-              control={control}
-              name={"about"}
-              placeholder={"عن الطالب"}
-              type={"textArea"}
-              rules={{
-                required: "الرجاء ادخل شرح عن الطالب",
-              }}
-            />
+            <div>
+              <input
+                type="date"
+                placeholder="تاريخ الميلاد"
+                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+              />
+            </div>
 
+            <div>
+              <input
+                id="location"
+                type="text"
+                placeholder="العنوان"
+                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+              />
+            </div>
+
+            <div>
+              <input
+                id="parent"
+                type="text"
+                placeholder="اسم ولي امر الطالب"
+                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+              />
+            </div>
+
+            <div>
+              <input
+                id="phone_number"
+                type="text"
+                placeholder="رقم هاتف ولي امر الطالب"
+                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+              />
+            </div> */}
             {/* Profile Picture */}
           </div>
         </form>

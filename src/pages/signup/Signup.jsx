@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 
-function NewStudent() {
+export default function Signup() {
   const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [isLastStep, setIsLastStep] = useState(false);
@@ -94,46 +94,44 @@ function NewStudent() {
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
 
   const handlePrev = () => {
+    if (isFirstStep) {
+      navigate("/login");
+    }
+
     !isFirstStep && setActiveStep((cur) => cur - 1);
-    navigate("/student");
   };
-
-  // const handlePrev = () => {
-  //   if (isFirstStep) {
-  //     navigate("/login");
-  //   }
-
-  //   !isFirstStep && setActiveStep((cur) => cur - 1);
-  // };
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append("name", data?.name);
-    formData.append("birthdate", data?.birthdate);
+
+    formData.append("birthdate", data?.date);
     formData.append("email", data?.email);
-    formData.append("password", data?.password);
-    formData.append("location", data?.location);
-    formData.append("phone_number", data?.phone_number);
-    formData.append("ClassId", selectedClass);
-    formData.append("DivisionId", selectedDivision);
-    formData.append("parent", data?.parent);
     formData.append("gender", data?.gender);
+    formData.append("location", data?.location);
+    formData.append("name", data?.name);
+    formData.append("parent", data?.parent);
+    formData.append("phone_number", data?.phone_number);
+    formData.append("classId", selectedClass);
+    formData.append("divisionId", selectedDivision);
+
     formData.append("image", image);
-    formData.append("document", document);
     formData.append("identification_card", identificationCard);
     formData.append("residence_card", residenceCard);
-    formData.append("about", data?.about);
-    formData.append("evaluation", data?.evaluation);
-
-    // console.log(formData);
-    console.log(formData);
+    formData.append("student_document_image", document);
 
     axios
-      .post("http://localhost:3001/student/", formData)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .post("http://localhost:3001/pending/", formData)
+      .then((res) => {
+        if (!res.error) {
+          console.log("is pending");
+          navigate("/pending");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-    navigate("/student");
+    // navigate("/pending");
   };
 
   const activeDiv = (activeTab) => {
@@ -186,7 +184,7 @@ function NewStudent() {
         return (
           <Step3
             control={control}
-            handleNext={handleNext}
+            handleNext={handleSubmit(handleNext)}
             handlePrev={handlePrev}
             isLastStep={isLastStep}
             setIsLastStep={setIsLastStep}
@@ -204,11 +202,10 @@ function NewStudent() {
   };
 
   return (
-    <div className="mx-auto max-w-[1000px] flex flex-col pt-[12rem]">
-      {/* STEPPER */}
+    <div className="mx-auto max-w-[1000px] flex flex-col pt-[7rem]">
       <div className="w-full md:w-[60%]  px-8 self-center">
         <h1 dir="rtl" className="pb-4 font-cairoBold text-lg text-[#999999]">
-          إضافة طالب
+          تسجيل طالب جديد
         </h1>
         <Stepper
           activeStep={activeStep}
@@ -225,5 +222,3 @@ function NewStudent() {
     </div>
   );
 }
-
-export default NewStudent;

@@ -7,7 +7,7 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import login from "../../assets/images/login_1.png";
 import { useForm, Controller } from "react-hook-form";
 import { useStateValue } from "../../context/StateProvider";
@@ -19,6 +19,7 @@ const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 function Login() {
   const [{}, dispatch] = useStateValue();
   const [error, setError] = useState("");
+  const [isLogged, setIsLogged] = useState(false);
   let navigator = useNavigate();
   const {
     control,
@@ -38,6 +39,8 @@ function Login() {
       .split("")
       .reverse()
       .join("");
+
+    console.log(userType);
 
     switch (userType) {
       // Student Log
@@ -156,7 +159,7 @@ function Login() {
         >
           <Card color="transparent" shadow={false}>
             <h1 dir="rtl" className="font-cairoBold text-2xl text-white">
-              مرحبًا بك في المدرسة
+              مرحبًا بك في مدرسة أكد
             </h1>
 
             <form
@@ -182,9 +185,9 @@ function Login() {
                   type={"password"}
                   label={"كلمة المرور"}
                   rules={{
-                    required: "دخل كلمة المرور لا انعل جدك",
+                    required: "ادخل كلمة المرور",
                   }}
-                  placeholder={"**********"}
+                  placeholder={"كلمة المرور"}
                 />
               </div>
               {error && <>كلمة المرور او البريد الالكتروني غير صالح</>}
@@ -216,9 +219,12 @@ function Login() {
                 className="mt-4 text-center font-cairoRegular"
               >
                 لتسجيل طالب جديد{" "}
-                <a href="#" className="font-medium text-gray-900 underline">
+                <Link
+                  to="/signup"
+                  className="font-medium text-gray-900 underline"
+                >
                   اضغط هنا
-                </a>
+                </Link>
               </Typography>
             </form>
           </Card>

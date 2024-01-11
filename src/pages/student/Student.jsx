@@ -6,6 +6,8 @@ import { FiEdit } from "react-icons/fi";
 import useFetch from "../../customHooks/useFetch";
 import axios from "axios";
 import { useStateValue } from "../../context/StateProvider";
+import { TfiAnnouncement } from "react-icons/tfi";
+import imagePlaceholder from "../../assets/images/profile.png";
 
 const TABLE_ROWS = [
   {
@@ -89,14 +91,18 @@ export default function Student() {
     navigate(`/student/${id}`);
   };
 
-  const handleStudentEdit = () => {
-    navigate("/profile/studentedit");
+  const handleStudentEdit = (id) => {
+    navigate(`/profile/studentedit/${id}`);
   };
 
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-    const item = data.filter((student) => student.name.startsWith(term));
-    setData(item);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm) {
+      const item = data.filter((student) =>
+        student.name.startsWith(searchTerm)
+      );
+      setData(item);
+    }
   };
 
   return (
@@ -105,24 +111,27 @@ export default function Student() {
       <h1 className="font-cairoRegular text-2xl text-[#999999]">الطلاب</h1>
       {/* SEARCH + BUTTON */}
       <div className="flex justify-between items-center">
-        <div className="flex items-center ">
-          <label htmlFor="Search" className="sr-only"></label>
+        <form onSubmit={handleSearch}>
+          <div className="flex items-center ">
+            <label htmlFor="Search" className="sr-only"></label>
 
-          <input
-            type="text"
-            id="Search"
-            placeholder="ابحث عن طالب..."
-            value={searchTerm}
-            onChange={(e) => handleSearch(e.target.value)}
-            className="w-[16rem] font-cairoRegular pr-4 mt-1 rounded-md border-gray-200 py-2.5 shadow-sm sm:text-sm"
-          />
-          <div
-            onClick={() => handleSearch(searchTerm)}
-            className="mr-1 transition ease-in-out hover:scale-[1.06] active:scale-[.9] px-[15px] py-[10px] mt-1 cursor-pointer rounded-md  bg-[#5B91D0]"
-          >
-            <BsSearch className="text-white" />
+            <input
+              type="text"
+              id="Search"
+              placeholder="ابحث عن طالب..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-[16rem] font-cairoRegular pr-4 mt-1 rounded-md border-gray-200 py-2.5 shadow-sm sm:text-sm"
+            />
+            <button
+              type="submit"
+              onClick={handleSearch}
+              className="mr-1 transition ease-in-out hover:scale-[1.06] active:scale-[.9] px-[15px] py-[10px] mt-1 cursor-pointer rounded-md  bg-[#5B91D0]"
+            >
+              <BsSearch className="text-white" />
+            </button>
           </div>
-        </div>
+        </form>
         {/* BUTTON */}
         {user.role === "admin" && (
           <Link
@@ -173,18 +182,40 @@ export default function Student() {
                     className={classes}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="avatar">
+                      {/* <div className="avatar">
                         <div className="w-10 ">
                           <img
                             src={
-                              item?.image
+                              item?.image !== "image"
                                 ? item?.image
                                 : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
                             }
                             className=" rounded-full"
                           />
                         </div>
-                      </div>
+                      </div> */}
+                      {!item.image ? (
+                        <div className="avatar">
+                          <div className="w-10 ">
+                            <img
+                              src={imagePlaceholder}
+                              className="rounded-full"
+                            />
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="avatar">
+                          <div className="w-10 ">
+                            <img
+                              src={
+                                "http://localhost:3001/images/" + item?.image
+                              }
+                              className="w-full h-full object-cover"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      )}
                       <div className="flex flex-col">
                         <p>{item?.name}</p>
                         <p className="text-blue-gray-400">{item?.email}</p>
@@ -210,13 +241,21 @@ export default function Student() {
                     <p>{item?.phone_number}</p>
                   </td>
 
-                  <td>
-                    <FiEdit
-                      size={20}
-                      className="cursor-pointer hover:scale-125 transition"
-                      onClick={handleStudentEdit}
-                    />
-                  </td>
+                  {user.role === "admin" ? (
+                    <td onClick={() => handleStudentEdit(item?.id)}>
+                      <FiEdit
+                        size={20}
+                        className="cursor-pointer hover:scale-125 transition"
+                      />
+                    </td>
+                  ) : (
+                    <td onClick={() => handleTeacherPress(item?.id)}>
+                      <FiEdit
+                        size={20}
+                        className="opacity-0 pointer-events-none cursor-pointer hover:scale-125 transition"
+                      />
+                    </td>
+                  )}
                 </tr>
               );
             })

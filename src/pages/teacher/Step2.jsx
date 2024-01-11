@@ -1,7 +1,16 @@
 import React from "react";
 import { Button } from "@material-tailwind/react";
+import CustomInput from "../../components/CustomInput";
 
-function Step2({ handleNext, handlePrev }) {
+function Step2({
+  handleNext,
+  handlePrev,
+  control,
+  onSubmit,
+  handleSubjectSelect,
+  selectedSubject,
+  subjectsList,
+}) {
   return (
     <div>
       {/* FORM */}
@@ -12,31 +21,41 @@ function Step2({ handleNext, handlePrev }) {
 
         <form>
           <div class="grid grid-cols-1 gap-6 mt-4 ">
-            <div>
-              <input
-                type="text"
-                placeholder="الشهادة"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <CustomInput
+              control={control}
+              name={"degree"}
+              type="text"
+              placeholder="الشهادة"
+              rules={{
+                required: "الرجاء إدخال شهادة الاستاذ",
+              }}
+            />
 
-            <div>
-              <input
-                id="subject"
-                type="text"
-                placeholder="المادة"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <select
+              value={selectedSubject}
+              onChange={(e) => handleSubjectSelect(e)}
+              className="w-full px-4 text-right py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-gray-300"
+              // defaultValue={defaultV}
+            >
+              <option value="">المادة</option>
+              {subjectsList &&
+                subjectsList.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.name}
+                  </option>
+                ))}
+            </select>
 
-            <div>
-              <input
-                id="number"
-                type="number"
-                placeholder="سنوات الخبرة"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <CustomInput
+              control={control}
+              name={"experience"}
+              type="number"
+              placeholder="سنوات الخبرة"
+              min={0}
+              rules={{
+                required: "الرجاء إدخال عدد سنوات الخبرة",
+              }}
+            />
           </div>
         </form>
       </section>
@@ -44,7 +63,7 @@ function Step2({ handleNext, handlePrev }) {
       <div className="flex justify-between">
         <Button
           className="font-cairoBold text-sm bg-blue-500"
-          onClick={handleNext}
+          onClick={onSubmit}
         >
           التالي
         </Button>
