@@ -6,14 +6,13 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
 import { FiEdit } from "react-icons/fi";
 import { useStateValue } from "../../context/StateProvider";
+import imagePlaceholder from "../../assets/images/profile.png";
 
 export default function ViewTeacherProfile() {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("announce");
   const [{ user }, dispatch] = useStateValue();
   const navigate = useNavigate();
-
-  console.log(id);
 
   const { data, isPending, error } = useFetch(
     `http://localhost:3001/teacher/byId/${id}`,
@@ -22,20 +21,22 @@ export default function ViewTeacherProfile() {
   );
 
   const activeDiv = () => {
-    switch (activeTab) {
-      case "announce":
-        return <Announce />;
+    if (data) {
+      switch (activeTab) {
+        case "announce":
+          return <Announce id={id} />;
 
-      case "thanks":
-        return <Thanks />;
+        case "thanks":
+          return <Thanks thanks={data.Appreciation_Books} id={id} />;
 
-      default:
-        return;
+        default:
+          return;
+      }
     }
   };
 
-  const handleTeacherEdit = () => {
-    navigate("/profile/teacheredit");
+  const handleTeacherEdit = (id) => {
+    navigate(`/profile/teacheredit/${id}`);
   };
 
   return (
@@ -44,22 +45,57 @@ export default function ViewTeacherProfile() {
         {/* Profile side */}
         <div className="bg-white rounded-md p-8 flex-[.3] flex-col mx-4 md:mx-auto">
           <div className="flex flex-col items-center justify-center">
-            <img
-              className="rounded-full bg-gradient"
-              width={150}
-              height={150}
-              src=""
-              alt=""
-            />
+            {data?.image ? (
+              <div className="relative">
+                <div className="avatar">
+                  <div className="">
+                    <img
+                      width={150}
+                      height={150}
+                      src={"http://localhost:3001/images/" + data.image}
+                      className=" rounded-full"
+                    />
+                  </div>
+                </div>
+                <div
+                  onClick={() => handleTeacherEdit(data?.id)}
+                  className="items-center flex  absolute bottom-[-10px]"
+                >
+                  {user.role === "admin" && (
+                    <div className="bg-[#091420] cursor-pointer p-4 rounded-full">
+                      <FiEdit className="text-white" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="relative">
+                  <div className="avatar">
+                    <div className="">
+                      <img
+                        width={150}
+                        height={150}
+                        src={imagePlaceholder}
+                        className=" rounded-full"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => handleTeacherEdit(data?.id)}
+                    className="items-center flex  absolute bottom-[-10px]"
+                  >
+                    {user.role === "admin" && (
+                      <div className="bg-[#091420] cursor-pointer p-4 rounded-full">
+                        <FiEdit className="text-white" />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </>
+            )}
             <h1 className="self-center text-2xl font-cairoBold my-4 flex items-center">
               أ. {data && data?.name}
-              {user?.id === data?.id && (
-                <FiEdit
-                  size={20}
-                  className="mr-4 cursor-pointer"
-                  onClick={handleTeacherEdit}
-                />
-              )}
             </h1>
           </div>
           <div className="border-l border border-black" />
@@ -67,12 +103,14 @@ export default function ViewTeacherProfile() {
           <div className="my-6">
             <h1 className="font-cairoBold text-[#9E9E9E]">معلومات شخصية</h1>
             <div className="flex">
-              <h3 className="font-cairoBold">العمر:</h3>
-              <h3 className="mr-4 font-cairoRegular">34</h3>
+              <h3 className="font-cairoBold">تاريخ الميلاد:</h3>
+              <h3 className="mr-4 font-cairoRegular">
+                {data && data?.birthdate}
+              </h3>
             </div>
             <div className="flex">
               <h3 className="font-cairoBold">الجنس:</h3>
-              <h3 className="mr-4 font-cairoRegular">ذكر</h3>
+              <h3 className="mr-4 font-cairoRegular">{data && data?.gender}</h3>
             </div>
             <div className="flex">
               <h3 className="font-cairoBold">الجنسية:</h3>
@@ -80,22 +118,26 @@ export default function ViewTeacherProfile() {
             </div>
             <div className="flex">
               <h3 className="font-cairoBold">العنوان</h3>
-              <h3 className="mr-4 font-cairoRegular">البصرة - عشار</h3>
+              <h3 className="mr-4 font-cairoRegular">
+                {data && data?.location}
+              </h3>
             </div>
             <div className="flex">
               <h3 className="font-cairoBold">البريدالإلكتروني:</h3>
-              <h3 className="mr-4 font-cairoRegular">ali.teacher@school.com</h3>
+              <h3 className="mr-4 font-cairoRegular">{data && data?.email}</h3>
             </div>
             <h1 className="mt-6 font-cairoBold text-[#9E9E9E]">
               معلومات مهنية
             </h1>
             <div className="flex">
               <h3 className="font-cairoBold">الشهادة:</h3>
-              <h3 className="mr-4 font-cairoRegular">علوم رياضيات</h3>
+              <h3 className="mr-4 font-cairoRegular">{data && data?.degree}</h3>
             </div>
             <div className="flex">
               <h3 className="font-cairoBold">سنوات الخبرة:</h3>
-              <h3 className="mr-4 font-cairoRegular">5 سنوات</h3>
+              <h3 className="mr-4 font-cairoRegular">
+                {data && data?.experience} سنوات
+              </h3>
             </div>
             <div className="flex">
               <h3 className="font-cairoBold">الصفوف التي يدرسها:</h3>

@@ -5,6 +5,7 @@ import { PiChalkboardTeacherFill } from "react-icons/pi";
 import { PiStudentFill } from "react-icons/pi";
 import { SiGoogleclassroom } from "react-icons/si";
 import { BsArrowLeft } from "react-icons/bs";
+import { TfiAnnouncement } from "react-icons/tfi";
 
 import { CardBody, Typography } from "@material-tailwind/react";
 import axios from "axios";
@@ -85,6 +86,7 @@ export default function Home() {
       label: "عدد الطلاب الحالي",
       link: "student",
       Icon: PiStudentFill,
+      image: "src/assets/images/waves.png",
     },
     {
       id: 2,
@@ -92,6 +94,7 @@ export default function Home() {
       label: "عدد الاساتذة الحالي",
       link: "teacher",
       Icon: PiChalkboardTeacherFill,
+      image: "src/assets/images/waves.png",
     },
     {
       id: 3,
@@ -99,6 +102,7 @@ export default function Home() {
       label: "عدد الصفوف الحالي",
       link: "class",
       Icon: SiGoogleclassroom,
+      image: "src/assets/images/waves.png",
     },
   ];
 
@@ -169,14 +173,26 @@ export default function Home() {
               <h1 className="text-dark-100 text-[2rem]">يرجى الانتظار</h1>
             </div>
           ) : (
-            data.slice(0, 8).map((item) => (
+            data.slice(0, 4).map((item) => (
               <div
                 key={item?.id}
                 className="cursor-pointer"
                 onClick={() => handleAnnounceClick(item?.id)}
               >
                 <div className="item-shadow mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md border border-gray-300/50 hover:border-gray-500">
-                  <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]"></div>
+                  {!item.cover ? (
+                    <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-gradient flex justify-center items-center">
+                      <TfiAnnouncement className="text-white p-6 w-full h-full" />
+                    </div>
+                  ) : (
+                    <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]">
+                      <img
+                        src={"http://localhost:3001/images/" + item?.cover}
+                        className="w-full h-full object-cover"
+                        alt=""
+                      />
+                    </div>
+                  )}
                   <CardBody>
                     <Typography
                       variant="h5"
@@ -231,7 +247,19 @@ export default function Home() {
                 onClick={() => handleAnnounceClick(item?.id)}
               >
                 <div className="item-shadow mt-6 bg-white w-[14rem]  rounded-lg overflow-hidden shadow-sm hover:shadow-md border border-gray-300/50 hover:border-gray-500">
-                  <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]"></div>
+                  {!item.cover ? (
+                    <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-gradient flex justify-center items-center">
+                      <TfiAnnouncement className="text-white p-6 w-full h-full" />
+                    </div>
+                  ) : (
+                    <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-gradient">
+                      <img
+                        src={"http://localhost:3001/images/" + item?.cover}
+                        className="w-full h-full object-cover"
+                        alt=""
+                      />
+                    </div>
+                  )}
                   <CardBody>
                     <Typography
                       variant="h5"

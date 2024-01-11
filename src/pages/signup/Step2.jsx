@@ -79,7 +79,6 @@ function Step2({
     formData.append("DivisionId", "3");
     formData.append("parent", "محسن رياض وليد");
     formData.append("image", image);
-    formData.append("document", document);
     formData.append("identification_card", identificationCard);
     formData.append("residence_card", residenceCard);
 

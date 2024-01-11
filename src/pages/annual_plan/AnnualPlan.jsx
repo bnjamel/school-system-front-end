@@ -22,9 +22,9 @@ export default function AnnualPlan() {
         )}
       </div>
       {/* Table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-200 mx-10 lg:mx-0">
-        <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-lg">
-          <thead className="ltr:text-left rtl:text-right bg-blue-50 ">
+      <div className="overflow-x-auto rounded-lg border border-gray-200 mx-10 lg:mx-0 lg:overflow-hidden">
+        <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-lg overflow-hidden">
+          <thead className="ltr:text-left rtl:text-right bg-blue-50 overflow-hidden">
             <tr>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 ">
                 الصف
@@ -50,82 +50,172 @@ export default function AnnualPlan() {
                 الشهر الثاني
               </th>
               <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                استلام النتائج
+                امتحانات <br /> نهاية السنة
               </th>
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200 overflow-hidden">
             <tr>
               <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الأول
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-01-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-02-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-03-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-04-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-05-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-06-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-07-23
+              </td>
             </tr>
 
             <tr>
               <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الثاني
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700  border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-01-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-02-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-03-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-04-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-05-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-06-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-07-23
+              </td>
             </tr>
 
             <tr>
               <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الثالث
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-01-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-02-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-03-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-04-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-05-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-06-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-07-23
+              </td>
             </tr>
 
             <tr>
               <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الرابع
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-01-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-02-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-03-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-04-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-05-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-06-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-07-23
+              </td>
             </tr>
 
             <tr>
               <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 الخامس
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-01-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-02-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-03-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-04-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-05-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-06-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-07-23
+              </td>
             </tr>
 
             <tr>
               <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-900 border-l border-black/25 ">
                 السادس
               </td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25"></td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-01-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-02-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-03-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-04-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-05-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-06-23
+              </td>
+              <td className="whitespace-nowrap px-4 py-2 text-gray-700 border-l border-black/25">
+                2024-07-23
+              </td>
             </tr>
           </tbody>
         </table>

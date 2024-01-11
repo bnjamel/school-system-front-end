@@ -1,28 +1,33 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
 import { HiOutlineUpload } from "react-icons/hi";
 import { FaRegTrashAlt } from "react-icons/fa";
+import CustomInput from "../../components/CustomInput";
 
+function Step1({
+  handleNext,
+  handlePrev,
+  imagePreview,
+  handleImageUpload,
+  control,
+}) {
+  // const [file, setFile] = useState();
+  // const [fileName, setFileName] = useState("No file selected");
 
-function Step1({ handleNext, handlePrev }) {
+  const types = ["image/png", "image/jpeg"];
 
-  const [file, setFile] = useState();
-  const [fileName, setFileName] = useState("No file selected");
+  // const handleImageUpload = (e) => {
+  //   const selected = e.target.files[0];
+  //   if (selected) {
+  //     setFileName(selected.name);
+  //     setFile(URL.createObjectURL(e.target.files[0]));
+  //   }
+  // };
 
-  const types = ['image/png', 'image/jpeg'];
-
-  const handleImageUpload = (e) => {
-    const selected = e.target.files[0]
-    if(selected) {
-      setFileName(selected.name)
-      setFile(URL.createObjectURL(e.target.files[0]))
-    }
-  }
-
-  const removeImage = () => {
-    setFileName("No file selected")
-    setFile(null)
-  }
+  // const removeImage = () => {
+  //   setFileName("No file selected");
+  //   setFile(null);
+  // };
 
   return (
     <div>
@@ -34,78 +39,129 @@ function Step1({ handleNext, handlePrev }) {
 
         <form>
           <div class="grid grid-cols-1 gap-6 mt-4 ">
-            <div>
-              <input
-                id="username"
-                type="text"
-                placeholder="اﻻسم"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <CustomInput
+              control={control}
+              name={"name"}
+              placeholder={"اسم الاستاذ الثلاثي"}
+              type={"text"}
+              rules={{
+                required: "الرجاء إدخال اسم الاستاذ",
+              }}
+            />
 
-            <div>
-              <input
-                id="emailAddress"
-                type="email"
-                placeholder="البريد الالكتروني"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <CustomInput
+              control={control}
+              name={"email"}
+              placeholder={"البريد الالكتروني"}
+              type={"email"}
+              rules={{
+                required: "الرجاء إدخال البريد الالكتروني",
+              }}
+            />
 
-            <div>
-              <input
-                id="password"
-                type="password"
-                placeholder="كلمة السر"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <CustomInput
+              control={control}
+              name={"password"}
+              placeholder={"كلمة المرور"}
+              type={"password"}
+              rules={{
+                required: "الرجاء إدخال كلمة المرور",
+              }}
+            />
 
-            <div>
-              <input
-                type="date"
-                placeholder="تاريخ الميلاد"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <CustomInput
+              control={control}
+              name={"birthdate"}
+              placeholder={"تاريخ الميلاد"}
+              type={"date"}
+              max={new Date().toISOString().split("T")[0]}
+              rules={{
+                required: "الرجاء إدخال تاريخ الميلاد",
+              }}
+            />
 
-            <div>
-              <input
-                id="address"
-                type="address"
-                placeholder="العنوان"
-                class="block w-full px-4 py-2 mt-2 text-gray-900 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-              />
-            </div>
+            <CustomInput
+              control={control}
+              name={"location"}
+              placeholder={"العنوان"}
+              type={"text"}
+              rules={{
+                required: "الرجاء إدخال العنوان",
+              }}
+            />
+
+            <CustomInput
+              control={control}
+              name={"phone_number"}
+              placeholder={"رقم الهاتف"}
+              type={"text"}
+              rules={{
+                required: "الرجاء إدخال رقم الهاتف",
+              }}
+            />
+
+            <CustomInput
+              control={control}
+              name={"gender"}
+              placeholder={"الجنس"}
+              type={"select"}
+              options={[
+                {
+                  id: 1,
+                  name: "ذكر",
+                },
+                {
+                  id: 2,
+                  name: "انثى",
+                },
+              ]}
+              rules={{
+                required: "الرجاء إدخال الجنس",
+              }}
+            />
+
             {/* Profile Picture */}
-            <label
-              htmlFor="file"
-              className="cursor-pointer transition ease-in-out hover:opacity-80 w-fit"
-            >
-              <div className="items-center flex">
-                <h2 className="font-cairoBold text-[#938D8D]">
-                  الصورة الشخصية
-                </h2>
-                <div className="bg-blue-500 rounded-full p-1.5 items-center mr-4">
-                  <HiOutlineUpload className="text-2xl text-white " />
+            <div className="border w-full py-2 text-gray-900 bg-white  border-gray-200 px-8 rounded">
+              <label
+                htmlFor="image"
+                className="cursor-pointer hover:bg-blue-500 hover:text-white  transition ease-in-out hover:opacity-80"
+              >
+                <div className="flex justify-between items-center ">
+                  <h2 className="font-cairoBold  text-[#938D8D]">
+                    الصورة الشخصية
+                  </h2>
+                  <div className="bg-blue-500 rounded-full p-1.5 items-center mr-4">
+                    <HiOutlineUpload className="text-2xl text-white " />
+                  </div>
                 </div>
-              </div>
-              <input id="file" name="file" type="file" className="hidden" accept={types} onChange={handleImageUpload} />
-              {
-                file && (
+                <input
+                  id="image"
+                  name="image"
+                  type="file"
+                  className="hidden"
+                  accept={types}
+                  onChange={handleImageUpload}
+                />
+                {imagePreview && (
                   <>
-                    <img src={file} className='img w-[50px] h-[50px] object-contain'/>
-                    <p className="text-[18px] font-cairoSemiBold">{fileName}</p>
+                    <img
+                      src={imagePreview}
+                      className="img w-[50px] h-[50px] object-contain"
+                    />
+                    {/* <p className="text-[18px] font-cairoSemiBold">{fileName}</p> */}
                   </>
-                )
-              }
-            </label>
+                )}
+              </label>
+            </div>
           </div>
-            {file && (
-              <button className="my-2 bg-red-400 p-2 rounded hover:opacity-80 transition ease-in-out" onClick={removeImage}>
-                <FaRegTrashAlt className="text-[24px] text-light-100" />
-              </button> 
-            )}
+          {/* {file && (
+            <button
+              className="my-2 bg-red-400 p-2 rounded hover:opacity-80 transition ease-in-out"
+              onClick={removeImage}
+            >
+              <FaRegTrashAlt className="text-[24px] text-light-100" />
+            </button>
+          )} */}
         </form>
       </section>
       {/* BUTTONS */}

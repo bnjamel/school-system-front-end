@@ -21,6 +21,8 @@ import StudentEdit from "../pages/profile/editProfile/StudentEdit";
 import TeacherEdit from "../pages/profile/editProfile/TeacherEdit";
 import ViewTeacherProfile from "../pages/profile/ViewTeacherProfile";
 import ViewStudentProfile from "../pages/profile/ViewStudentProfile";
+import Signup from "../pages/signup/Signup";
+import Pending from "../pages/pending/Pending";
 
 export default function RouterContent() {
   return (
@@ -38,10 +40,13 @@ export default function RouterContent() {
           <Route path="/class/display/:id" element={<Display />} />
 
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/profile/studentedit" element={<StudentEdit />} />
-          <Route path="/profile/teacheredit" element={<TeacherEdit />} />
+          <Route path="/profile/studentedit/:id" element={<StudentEdit />} />
+          <Route path="/profile/teacheredit/:id" element={<TeacherEdit />} />
           <Route path="/student/:id" element={<ViewStudentProfile />} />
           <Route path="/student/:name" element={<ViewStudentProfile />} />
+
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/pending" element={<Pending />} />
 
           <Route path="/teacher/:id" element={<ViewTeacherProfile />} />
           <Route path="/teacher/:name" element={<ViewTeacherProfile />} />

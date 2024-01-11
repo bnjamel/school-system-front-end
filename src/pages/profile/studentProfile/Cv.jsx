@@ -1,19 +1,24 @@
 import React from "react";
+import { FiEdit } from "react-icons/fi";
+import { useStateValue } from "../../../context/StateProvider";
 
-function Cv() {
+function Cv({ about, evaluation }) {
+  const [{ user }, dispatch] = useStateValue();
+
   return (
     <div className="flex flex-col mx-10 mb-8">
       <div>
-        <h1 className="font-cairoSemiBold text-xl mb-2">عن الطالب</h1>
+        <h1 className="flex font-cairoSemiBold text-xl mb-2">عن الطالب</h1>
         <p className="text-black/75 font-cairoRegular">
-          هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذا يستبدل في نفس
-          المساحة u. هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة
+          {/* هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة هذا يستبدل في نفس
+          المساحة u. هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة */}
+          {about}
         </p>
       </div>
       <div className="my-10">
-        <h1 className="font-cairoSemiBold text-xl mb-4">المستوى الدراسي</h1>
+        <h1 className="flex font-cairoSemiBold text-xl mb-4">تقييم الطالب</h1>
         <label className="bg-green-500 text-white font-cairoRegular px-10 py-1 rounded-full text-xl ">
-          جيد
+          {evaluation}
         </label>
       </div>
       <div>

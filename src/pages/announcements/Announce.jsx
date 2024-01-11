@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
 import axios from "axios";
+import { TfiAnnouncement } from "react-icons/tfi";
 
 const NotFound = () => {
   return (
@@ -29,7 +30,19 @@ function Announce() {
       ) : (
         <>
           {/* {data && console.log(data?.User.role)} */}
-          <div className="w-full h-[15rem] bg-blue-500 rounded-md self-center"></div>
+          {!data?.cover ? (
+            <div className="h-[15rem] mx-2 mt-4 rounded-lg bg-gradient flex justify-center items-center">
+              <TfiAnnouncement className="text-white p-6 w-full h-full" />
+            </div>
+          ) : (
+            <div className="h-[15rem] mt-4 w-full rounded-lg overflow-hidden ">
+              <img
+                src={"http://localhost:3001/images/" + data?.cover}
+                className="w-full h-full object-cover"
+                alt=""
+              />
+            </div>
+          )}
           <div
             dir="rtl"
             className="font-cairoRegular mt-6 mx-10 xl:mx-0 flex-col flex items-start"

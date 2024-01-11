@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
 import axios from "axios";
 import { useStateValue } from "../../context/StateProvider";
+import imagePlaceholder from "../../assets/images/profile.png";
 
 const TABLE_HEAD = ["#", "الأسم", "المادة", "رقم الهاتف", ""];
 
@@ -90,8 +91,8 @@ export default function Teacher() {
     navigate(`/teacher/${id}`);
   };
 
-  const handleTeacherEdit = () => {
-    navigate("/profile/teacheredit");
+  const handleTeacherEdit = (id) => {
+    navigate(`/profile/teacheredit/${id}`);
   };
 
   const handleSearch = (term) => {
@@ -174,18 +175,28 @@ export default function Teacher() {
                     className={classes}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="w-10 ">
-                          <img
-                            src={
-                              item?.image
-                                ? item?.image
-                                : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
-                            }
-                            className=" rounded-full"
-                          />
+                      {!item.image ? (
+                        <div className="avatar">
+                          <div className="w-10 ">
+                            <img
+                              src={imagePlaceholder}
+                              className="rounded-full"
+                            />
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="avatar">
+                          <div className="w-10 ">
+                            <img
+                              src={
+                                "http://localhost:3001/images/" + item?.image
+                              }
+                              className="w-full h-full object-cover"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      )}
                       <div className="flex flex-col">
                         <p>أ.{item?.name}</p>
                         <p className="text-blue-gray-400">{item?.email}</p>
@@ -209,12 +220,21 @@ export default function Teacher() {
                     <p>07503234093</p>
                   </td>
 
-                  <td onClick={handleTeacherEdit}>
-                    <FiEdit
-                      size={20}
-                      className="cursor-pointer hover:scale-125 transition"
-                    />
-                  </td>
+                  {user.role === "admin" ? (
+                    <td onClick={() => handleTeacherEdit(item?.id)}>
+                      <FiEdit
+                        size={20}
+                        className="cursor-pointer hover:scale-125 transition"
+                      />
+                    </td>
+                  ) : (
+                    <td onClick={() => handleTeacherPress(item?.id)}>
+                      <FiEdit
+                        size={20}
+                        className="opacity-0 pointer-events-none cursor-pointer hover:scale-125 transition"
+                      />
+                    </td>
+                  )}
                 </tr>
               );
             })}

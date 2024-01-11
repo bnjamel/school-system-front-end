@@ -1,6 +1,7 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import imagePlaceholder from "../../assets/images/profile.png";
 
 const TABLE_HEAD = ["#", "الأسم", "الصف", "رقم الهاتف"];
 
@@ -118,18 +119,29 @@ function Students({ students, isPending, studentDivision, studentClass }) {
                         className={classes}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="avatar">
-                            <div className="w-10 ">
-                              <img
-                                src={
-                                  item?.image
-                                    ? item?.image
-                                    : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg"
-                                }
-                                className=" rounded-full"
-                              />
+                          {!item.image ? (
+                            <div className="avatar">
+                              <div className="w-10 ">
+                                <img
+                                  src={imagePlaceholder}
+                                  className="rounded-full"
+                                />
+                              </div>
                             </div>
-                          </div>
+                          ) : (
+                            <div className="avatar">
+                              <div className="w-10 ">
+                                <img
+                                  src={
+                                    "http://localhost:3001/images/" +
+                                    item?.image
+                                  }
+                                  className="w-full h-full object-cover"
+                                  alt=""
+                                />
+                              </div>
+                            </div>
+                          )}
                           <div className="flex flex-col">
                             <p>{item?.name}</p>
                             <p className="text-blue-gray-400">{item?.email}</p>

@@ -1,52 +1,91 @@
 import React, { useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
-import { FaRegTrashAlt } from "react-icons/fa";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import CustomInput from "../../components/CustomInput";
+import { useStateValue } from "../../context/StateProvider";
+
+const announcementTypes = [
+  {
+    id: 1,
+    name: "عام",
+  },
+  {
+    id: 2,
+    name: "نشاط",
+  },
+  {
+    id: 3,
+    name: "امتحان",
+  },
+  {
+    id: 4,
+    name: "ضروري",
+  },
+];
 
 function NewAnnounce() {
-  const [file, setFile] = useState();
-  const [fileName, setFileName] = useState("No file selected");
-
+  const [{ user }, dispatch] = useStateValue();
   const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState();
+  const [imageError, setImageError] = useState();
+
+  console.log(user.id);
+
+  // Form Controllers
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
 
   const types = ["image/png", "image/jpeg"];
 
   const handleImageUpload = (e) => {
     const selected = e.target.files[0];
     if (selected) {
-      setFileName(selected.name);
       setImagePreview(URL.createObjectURL(e.target.files[0]));
       setImage(e.target.files[0]);
     }
   };
 
   const removeImage = () => {
-    setFileName("No file selected");
+    image(null);
     setImagePreview(null);
   };
 
-  const handleSubmit = () => {
+  const onSubmit = (data) => {
     const formData = new FormData();
 
     if (!image) {
-      console.log("error");
+      console.log("Add Image");
     } else {
-      formData.append("image", image);
-      formData.append("title", "title");
-      formData.append("body", "body");
-      formData.append("date", Date.now().toString());
-      formData.append("type", "نشاط");
-      formData.append("UserId", "2");
+      let year = new Date().getFullYear();
+      let month = (new Date().getMonth() + 1).toString().padStart(2, "0");
+      let day = new Date().getDate().toString().padStart(2, "0");
+      let hours = new Date().getHours().toString().padStart(2, "0");
+      let minutes = new Date().getMinutes().toString().padStart(2, "0");
 
-      // axios
-      //   .post("http://localhost:3001/announcement/", formData)
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      let period = hours >= 12 ? "PM" : "AM";
+      hours = hours % 12 || 12;
+      const date = `${year}-${month}-${day} ${hours}:${minutes} ${period}`;
+
+      formData.append("cover", image);
+      formData.append("title", data.title);
+      formData.append("body", data.body);
+      formData.append("date", date);
+      formData.append("type", data.type);
+      formData.append("UserId", user.id);
+
+      axios
+        .post("http://localhost:3001/announcement/", formData)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -57,8 +96,8 @@ function NewAnnounce() {
         <label
           htmlFor="image"
           className={`cursor-pointer ${
-            !imagePreview && "bg-blue-500"
-          } rounded-md items-end flex h-full transition ease-in-out border border-transparent hover:border-light-400/50 hover:opacity-90`}
+            imagePreview ? "border-transparent" : "border-blue-200"
+          } rounded-md items-end flex h-full transition ease-in-out border-2 border-dashed  hover:opacity-90`}
         >
           {!imagePreview && (
             <>
@@ -67,7 +106,7 @@ function NewAnnounce() {
                   <BiImageAdd className="text-2xl text-white " />
                 </div>
 
-                <h2 className="font-cairoBold text-2xl text-white ">
+                <h2 className="font-cairoBold text-2xl text-black ">
                   اضف غلاف للتبليغ
                 </h2>
               </div>
@@ -85,9 +124,8 @@ function NewAnnounce() {
             <>
               <img
                 src={imagePreview}
-                className="img w-full h-full object-contain"
+                className="img w-full h-full object-cover"
               />
-              {/* <p className="text-[18px] font-cairoSemiBold">{fileName}</p> */}
             </>
           )}
         </label>
@@ -95,36 +133,46 @@ function NewAnnounce() {
       {/* ALL OF IT / JUSTIFIED CENTERED / FOR THE MOBILE */}
       <div className="flex flex-col justify-center self-center items-center lg:self-auto lg:block">
         {/* TEXT */}
-        <div className="mt-6 font-cairoBold">
-          <input
-            className="w-fit lg:w-full  rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4  focus:border-dark-100 outline-none focus:border-transparent transition ease-in-out"
-            type="text"
-            placeholder="عنوان التبليغ"
-          ></input>
+        <div className="my-6">
+          <CustomInput
+            control={control}
+            name={"title"}
+            placeholder={"عنوان التبليغ"}
+            type={"text"}
+            rules={{
+              required: "الرجاء إدخال عنوان للتبليغ",
+            }}
+          />
         </div>
-        {/* TEXTAREA */}
-        <div className="my-6 font-cairoBold">
-          <textarea
-            className="w-fit lg:w-full rounded-lg border-gray-400 border align-top shadow-sm sm:text-sm p-4 max-h-[400px] min-h-[200px] focus:border-dark-100 outline-none focus:border-transparent transition ease-in-out"
-            rows="8"
-            placeholder="اكتب محتوى التبليغ..."
-          ></textarea>
-        </div>
-        {/* SELECT */}
-        <div className="flex flex-col items-start font-cairoRegular mb-10 ">
-          <label htmlFor="">نوع التبليغ</label>
-          <select className="w-60 rounded-md text-black/50 p-1.5 border bg-white border-gray-500/50 mt-2 focus:border-black/50 transition ease-in-out">
-            <option value="عام">عام</option>
-            <option value="نشاط">نشاط</option>
 
-            <option value="امتحان">امتحان</option>
-            <option value="ضروري">ضروري</option>
-          </select>
+        <div className="my-6 font-cairoBold">
+          <CustomInput
+            control={control}
+            name={"body"}
+            placeholder={"اكتب محتوى التبليغ"}
+            type={"textArea"}
+            rules={{
+              required: "الرجاء أكتب محتوى للتبليغ",
+            }}
+          />
+        </div>
+
+        <div className="flex flex-col items-start font-cairoRegular mb-10 w-60">
+          <CustomInput
+            control={control}
+            type={"select"}
+            name={"type"}
+            options={announcementTypes}
+            placeholder={"نوع التبليغ"}
+            rules={{
+              required: "الرجاء إدخال نوع التبليغ",
+            }}
+          />
         </div>
         {/* BUTTON */}
         <div>
           <button
-            onClick={handleSubmit}
+            onClick={handleSubmit(onSubmit)}
             className="transition ease-in-out hover:scale-[1.04] active:scale-[.99] md:flex px-6 text-lg font-cairoSemiBold py-2 rounded-md text-white bg-[#5B91D0] ml-4 "
           >
             نشر التبليغ
