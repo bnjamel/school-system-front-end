@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
 import axios from "axios";
 import { TfiAnnouncement } from "react-icons/tfi";
+import { useStateValue } from "../../context/StateProvider";
 
 const NotFound = () => {
   return (
@@ -13,12 +14,13 @@ const NotFound = () => {
 };
 
 function Announce() {
+  const [{ endpoint }] = useStateValue();
   const { id } = useParams();
 
   if (!id) return <NotFound />;
 
   const { data, isPending, error } = useFetch(
-    `http://localhost:3001/announcement/byId/${id}`
+    `${endpoint}announcement/byId/${id}`
   );
 
   return (
@@ -37,7 +39,7 @@ function Announce() {
           ) : (
             <div className="h-[15rem] mt-4 w-full rounded-lg overflow-hidden ">
               <img
-                src={"http://localhost:3001/images/" + data?.cover}
+                src={endpoint + "images/" + data?.cover}
                 className="w-full h-full object-cover"
                 alt=""
               />

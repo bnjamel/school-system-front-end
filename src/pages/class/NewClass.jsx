@@ -8,47 +8,16 @@ import { useForm, Controller } from "react-hook-form";
 import CustomInput from "../../components/CustomInput";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-// const classOptions = [
-//   {
-//     id: 1,
-//     label: "اول",
-//     value: "اول",
-//   },
-//   {
-//     id: 2,
-//     label: "ثاني",
-//     value: "ثاني",
-//   },
-//   {
-//     id: 3,
-//     label: "ثالث",
-//     value: "ثالث",
-//   },
-//   {
-//     id: 4,
-//     label: "رابع",
-//     value: "رابع",
-//   },
-//   {
-//     id: 5,
-//     label: "خامس",
-//     value: "خامس",
-//   },
-//   {
-//     id: 6,
-//     label: "سادس",
-//     value: "سادس",
-//   },
-// ];
+import { useStateValue } from "../../context/StateProvider";
 
 function NewClass() {
   const [classList, setClassList] = useState([]);
   const navigate = useNavigate();
+  const [{ endpoint }] = useStateValue();
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/class")
+      .get(`${endpoint}class`)
       .then((res) => {
         setClassList(res.data);
       })
@@ -74,7 +43,7 @@ function NewClass() {
     };
 
     axios
-      .post("http://localhost:3001/division/", info)
+      .post(`${endpoint}division/`, info)
       .then((res) => {
         console.log(res);
       })

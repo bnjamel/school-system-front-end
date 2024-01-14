@@ -17,7 +17,7 @@ import CustomInput from "../../components/CustomInput";
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 function Login() {
-  const [{}, dispatch] = useStateValue();
+  const [{ endpoint }, dispatch] = useStateValue();
   const [error, setError] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   let navigator = useNavigate();
@@ -45,96 +45,90 @@ function Login() {
     switch (userType) {
       // Student Log
       case "student":
-        axios
-          .post("http://localhost:3001/student/login", user)
-          .then((response) => {
-            if (response.data.error) {
-              setError(response.data.error);
-            } else {
-              localStorage.setItem("accessToken", response.data.token);
-              dispatch({
-                type: "SET_PROFILE",
-                profile: response.data,
-              });
-              dispatch({
-                type: "SET_USER",
-                user: {
-                  email: response.data.email,
-                  fullName: response.data.fullName,
-                  role: response.data.role,
-                  id: response.data.id,
-                },
-              });
-              dispatch({
-                type: "SET_LOGIN",
-                isLogged: true,
-              });
-              navigator("/", { replace: true });
-            }
-          });
+        axios.post(`${endpoint}student/login`, user).then((response) => {
+          if (response.data.error) {
+            setError(response.data.error);
+          } else {
+            localStorage.setItem("accessToken", response.data.token);
+            dispatch({
+              type: "SET_PROFILE",
+              profile: response.data,
+            });
+            dispatch({
+              type: "SET_USER",
+              user: {
+                email: response.data.email,
+                fullName: response.data.fullName,
+                role: response.data.role,
+                id: response.data.id,
+              },
+            });
+            dispatch({
+              type: "SET_LOGIN",
+              isLogged: true,
+            });
+            navigator("/", { replace: true });
+          }
+        });
         break;
 
       // Teacher Log
       case "teacher":
-        axios
-          .post("http://localhost:3001/teacher/login", user)
-          .then((response) => {
-            if (response.data.error) {
-              setError(response.data.error);
-            } else {
-              localStorage.setItem("accessToken", response.data.token);
-              dispatch({
-                type: "SET_PROFILE",
-                profile: response.data,
-              });
-              dispatch({
-                type: "SET_USER",
-                user: {
-                  email: response.data.email,
-                  fullName: response.data.fullName,
-                  role: response.data.role,
-                  id: response.data.id,
-                },
-              });
-              dispatch({
-                type: "SET_LOGIN",
-                isLogged: true,
-              });
-              navigator("/", { replace: true });
-            }
-          });
+        axios.post(`${endpoint}teacher/login`, user).then((response) => {
+          if (response.data.error) {
+            setError(response.data.error);
+          } else {
+            localStorage.setItem("accessToken", response.data.token);
+            dispatch({
+              type: "SET_PROFILE",
+              profile: response.data,
+            });
+            dispatch({
+              type: "SET_USER",
+              user: {
+                email: response.data.email,
+                fullName: response.data.fullName,
+                role: response.data.role,
+                id: response.data.id,
+              },
+            });
+            dispatch({
+              type: "SET_LOGIN",
+              isLogged: true,
+            });
+            navigator("/", { replace: true });
+          }
+        });
         break;
 
       // Admin Log
       case "admin":
-        axios
-          .post("http://localhost:3001/admin/login", user)
-          .then((response) => {
-            if (response.data.error) {
-              setError(response.data.error);
-              setIsLogged(false);
-            } else {
-              localStorage.setItem("accessToken", response.data.token);
-              dispatch({
-                type: "SET_PROFILE",
-                profile: response.data,
-              });
-              dispatch({
-                type: "SET_USER",
-                user: {
-                  email: response.data.email,
-                  fullName: response.data.fullName,
-                  role: response.data.role,
-                  id: response.data.id,
-                },
-              });
-              dispatch({
-                type: "SET_LOGIN",
-                isLogged: true,
-              });
-              navigator("/");
-            }
-          });
+        axios.post(`${endpoint}admin/login`, user).then((response) => {
+          if (response.data.error) {
+            setError(response.data.error);
+            setIsLogged(false);
+          } else {
+            localStorage.setItem("accessToken", response.data.token);
+            dispatch({
+              type: "SET_PROFILE",
+              profile: response.data,
+            });
+            dispatch({
+              type: "SET_USER",
+              user: {
+                email: response.data.email,
+                fullName: response.data.fullName,
+                role: response.data.role,
+                id: response.data.id,
+              },
+            });
+            dispatch({
+              type: "SET_LOGIN",
+              isLogged: true,
+            });
+            navigator("/");
+          }
+        });
         break;
       default:
         break;

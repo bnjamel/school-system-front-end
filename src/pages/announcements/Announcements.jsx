@@ -13,7 +13,7 @@ import { useStateValue } from "../../context/StateProvider";
 import { TfiAnnouncement } from "react-icons/tfi";
 
 export default function Announcements() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [type, setType] = useState("");
   const [announcements, setAnnouncements] = useState([]);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function Announcements() {
   useEffect(() => {
     if (type) {
       axios
-        .get(`http://localhost:3001/announcement/byType/${type}`)
+        .get(`${endpoint}announcement/byType/${type}`)
         .then((response) => {
           setAnnouncements(response.data);
         })
@@ -38,7 +38,7 @@ export default function Announcements() {
         });
     } else {
       axios
-        .get(`http://localhost:3001/announcement/`)
+        .get(`${endpoint}announcement/`)
         .then((response) => {
           setAnnouncements(response.data);
         })
@@ -106,7 +106,7 @@ export default function Announcements() {
                     ) : (
                       <div className="h-full mt-4 w-full rounded-lg overflow-hidden ">
                         <img
-                          src={"http://localhost:3001/images/" + item?.cover}
+                          src={endpoint + "images/" + item?.cover}
                           className="w-full h-full object-cover"
                           alt=""
                         />

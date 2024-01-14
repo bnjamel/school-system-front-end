@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import imagePlaceholder from "../../../assets/images/profile.png";
 import { FiEdit } from "react-icons/fi";
+import { useStateValue } from "../../../context/StateProvider";
 
 const evaluationOptions = [
   {
@@ -37,8 +38,7 @@ function EditProfile() {
   const [divisionList, setDivisionList] = useState([]);
   const [selectedClass, setSelectedClass] = useState();
   const [selectedDivision, setSelectedDivision] = useState();
-
-  const navigate = useNavigate();
+  const [{ endpoint }] = useStateValue();
 
   const handleClassSelect = (e) => {
     setSelectedClass(e.target.value);
@@ -71,14 +71,14 @@ function EditProfile() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/student/byId/${id}`)
+      .get(`${endpoint}student/byId/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
       .catch((error) => console.log(error));
 
     axios
-      .get("http://localhost:3001/class")
+      .get(`${endpoint}class`)
       .then((response) => {
         if (response.data) {
           setClassList(response.data);
@@ -92,7 +92,7 @@ function EditProfile() {
   useEffect(() => {
     // setDivisionList(selectedClass.Divisions);
     axios
-      .get(`http://localhost:3001/division/byClass/${selectedClass}`)
+      .get(`${endpoint}division/byClass/${selectedClass}`)
       .then((res) => {
         setDivisionList(res.data);
       })
@@ -156,7 +156,7 @@ function EditProfile() {
       form_data.append("parent", info.parent);
 
       axios
-        .put(`http://localhost:3001/student/${id}`, form_data)
+        .put(`${endpoint}student/${id}`, form_data)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
     }
@@ -214,7 +214,7 @@ function EditProfile() {
                     <img
                       width={150}
                       height={150}
-                      src={"http://localhost:3001/images/" + formData?.image}
+                      src={`${endpoint}images/` + formData?.image}
                       className=" rounded-full object-cover h-full w-full"
                     />
                   </div>

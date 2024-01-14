@@ -69,7 +69,7 @@ const TABLE_ROWS = [
 ];
 
 export default function Teacher() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [searchTerm, setSearchTerm] = useState();
   const [data, setData] = useState();
   const navigate = useNavigate();
@@ -77,7 +77,7 @@ export default function Teacher() {
   useEffect(() => {
     if (!searchTerm) {
       axios
-        .get("http://localhost:3001/teacher/")
+        .get(`${endpoint}teacher/`)
         .then((response) => {
           setData(response.data);
         })
@@ -188,9 +188,7 @@ export default function Teacher() {
                         <div className="avatar">
                           <div className="w-10 ">
                             <img
-                              src={
-                                "http://localhost:3001/images/" + item?.image
-                              }
+                              src={`${endpoint}images/` + item?.image}
                               className="w-full h-full object-cover"
                               alt=""
                             />

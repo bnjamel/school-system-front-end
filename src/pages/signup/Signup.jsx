@@ -6,6 +6,7 @@ import Step3 from "./Step3";
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
+import { useStateValue } from "../../context/StateProvider";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function Signup() {
   const [isFirstStep, setIsFirstStep] = useState(false);
   const [selectedClass, setSelectedClass] = useState();
   const [selectedDivision, setSelectedDivision] = useState();
-
+  const [{ endpoint }] = useStateValue();
   // handleClassSelect,
   // selectedClass,
   // selectedDivision,
@@ -119,18 +120,18 @@ export default function Signup() {
     formData.append("residence_card", residenceCard);
     formData.append("student_document_image", document);
 
-    axios
-      .post("http://localhost:3001/pending/", formData)
-      .then((res) => {
-        if (!res.error) {
-          console.log("is pending");
-          navigate("/pending");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
+    // axios
+    //   .post(`${endpoint}pending/`, formData)
+    //   .then((res) => {
+    //     if (!res.error) {
+    //       console.log("is pending");
+    //       navigate("/pending");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    navigate("/pending");
     // navigate("/pending");
   };
 

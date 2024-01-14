@@ -5,15 +5,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FiEdit } from "react-icons/fi";
 import imagePlaceholder from "../assets/images/profile.png";
+import { useStateValue } from "../context/StateProvider";
 
 export default function TeacherProfile({ id }) {
+  const [{ endpoint }, dispatch] = useStateValue();
   const [activeTab, setActiveTab] = useState("announce");
   const navigate = useNavigate();
   const [data, setData] = useState();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/teacher/byId/${id}`)
+      .get(`${endpoint}teacher/byId/${id}`)
       .then((response) => {
         setData(response.data);
         console.log(response.data);
@@ -52,7 +54,7 @@ export default function TeacherProfile({ id }) {
                   <img
                     width={150}
                     height={150}
-                    src={"http://localhost:3001/images/" + data?.image}
+                    src={endpoint + "images/" + data?.image}
                     className=" rounded-full"
                   />
                 </div>

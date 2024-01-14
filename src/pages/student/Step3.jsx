@@ -3,6 +3,7 @@ import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import CustomInput from "../../components/CustomInput";
 import axios from "axios";
+import { useStateValue } from "../../context/StateProvider";
 
 function Step3({
   handleNext,
@@ -17,53 +18,13 @@ function Step3({
   handleDivisionSelect,
   setSelectedDivision,
 }) {
-  const [studentClass, setStudentClass] = useState("");
-  const [studentDivision, setStudentDivision] = useState("");
-  const navigate = useNavigate();
   const [classList, setClassList] = useState([]);
   const [divisionList, setDivisionList] = useState();
-
-  const classOptions = [
-    {
-      id: 1,
-      name: "اول",
-    },
-    {
-      id: 2,
-      name: "ثاني",
-    },
-    {
-      id: 3,
-      name: "ثالث",
-    },
-    {
-      id: 4,
-      name: "رابع",
-    },
-    {
-      id: 5,
-      name: "خامس",
-    },
-    {
-      id: 6,
-      name: "سادس",
-    },
-  ];
-
-  const divisionOptions = [
-    {
-      id: 1,
-      name: "شعبة أ",
-    },
-    {
-      id: 2,
-      name: "شعبة ب",
-    },
-  ];
+  const [{ endpoint }] = useStateValue();
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/class")
+      .get(`${endpoint}class`)
       .then((response) => {
         if (response.data) {
           setClassList(response.data);
@@ -77,7 +38,7 @@ function Step3({
   useEffect(() => {
     // setDivisionList(selectedClass.Divisions);
     axios
-      .get(`http://localhost:3001/division/byClass/${selectedClass}`)
+      .get(`${endpoint}division/byClass/${selectedClass}`)
       .then((res) => {
         setDivisionList(res.data);
       })

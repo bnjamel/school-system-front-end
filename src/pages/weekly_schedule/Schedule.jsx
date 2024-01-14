@@ -15,7 +15,7 @@ import {
 
 function Schedule() {
   const { id } = useParams();
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [divisionData, setDivisionData] = useState();
   const [subjectList, setSubjectList] = useState([]);
 
@@ -39,14 +39,14 @@ function Schedule() {
   };
 
   const { data, isPending, error } = useFetch(
-    `http://localhost:3001/schedule/byDivId/${id}`,
+    `${endpoint}schedule/byDivId/${id}`,
     "GET",
     null
   );
 
   const getData = async () => {
     const res = await axios
-      .get(`http://localhost:3001/division/${id}`)
+      .get(`${endpoint}division/${id}`)
       .then((response) => {
         setDivisionData(response.data);
       })
@@ -60,7 +60,7 @@ function Schedule() {
     getData();
 
     axios
-      .get("http://localhost:3001/subject/")
+      .get(`${endpoint}subject/`)
       .then((res) => {
         setSubjectList(res.data);
       })
@@ -93,7 +93,7 @@ function Schedule() {
         sixth_lesson: sixthLesson ? sixthLesson : selectedSchedule.sixth_lesson,
       };
       axios
-        .put(`http://localhost:3001/schedule/${selectedSchedule.id}`, info)
+        .put(`${endpoint}schedule/${selectedSchedule.id}`, info)
         .then((res) => {
           console.log(res);
         })

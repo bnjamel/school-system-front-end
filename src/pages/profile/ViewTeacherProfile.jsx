@@ -11,11 +11,11 @@ import imagePlaceholder from "../../assets/images/profile.png";
 export default function ViewTeacherProfile() {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("announce");
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
   const { data, isPending, error } = useFetch(
-    `http://localhost:3001/teacher/byId/${id}`,
+    `${endpoint}teacher/byId/${id}`,
     "GET",
     null
   );
@@ -52,7 +52,7 @@ export default function ViewTeacherProfile() {
                     <img
                       width={150}
                       height={150}
-                      src={"http://localhost:3001/images/" + data.image}
+                      src={`${endpoint}images/` + data.image}
                       className=" rounded-full"
                     />
                   </div>

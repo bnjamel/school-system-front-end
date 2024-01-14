@@ -4,15 +4,13 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import RouterContent from "./components/RouterContent";
 import Footer from "./components/Footer";
-import { useNavigate, useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import useFetch from "./customHooks/useFetch";
-import axios from "axios"
+import axios from "axios";
 import { useStateValue } from "./context/StateProvider";
 
-const URL = "http://localhost:3001/"
-
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [{ endpoint }, dispatch] = useStateValue();
   const location = useLocation();
   const navigator = useNavigate();
 
@@ -20,10 +18,11 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-
-      axios.get("http://localhost:3001/user/authToken", {
+      axios
+        .get(`${endpoint}user/authToken`, {
           headers: { accessToken: localStorage.getItem("accessToken") },
-        }).then((response) => {
+        })
+        .then((response) => {
           if (response.data.error) {
             dispatch({
               type: "SET_LOGIN",
@@ -47,7 +46,7 @@ function App() {
           }
         });
     } else {
-      navigator("/login")
+      navigator("/login");
     }
   }, []);
 
@@ -56,10 +55,10 @@ function App() {
       <div className="w-full ">
         {/* Navbar */}
         <div className="w-full fixed bg-white z-[100]">
-          <Navbar location={location}/>
+          <Navbar location={location} />
           {/* sub Navbar */}
           <div className=" hidden lg:flex justify-center ">
-            <Sidebar location={location}/>
+            <Sidebar location={location} />
           </div>
         </div>
         {/* Content */}

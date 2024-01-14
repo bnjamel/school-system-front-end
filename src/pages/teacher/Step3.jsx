@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import imagePlaceholder from "../../assets/images/profile.png";
+import { useStateValue } from "../../context/StateProvider";
 
 function Step3({
   handleNext,
@@ -14,12 +15,13 @@ function Step3({
   imagePreview,
 }) {
   const [selectedItem, setSelectedItem] = useState();
+  const [{ endpoint }] = useStateValue();
   // const selectedItem = Number(selectedSubject);
   // const subject = subjectsList.filter((sub) => sub.id === selectedItem);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/subject/${selectedSubject}`)
+      .get(`${endpoint}subject/${selectedSubject}`)
       .then((res) => setSelectedItem(res.data))
       .catch((err) => console.log(err));
   }, []);

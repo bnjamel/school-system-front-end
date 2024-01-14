@@ -25,7 +25,7 @@ const announcementTypes = [
 ];
 
 function NewAnnounce() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState();
   const [imageError, setImageError] = useState();
@@ -79,7 +79,7 @@ function NewAnnounce() {
       formData.append("UserId", user.id);
 
       axios
-        .post("http://localhost:3001/announcement/", formData)
+        .post(`${endpoint}announcement/`, formData)
         .then((response) => {
           console.log(response);
         })

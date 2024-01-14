@@ -10,7 +10,7 @@ function Document({
   studentDocumentPreview,
   handleSubmitDocument,
 }) {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
 
   return (
     <div className="flex hide-scrollbar flex-col mx-10 h-[100vh]">
@@ -23,7 +23,7 @@ function Document({
             </label>
             <div className="bg-blue-500 w-full mt-12 h-[20rem] rounded">
               <img
-                src={"http://localhost:3001/images/" + document}
+                src={`${endpoint}images/` + document}
                 className="w-full h-full object-cover"
                 alt=""
               />

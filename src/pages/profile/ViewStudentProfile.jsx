@@ -14,7 +14,7 @@ import imagePlaceholder from "../../assets/images/profile.png";
 export default function ViewStudentProfile() {
   const { id, name } = useParams();
   const [data, setData] = useState();
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const navigate = useNavigate();
   const [studentDocument, setStudentDocument] = useState();
   const [studentDocumentPreview, setStudentDocumentPreview] = useState();
@@ -22,7 +22,7 @@ export default function ViewStudentProfile() {
   useEffect(() => {
     if (name) {
       axios
-        .get(`http://localhost:3001/student/${name}`)
+        .get(`${endpoint}student/${name}`)
         .then((response) => {
           setData(response.data);
         })
@@ -33,7 +33,7 @@ export default function ViewStudentProfile() {
 
     if (id) {
       axios
-        .get(`http://localhost:3001/student/byId/${id}`)
+        .get(`${endpoint}student/byId/${id}`)
         .then((response) => {
           setData(response.data);
         })
@@ -57,7 +57,7 @@ export default function ViewStudentProfile() {
       const formData = new FormData();
       formData.append("document", studentDocument);
       axios
-        .put(`http://localhost:3001/student/updateDoc/${id}`, formData)
+        .put(`${endpoint}student/updateDoc/${id}`, formData)
         .then((res) => {
           console.log(res);
         })
@@ -126,7 +126,7 @@ export default function ViewStudentProfile() {
                       <img
                         width={150}
                         height={150}
-                        src={"http://localhost:3001/images/" + data.image}
+                        src={`${endpoint}images/` + data.image}
                         className=" rounded-full"
                       />
                     </div>

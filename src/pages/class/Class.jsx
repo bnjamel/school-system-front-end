@@ -4,13 +4,9 @@ import useFetch from "../../customHooks/useFetch";
 import { useStateValue } from "../../context/StateProvider";
 
 export default function Class() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
 
-  const { data, isPending, error } = useFetch(
-    "http://localhost:3001/class/",
-    "GET",
-    null
-  );
+  const { data, isPending, error } = useFetch(`${endpoint}class/`, "GET", null);
 
   if (error) {
     console.log(error);

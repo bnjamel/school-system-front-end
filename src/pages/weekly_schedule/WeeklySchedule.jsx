@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
+import { useStateValue } from "../../context/StateProvider";
 
 export default function WeeklySchedule() {
-  const { data, isPending, error } = useFetch(
-    "http://localhost:3001/class/",
-    "GET",
-    null
-  );
+  const [{ endpoint }] = useStateValue();
+  const { data, isPending, error } = useFetch(`${endpoint}class/`, "GET", null);
 
   return (
     <div dir="rtl" className="mx-auto max-w-[1000px] flex flex-col pt-[12rem]">
