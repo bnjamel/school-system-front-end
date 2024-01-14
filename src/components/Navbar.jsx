@@ -14,13 +14,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 
 function Navbar({ location }) {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [requests, setRequests] = useState();
   let navigator = useNavigate();
 
   const getPendingRequests = async () => {
     await axios
-      .get("http://localhost:3001/pending/")
+      .get(`${endpoint}pending/`)
       .then((response) => {
         setRequests(response.data);
       })

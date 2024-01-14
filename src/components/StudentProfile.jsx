@@ -9,7 +9,7 @@ import imagePlaceholder from "../assets/images/profile.png";
 import { useStateValue } from "../context/StateProvider";
 
 export default function StudentProfile({ id }) {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [activeTab, setActiveTab] = useState("cv");
   const navigate = useNavigate();
   const [data, setData] = useState();
@@ -26,7 +26,7 @@ export default function StudentProfile({ id }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/student/byId/${id}`)
+      .get(`${endpoint}student/byId/${id}`)
       .then((response) => {
         setData(response.data);
       })
@@ -75,7 +75,7 @@ export default function StudentProfile({ id }) {
                   <img
                     width={150}
                     height={150}
-                    src={"http://localhost:3001/images/" + data?.image}
+                    src={endpoint + "images/" + data?.image}
                     className=" rounded-full"
                   />
                 </div>

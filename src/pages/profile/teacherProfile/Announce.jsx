@@ -5,15 +5,17 @@ import useFetch from "../../../customHooks/useFetch";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { TfiAnnouncement } from "react-icons/tfi";
+import { useStateValue } from "../../../context/StateProvider";
 
 function Announce({ id }) {
   // const data = [1, 2, 3, 4, 5, 6, 7, 8];
   const [user, setUser] = useState();
   const navigate = useNavigate();
+  const [{ endpoint }] = useStateValue();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/user/byId/${id}`)
+      .get(`${endpoint}user/byId/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -43,7 +45,7 @@ function Announce({ id }) {
                 {item?.cover ? (
                   <div className="h-[8rem] w-[10rem] mx-2 rounded-lg overflow-hidden bg-gradient">
                     <img
-                      src={"http://localhost:3001/images/" + item?.cover}
+                      src={`${endpoint}images/` + item?.cover}
                       className="w-full h-full object-cover"
                       alt=""
                     />

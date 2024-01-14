@@ -7,12 +7,13 @@ import CustomInput from "../../components/CustomInput";
 import { FiEdit } from "react-icons/fi";
 import imagePlaceholder from "../../assets/images/profile.png";
 import { useNavigate } from "react-router-dom";
+import { useStateValue } from "../../context/StateProvider";
 
 function AddAdmin() {
   const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState();
   const navigate = useNavigate();
-
+  const [{ endpoint }] = useStateValue();
   const types = ["image/png", "image/jpeg"];
 
   const {
@@ -48,7 +49,7 @@ function AddAdmin() {
     formData.append("image", image);
 
     axios
-      .post("http://localhost:3001/admin/", formData)
+      .post(`${endpoint}admin/`, formData)
       .then((res) => {
         console.log(res);
       })

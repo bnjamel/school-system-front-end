@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 
 function Schedule({ schedules, DivisionId }) {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [data, setData] = useState();
   const [divisionData, setDivisionData] = useState();
   const [subjectList, setSubjectList] = useState([]);
@@ -39,7 +39,7 @@ function Schedule({ schedules, DivisionId }) {
   useEffect(() => {
     if (schedules) {
       axios
-        .get(`http://localhost:3001/schedule/byDivId/${DivisionId}`)
+        .get(`${endpoint}schedule/byDivId/${DivisionId}`)
         .then((response) => {
           setData(response.data);
         })
@@ -49,7 +49,7 @@ function Schedule({ schedules, DivisionId }) {
     }
 
     axios
-      .get("http://localhost:3001/subject/")
+      .get(`${endpoint}subject/`)
       .then((res) => {
         setSubjectList(res.data);
       })
@@ -83,7 +83,7 @@ function Schedule({ schedules, DivisionId }) {
       };
       // console.log(selectedSchedule.id);
       axios
-        .put(`http://localhost:3001/schedule/${selectedSchedule.id}`, info)
+        .put(`${endpoint}schedule/${selectedSchedule.id}`, info)
         .then((res) => {
           console.log(res);
         })

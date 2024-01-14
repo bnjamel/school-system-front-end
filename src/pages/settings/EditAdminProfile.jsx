@@ -11,7 +11,7 @@ import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 function EditAdminProfile() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [formData, setFormData] = useState();
   const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState();
@@ -39,15 +39,9 @@ function EditAdminProfile() {
     },
   });
 
-  // const { data, isPending, error } = useFetch(
-  //   `http://localhost:3001/admin/byId/${user.id}`,
-  //   "GET",
-  //   null
-  // );
-
   const getData = async () => {
     await axios
-      .get(`http://localhost:3001/admin/byId/${user.id}`)
+      .get(`${endpoint}admin/byId/${user.id}`)
       .then((response) => {
         setFormData(response.data);
       })
@@ -98,7 +92,7 @@ function EditAdminProfile() {
       // console.log(info);
 
       axios
-        .put(`http://localhost:3001/admin/${user.id}`, form_data)
+        .put(`${endpoint}admin/${user.id}`, form_data)
         .then((res) => {
           console.log(res);
         })
@@ -160,7 +154,7 @@ function EditAdminProfile() {
                     <img
                       width={150}
                       height={150}
-                      src={"http://localhost:3001/images/" + formData?.image}
+                      src={`${endpoint}images/` + formData?.image}
                       className=" rounded-full object-cover h-full w-full"
                     />
                   </div>

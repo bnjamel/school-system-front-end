@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import imagePlaceholder from "../../../assets/images/profile.png";
 import { FiEdit } from "react-icons/fi";
+import { useStateValue } from "../../../context/StateProvider";
 
 function TeacherEdit() {
   const { id } = useParams();
@@ -17,6 +18,7 @@ function TeacherEdit() {
   const [imagePreview, setImagePreview] = useState();
   const navigate = useNavigate();
   const [selectedSubject, setSelectedSubject] = useState();
+  const [{ endpoint }] = useStateValue();
 
   const handleSubjectSelect = (e) => {
     setSelectedSubject(e.target.value);
@@ -24,14 +26,14 @@ function TeacherEdit() {
 
   const getData = async () => {
     await axios
-      .get(`http://localhost:3001/teacher/byId/${id}`)
+      .get(`${endpoint}teacher/byId/${id}`)
       .then((response) => {
         setFormData(response.data);
       })
       .catch((error) => console.log(error));
 
     await axios
-      .get(`http://localhost:3001/subject/`)
+      .get(`${endpoint}subject/`)
       .then((response) => {
         setSubjectList(response.data);
       })
@@ -110,7 +112,7 @@ function TeacherEdit() {
       form_Data.append("image", image);
 
       axios
-        .put(`http://localhost:3001/teacher/${id}`, form_Data)
+        .put(`${endpoint}teacher/${id}`, form_Data)
         .then((res) => {
           console.log(res);
         })
@@ -172,7 +174,7 @@ function TeacherEdit() {
                     <img
                       width={150}
                       height={150}
-                      src={"http://localhost:3001/images/" + formData?.image}
+                      src={`${endpoint}images/` + formData?.image}
                       className=" rounded-full object-cover h-full w-full"
                     />
                   </div>

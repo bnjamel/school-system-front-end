@@ -6,6 +6,7 @@ import Step3 from "./Step3";
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
+import { useStateValue } from "../../context/StateProvider";
 
 function NewStudent() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function NewStudent() {
   const [isFirstStep, setIsFirstStep] = useState(false);
   const [selectedClass, setSelectedClass] = useState();
   const [selectedDivision, setSelectedDivision] = useState();
-
+  const [{ endpoint }] = useStateValue();
   // handleClassSelect,
   // selectedClass,
   // selectedDivision,
@@ -129,7 +130,7 @@ function NewStudent() {
     console.log(formData);
 
     axios
-      .post("http://localhost:3001/student/", formData)
+      .post(`${endpoint}student/`, formData)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 

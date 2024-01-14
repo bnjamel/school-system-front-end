@@ -11,6 +11,7 @@ import { CardBody, Typography } from "@material-tailwind/react";
 import axios from "axios";
 import useFetch from "../../customHooks/useFetch";
 import { useNavigate } from "react-router-dom";
+import { useStateValue } from "../../context/StateProvider";
 
 export default function Home() {
   const [numberOfStudents, setNumberOfStudents] = useState(0);
@@ -18,14 +19,13 @@ export default function Home() {
   const [numberOfClasses, setNumberOfClasses] = useState(0);
   const [eventAnnouncements, setEventAnnouncements] = useState([]);
   const navigate = useNavigate();
+  const [{ endpoint }] = useStateValue();
 
-  const { data, isPending, error } = useFetch(
-    "http://localhost:3001/announcement"
-  );
+  const { data, isPending, error } = useFetch(`${endpoint}announcement`);
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/student/")
+      .get(`${endpoint}student/`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);
@@ -38,7 +38,7 @@ export default function Home() {
       });
 
     axios
-      .get("http://localhost:3001/teacher/")
+      .get(`${endpoint}teacher/`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);
@@ -51,7 +51,7 @@ export default function Home() {
       });
 
     axios
-      .get("http://localhost:3001/class/")
+      .get(`${endpoint}class/`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);
@@ -66,7 +66,7 @@ export default function Home() {
     let type = "نشاط";
 
     axios
-      .get(`http://localhost:3001/announcement/byType/${type}`)
+      .get(`${endpoint}announcement/byType/${type}`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);
@@ -187,7 +187,7 @@ export default function Home() {
                   ) : (
                     <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-[#47D0C8]">
                       <img
-                        src={"http://localhost:3001/images/" + item?.cover}
+                        src={`${endpoint}images/` + item?.cover}
                         className="w-full h-full object-cover"
                         alt=""
                       />
@@ -254,7 +254,7 @@ export default function Home() {
                   ) : (
                     <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-gradient">
                       <img
-                        src={"http://localhost:3001/images/" + item?.cover}
+                        src={`${endpoint}images/` + item?.cover}
                         className="w-full h-full object-cover"
                         alt=""
                       />

@@ -3,13 +3,15 @@ import Students from "./Students";
 import Schedule from "./Schedule";
 import { useParams } from "react-router-dom";
 import useFetch from "../../customHooks/useFetch";
+import { useStateValue } from "../../context/StateProvider";
 
 function Display() {
   const { id } = useParams();
   const [activeTab, setActiveTab] = useState("students");
+  const [{ endpoint }] = useStateValue();
 
   const { data, isPending, error } = useFetch(
-    `http://localhost:3001/division/${id}`,
+    `${endpoint}division/${id}`,
     "GET",
     null
   );

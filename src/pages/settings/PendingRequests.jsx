@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import imagePlaceholder from "../../assets/images/profile.png";
 import { useForm, Controller } from "react-hook-form";
 import CustomInput from "../../components/CustomInput";
+import { useStateValue } from "../../context/StateProvider";
 
 const TABLE_ROWS = [
   {
@@ -79,7 +80,7 @@ export default function PendingRequests() {
   const [open, setOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState();
   const [noRequestsError, setNoRequestsError] = useState("");
-
+  const [{ endpoint }] = useStateValue();
   const navigate = useNavigate();
 
   const handleOpen = () => setOpen(!open);
@@ -94,7 +95,7 @@ export default function PendingRequests() {
 
   const getPendingRequests = async () => {
     await axios
-      .get("http://localhost:3001/pending/")
+      .get(`${endpoint}pending/`)
       .then((response) => {
         if (response.data.error) {
           setNoRequestsError(response.data.error);
@@ -138,7 +139,7 @@ export default function PendingRequests() {
     console.log(info);
 
     axios
-      .post("http://localhost:3001/student/acceptrequest", info)
+      .post(`${endpoint}student/acceptrequest`, info)
       .then((res) => {
         console.log(res);
       })
@@ -147,7 +148,7 @@ export default function PendingRequests() {
       });
 
     axios
-      .delete(`http://localhost:3001/pending/${selectedRequest.id}`)
+      .delete(`${endpoint}pending/${selectedRequest.id}`)
       .then((res) => {
         console.log(res);
       })
@@ -185,9 +186,7 @@ export default function PendingRequests() {
                   <img
                     width={150}
                     height={150}
-                    src={
-                      "http://localhost:3001/images/" + selectedRequest?.image
-                    }
+                    src={`${endpoint}images/` + selectedRequest?.image}
                     className=" rounded-full"
                   />
                 </div>
@@ -246,7 +245,7 @@ export default function PendingRequests() {
               >
                 <img
                   src={
-                    "http://localhost:3001/images/" +
+                    `${endpoint}images/` +
                     selectedRequest?.student_document_image
                   }
                   // className="img w-[50px] h-[50px] object-contain"

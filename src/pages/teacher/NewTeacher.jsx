@@ -6,6 +6,7 @@ import Step3 from "./Step3";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useStateValue } from "../../context/StateProvider";
 
 function NewTeacher() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -15,6 +16,7 @@ function NewTeacher() {
   const [imagePreview, setImagePreview] = useState();
   const [selectedSubject, setSelectedSubject] = useState();
   const [subjectsList, setSubjectsList] = useState();
+  const [{ endpoint }] = useStateValue();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -60,7 +62,7 @@ function NewTeacher() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/subject/")
+      .get(`${endpoint}subject/`)
       .then((res) => {
         setSubjectsList(res.data);
       })
@@ -104,7 +106,7 @@ function NewTeacher() {
     console.log(image);
 
     axios
-      .post("http://localhost:3001/teacher/", form_Data)
+      .post(`${endpoint}teacher/`, form_Data)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
 

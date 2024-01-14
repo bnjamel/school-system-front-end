@@ -14,6 +14,7 @@ import AddAdmin from "../settings/AddAdmin.jsx";
 import SendEmail from "../settings/SendEmail.jsx";
 import PendingRequests from "./PendingRequests.jsx";
 import axios from "axios";
+import { useStateValue } from "../../context/StateProvider.jsx";
 
 export default function Settings() {
   const [numberOfStudents, setNumberOfStudents] = useState(0);
@@ -21,10 +22,11 @@ export default function Settings() {
   const [numberOfClasses, setNumberOfClasses] = useState(0);
   const [numberOfAnnouncements, setNumberOfAnnouncements] = useState(0);
   const [requests, setRequests] = useState();
+  const [{ endpoint }] = useStateValue();
 
   const getPendingRequests = async () => {
     await axios
-      .get("http://localhost:3001/pending/")
+      .get(`${endpoint}pending/`)
       .then((response) => {
         setRequests(response.data);
       })
@@ -36,7 +38,7 @@ export default function Settings() {
   useEffect(() => {
     getPendingRequests();
     axios
-      .get("http://localhost:3001/student/")
+      .get(`${endpoint}student/`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);
@@ -49,7 +51,7 @@ export default function Settings() {
       });
 
     axios
-      .get("http://localhost:3001/teacher/")
+      .get(`${endpoint}teacher/`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);
@@ -62,7 +64,7 @@ export default function Settings() {
       });
 
     axios
-      .get("http://localhost:3001/class/")
+      .get(`${endpoint}class/`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);
@@ -75,7 +77,7 @@ export default function Settings() {
       });
 
     axios
-      .get(`http://localhost:3001/announcement/`)
+      .get(`${endpoint}announcement/`)
       .then((response) => {
         if (response.data.error) {
           console.log("Something went wrong", response.data.error);

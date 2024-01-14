@@ -8,6 +8,7 @@ export const initialState = {
     profile: {},
     isLogged: false,
     token: "",
+    endpoint: "https://akkad-school.onrender.com/"
   };
   
   const reducer = (state, action) => {

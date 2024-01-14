@@ -17,7 +17,7 @@ import axios from "axios";
 import { TfiAnnouncement } from "react-icons/tfi";
 
 function Thanks({ thanks, id }) {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, endpoint }, dispatch] = useStateValue();
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState();
   const [imagePreview, setImagePreview] = useState();
@@ -58,7 +58,7 @@ function Thanks({ thanks, id }) {
     console.log(info);
 
     axios
-      .post("http://localhost:3001/appreciation_book", formData)
+      .post(`${endpoint}appreciation_book`, formData)
       .then((res) => {
         console.log(res);
       })
@@ -105,7 +105,7 @@ function Thanks({ thanks, id }) {
                 ) : (
                   <div className="h-[8rem] mx-2 mt-4 rounded-lg bg-gradient">
                     <img
-                      src={"http://localhost:3001/images/" + item?.image}
+                      src={`${endpoint}images/` + item?.image}
                       className="w-full h-full object-cover"
                       alt=""
                     />
