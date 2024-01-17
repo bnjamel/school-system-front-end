@@ -111,18 +111,18 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="">
       {/* HERO SECTION */}
-      <div className="h-[25rem] mt-[8rem] bg-gradient">
-        <div className="flex justify-center items-center gap-[10rem]">
+      <div className="pb-[4rem] pt-[4rem] lg:pt-[8rem]  bg-gradient">
+        <div className="flex lg:justify-center items-center flex-col lg:flex-row lg:gap-[10rem]">
           {/* PICTURE */}
           <div>
             <img width={450} height={450} src={home} alt="home" />
           </div>
 
           {/* TEXT */}
-          <div className="hidden lg:flex text-right text-white text-2xl ">
-            <h2 className="font-cairoSemiBold leading-relaxed">
+          <div className="flex text-right text-white text-2xl ">
+            <h2 className="text-center lg:text-right font-cairoSemiBold leading-relaxed">
               ليس الجمال بأثوابٍ تزيننا
               <br />
               إن الجمالَ جمالُ العلم والأدبِ
