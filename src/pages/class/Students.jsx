@@ -2,6 +2,7 @@ import React from "react";
 import { BsSearch } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import imagePlaceholder from "../../assets/images/profile.png";
+import { useStateValue } from "../../context/StateProvider";
 
 const TABLE_HEAD = ["#", "الأسم", "الصف", "رقم الهاتف"];
 
@@ -65,6 +66,8 @@ const TABLE_ROWS = [
 ];
 
 function Students({ students, isPending, studentDivision, studentClass }) {
+  const [{ endpoint }, dispatch] = useStateValue();
+
   const navigate = useNavigate();
 
   const handleTeacherPress = (id) => {
@@ -132,10 +135,7 @@ function Students({ students, isPending, studentDivision, studentClass }) {
                             <div className="avatar">
                               <div className="w-10 ">
                                 <img
-                                  src={
-                                    "http://localhost:3001/images/" +
-                                    item?.image
-                                  }
+                                  src={`${endpoint}images/${item?.image}`}
                                   className="w-full h-full object-cover"
                                   alt=""
                                 />
